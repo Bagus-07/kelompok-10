@@ -27,3 +27,9 @@ Route::get('/login', [LoginController::class, 'index']);
 use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+//Bagus
+
+use App\Http\Controllers\RoomController;
+
+Route::get('/rooms', [RoomController::class, 'index']);
