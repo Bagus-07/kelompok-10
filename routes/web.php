@@ -22,3 +22,8 @@ use App\Http\Controllers\LoginController;
 
 
 Route::get('/login', [LoginController::class, 'index']);
+
+//nayla//
+use App\Http\Controllers\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
