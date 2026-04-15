@@ -30,6 +30,8 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::view('/profile', 'profile');
 
+Route::view('/home', 'home');
+
 use App\Http\Controllers\CustomerController;
 
 Route::get('/customer', [CustomerController::class, 'tampilkan']);
