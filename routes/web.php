@@ -28,6 +28,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
+Route::view('/profile', 'profile');
+
 //Bagus
 
 use App\Http\Controllers\RoomController;
