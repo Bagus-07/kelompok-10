@@ -111,17 +111,17 @@
     </div>
 </div>
 
-<!-- CONTACT -->
-<div class="section" id="contact">
-    <h3>CONTACT US</h3>
+<!-- CONTACT + FOOTER -->
+<div style="background:#333; color:white; padding:40px;">
+
+    <h2>Contact Us</h2>
     <p>Email: stayease@gmail.com</p>
     <p>Phone: 08123456789</p>
-</div>
+    <p>Address: Batam, Indonesia</p>
 
-<!-- FOOTER -->
-<div class="footer">
-    <p>© 2026 StayEase Hotel</p>
-</div>
+    <hr style="margin:20px 0; border-color:#555;">
 
-</body>
+    <p style="text-align:center;">© 2026 StayEase Hotel</p>
+
+</div>
 </html>
