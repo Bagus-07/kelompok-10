@@ -6,8 +6,21 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function getData()
     {
-        return view('dashboard');
+        $stats = [
+            ['title' => 'Total Rooms', 'value' => 25],
+            ['title' => 'Booked Rooms', 'value' => 12],
+            ['title' => 'Available Rooms', 'value' => 13],
+            ['title' => 'Customers', 'value' => 40]
+        ];
+
+        return $stats;
+    }
+
+    public function tampilkan()
+    {
+        $data = $this->getData();
+        return view('dashboard', compact('data'));
     }
 }

@@ -1,43 +1,47 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// Controllers
 use App\Http\Controllers\LoginController;
-
-
-
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-// Route::get('/', [HomeController::class, 'index']);
-// Route::get('/contact', [HomeController::class, 'contact']);
-
-
-
-
-
-
-
-
-
-Route::get('/login', [LoginController::class, 'index']);
-
-//nayla//
 use App\Http\Controllers\DashboardController;
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
-
-Route::view('/profile', 'profile');
-
-Route::view('/home', 'home');
-
 use App\Http\Controllers\CustomerController;
-
-Route::get('/customer', [CustomerController::class, 'tampilkan']);
-
-//Bagus
-
 use App\Http\Controllers\RoomController;
 
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/login', [LoginController::class, 'index']);
+
+/*
+|--------------------------------------------------------------------------
+| Main Pages
+|--------------------------------------------------------------------------
+*/
+Route::view('/home', 'home');
+Route::view('/profile', 'profile');
+
+/*
+|--------------------------------------------------------------------------
+| view Home (about us dan contact), view profile guest - Nayla
+|--------------------------------------------------------------------------
+*/
+Route::get('/customer', [CustomerController::class, 'tampilkan']);
+
+/*
+|--------------------------------------------------------------------------
+| ___ - angela
+|--------------------------------------------------------------------------
+*/
+
+
+/*
+|--------------------------------------------------------------------------
+| Rooms / Product Service, Dashboard - Bagus
+|--------------------------------------------------------------------------
+*/
 Route::get('/rooms', [RoomController::class, 'index']);
+Route::get('/product', [RoomController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'tampilkan']);

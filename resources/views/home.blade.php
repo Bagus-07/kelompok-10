@@ -58,6 +58,57 @@
             padding: 30px;
             text-align: center;
         }
+
+        /* ROOM CARD */
+        .room-card {
+            width: 220px;
+            padding: 20px;
+            background: #ddd;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: white;
+            width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .booking-btn {
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -89,9 +140,17 @@
 <div class="section">
     <h3>OUR ROOMS</h3>
     <div class="grid">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+        <div class="room-card" onclick="showRoom('Deluxe Room', 'Rp 500.000', 'Spacious room with king-size bed')">
+            Deluxe Room
+        </div>
+
+        <div class="room-card" onclick="showRoom('Superior Room', 'Rp 350.000', 'Comfortable room for couples')">
+            Superior Room
+        </div>
+
+        <div class="room-card" onclick="showRoom('Standard Room', 'Rp 250.000', 'Affordable room with basic facilities')">
+            Standard Room
+        </div>
     </div>
 </div>
 
@@ -124,4 +183,36 @@
     <p style="text-align:center;">© 2026 StayEase Hotel</p>
 
 </div>
+<!-- ROOM POPUP MODAL -->
+<div id="roomModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <h2 id="roomTitle">Room Name</h2>
+
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800" alt="Room Image">
+
+        <p id="roomPrice">Harga</p>
+        <p id="roomDesc">Deskripsi kamar</p>
+
+        <button class="booking-btn" onclick="alert('Booking berhasil!')">
+            Booking
+        </button>
+    </div>
+</div>
+
+<script>
+function showRoom(name, price, desc) {
+    document.getElementById('roomTitle').innerText = name;
+    document.getElementById('roomPrice').innerText = price;
+    document.getElementById('roomDesc').innerText = desc;
+    document.getElementById('roomModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('roomModal').style.display = 'none';
+}
+</script>
+
+</body>
 </html>

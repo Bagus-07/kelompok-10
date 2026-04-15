@@ -1,83 +1,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hotel Dashboard(placeholders)<</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>StayEase Admin Dashboard</title>
+    <style>
+        body{
+            margin:0;
+            font-family: Arial, sans-serif;
+            display:flex;
+        }
+
+        /* SIDEBAR */
+        .sidebar{
+            width:220px;
+            height:100vh;
+            background:#2c2c2c;
+            color:white;
+            padding:20px;
+            box-sizing:border-box;
+        }
+
+        .sidebar h2{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .sidebar a{
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:12px;
+            margin:8px 0;
+            border-radius:6px;
+            cursor:pointer;
+        }
+
+        .sidebar a:hover{
+            background:#444;
+        }
+
+        /* CONTENT */
+        .content{
+            flex:1;
+            padding:30px;
+            background:#f5f5f5;
+        }
+
+        .section{
+            display:none;
+        }
+
+        .active{
+            display:block;
+        }
+
+        .card-container{
+            display:flex;
+            gap:20px;
+            margin-top:20px;
+            flex-wrap:wrap;
+        }
+
+        .card{
+            width:200px;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+            background:white;
+        }
+
+        th, td{
+            border:1px solid #ddd;
+            padding:10px;
+            text-align:center;
+        }
+
+        th{
+            background:#333;
+            color:white;
+        }
+    </style>
 </head>
-
 <body>
-<div class="container mt-4">
 
-  <h2>Hotel Dashboard(placeholders)</h2>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>StayEase</h2>
 
-  <!-- Summary Cards -->
-  <div class="row text-center">
-    <div class="col-md-3">
-      <div class="card p-3">
-        <h5>Bookings</h5>
-        <h3>120</h3>
-      </div>
+        <a onclick="showSection('dashboard')">Dashboard</a>
+        <a onclick="showSection('tipe')">Tipe Kamar</a>
+        <a onclick="showSection('kamar')">Data Kamar</a>
+        <a onclick="showSection('reservasi')">Reservasi</a>
+        <a onclick="showSection('laporan')">Laporan</a>
     </div>
-    <div class="col-md-3">
-      <div class="card p-3">
-        <h5>Kamar yang tersedia</h5>
-        <h3>30</h3>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card p-3">
-        <h5>Kamar yang ditempati</h5>
-        <h3>70</h3>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card p-3">
-        <h5>Pendapatan</h5>
-        <h3>$5,000</h3>
-      </div>
-    </div>
-  </div>
 
-  <!-- Booking Table -->
-  <div class="mt-4">
-    <h4>Booking yang sedang berlangsung</h4>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Tamu</th>
-          <th>Kamar</th>
-          <th>Check-in</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>John Doe</td>
-          <td>Deluxe</td>
-          <td>20 Mar 2026</td>
-          <td>Booked</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <!-- CONTENT -->
+    <div class="content">
 
-  <!-- Room Cards -->
-  <div class="mt-4">
-    <h4>Kamar</h4>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card">
-          <img src="https://via.placeholder.com/300x150" class="card-img-top">
-          <div class="card-body">
-            <h5>Deluxe Room</h5>
-            <p>$100 / malam</p>
-            <span class="badge bg-success">tersedia</span>
-          </div>
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="section active">
+            <h1>Dashboard Admin</h1>
+
+            <div class="card-container">
+                <div class="card">
+                    <h3>Kamar Tersedia</h3>
+                    <p>20</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Kamar</h3>
+                    <p>20</p>
+                </div>
+
+                <div class="card">
+                    <h3>Booking Hari Ini</h3>
+                    <p>5</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-</div>
+        <!-- TIPE KAMAR -->
+        <div id="tipe" class="section">
+            <h1>Tipe Kamar</h1>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Tipe</th>
+                    <th>Harga</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Deluxe</td>
+                    <td>Rp 500.000</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Superior</td>
+                    <td>Rp 350.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- DATA KAMAR -->
+        <div id="kamar" class="section">
+            <h1>Data Kamar</h1>
+
+            <table>
+                <tr>
+                    <th>No Kamar</th>
+                    <th>Tipe</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>101</td>
+                    <td>Deluxe</td>
+                    <td>Tersedia</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Superior</td>
+                    <td>Dipesan</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- RESERVASI -->
+        <div id="reservasi" class="section">
+            <h1>Reservasi</h1>
+            <p>Bagian ini masih dalam tahap pengembangan.</p>
+        </div>
+
+        <!-- LAPORAN -->
+        <div id="laporan" class="section">
+            <h1>Laporan</h1>
+            <p>Bagian laporan akan dibuat pada tahap selanjutnya.</p>
+        </div>
+
+    </div>
+
+    <script>
+        function showSection(sectionId){
+            let sections = document.querySelectorAll('.section');
+
+            sections.forEach(function(section){
+                section.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+
 </body>
 </html>
