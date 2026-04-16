@@ -120,8 +120,8 @@
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <a href="#">Log In</a>
-        <a href="#">Sign In</a>
+        <a href="/login">Log In</a>
+        <a href="/register">Sign In</a>
     </div>
 </div>
 
@@ -195,9 +195,8 @@
         <p id="roomPrice">Harga</p>
         <p id="roomDesc">Deskripsi kamar</p>
 
-        <button class="booking-btn" onclick="alert('Booking berhasil!')">
-            Booking
-        </button>
+        <a href="/login" class="booking-btn">Booking</a>
+        
     </div>
 </div>
 

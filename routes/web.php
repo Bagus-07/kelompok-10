@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('home');
+});
+
 // Controllers
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -14,7 +18,7 @@ use App\Http\Controllers\RoomController;
 |--------------------------------------------------------------------------
 */
 Route::get('/login', [LoginController::class, 'index']);
-
+Route::view('/register', 'register');
 /*
 |--------------------------------------------------------------------------
 | Main Pages
@@ -32,7 +36,7 @@ Route::get('/customer', [CustomerController::class, 'tampilkan']);
 
 /*
 |--------------------------------------------------------------------------
-| ___ - angela
+| ___ - angels
 |--------------------------------------------------------------------------
 */
 
