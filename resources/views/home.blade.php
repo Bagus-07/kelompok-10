@@ -203,6 +203,7 @@
         <img src="/photo/hotel4.jpeg" class="slide">
         <img src="/photo/hotel5.jpeg" class="slide">
         <img src="/photo/hotel6.jpeg" class="slide">
+        <img src="/photo/butt.jpg" class="slide">
     </div>
     <div class="hero-content">
         <h2>WELCOME TO STAYEASE HOTEL</h2>
