@@ -10,20 +10,23 @@
     }
 
     /* NAVBAR */
-    .navbar {
-        display: flex;
-        align-items: center;;
-        padding: 20px 60px;
+   .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
 
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
 
-        background: rgba(255, 255, 255, 0.6); /* transparent white */
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
+    padding: 0 40px;
+    box-sizing: border-box;
+
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
 
     .navbar a {
         color: #333;
@@ -36,13 +39,27 @@
 }
 
     .logo {
-        margin-right: 1000px;
+        justify-self: start;
     }
 
     .logo img {
-        height: 70px;
+        height: 60px;
         object-fit: contain;
     }
+
+    /* Menu Tengah */
+    .nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
 
     .nav-links {
     display: flex;
@@ -55,19 +72,40 @@
         text-decoration: none;
         color: #333;
     }
-
+  /* Login signup */
     .auth {
-        margin-left: 20px;
+        justify-self: end;display: flex;
+        gap: 12px;
     }
 
     .auth button {
-        padding: 12px 25px;
-        font-size: 16px;
+        padding: 8px 18px;
+        font-weight: 600;
         background: #FF13F0;
         border: none;
         border-radius: 20px;
         cursor: pointer;
     }
+
+    /* Login */
+    .auth button:first-child {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: #FF13F0;
+    color: white;
+    cursor: pointer;
+}
+
+/* SIGNUP */
+.auth button:last-child {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: #FF13F0;
+    color: white;
+    cursor: pointer;
+}
 
     /* BOOK NOW BUTTON */
     .booking-btn {
@@ -180,18 +218,22 @@
 
 <!-- NAVBAR -->
 <div class="navbar">
+
     <div class="logo">
-        <img src="/photo/lofo.jpeg" alt="StayEase Logo">
+        <img src="/photo/new logo.jpeg">
     </div>
-    <div>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </div>
+
+   <div class="nav-menu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+</div>
+
     <div class="auth">
-        <button> log in </button>
-        <button> sign up </button>
+        <button>log in</button>
+        <button>sign up</button>
     </div>
+
 </div>
 
 <!-- HOME -->
@@ -203,7 +245,6 @@
         <img src="/photo/hotel4.jpeg" class="slide">
         <img src="/photo/hotel5.jpeg" class="slide">
         <img src="/photo/hotel6.jpeg" class="slide">
-        <img src="/photo/butt.jpg" class="slide">
     </div>
     <div class="hero-content">
         <h2>WELCOME TO STAYEASE HOTEL</h2>
@@ -246,7 +287,7 @@
 </div>
 
 <!-- CONTACT + FOOTER -->
-<div style="background:#333; color:white; padding:40px;">
+<div style="background:#333; color:white; padding:40px;" id="contact">
 
     <h2>Contact Us</h2>
     <p>Email: stayease@gmail.com</p>
