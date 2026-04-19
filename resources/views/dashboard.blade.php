@@ -86,6 +86,42 @@
             background:#333;
             color:white;
         }
+        /* LOGOUT MODAL */
+        .logout-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .logout-box {
+            background: white;
+            width: 300px;
+            margin: 150px auto;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .logout-box button {
+            padding: 8px 15px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-yes {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-no {
+            background: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -94,11 +130,13 @@
     <div class="sidebar">
         <h2>StayEase</h2>
 
+        <p id="adminName" style="text-align:center; margin-bottom:20px;">Admin</p>
         <a onclick="showSection('dashboard')">Dashboard</a>
         <a onclick="showSection('tipe')">Tipe Kamar</a>
         <a onclick="showSection('kamar')">Data Kamar</a>
         <a onclick="showSection('reservasi')">Reservasi</a>
         <a onclick="showSection('laporan')">Laporan</a>
+        <a onclick="openLogoutModal()" style="background:#c0392b; margin-top:20px;">Logout</a>
     </div>
 
     <!-- CONTENT -->
@@ -183,10 +221,27 @@
             <h1>Laporan</h1>
             <p>Bagian laporan akan dibuat pada tahap selanjutnya.</p>
         </div>
+        <!-- LOGOUT POPUP -->
+        <div id="logoutModal" class="logout-modal">
+            <div class="logout-box">
+                <h3>Konfirmasi Logout</h3>
+                <p>Apakah Anda yakin ingin keluar?</p>
 
+                <button class="btn-yes" onclick="logout()">Ya</button>
+                <button class="btn-no" onclick="closeLogoutModal()">Batal</button>
+            </div>
+        </div>
     </div>
 
     <script>
+        // TAMPILKAN USERNAME
+        let username = localStorage.getItem("adminUsername");
+        if(username) {
+            document.getElementById("adminName").innerText = "Admin: " + username;
+        } else {
+            document.getElementById("adminName").innerText = "Admin: Guest";
+        }
+
         function showSection(sectionId){
             let sections = document.querySelectorAll('.section');
 
@@ -196,6 +251,20 @@
 
             document.getElementById(sectionId).classList.add('active');
         }
+
+        function openLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'block';
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+
+        function logout() {
+            localStorage.removeItem("adminUsername");
+            window.location.href = "/login-admin";
+        }
+
     </script>
 
 </body>

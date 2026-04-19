@@ -39,9 +39,10 @@ Route::get('/customer', [CustomerController::class, 'tampilkan']);
 
 /*
 |--------------------------------------------------------------------------
-| Rooms / Product Service, Dashboard - Bagus
+| Rooms / Product Service, Admin Dashboard, login admin - Bagus
 |--------------------------------------------------------------------------
 */
 Route::get('/rooms', [RoomController::class, 'index']);
 Route::get('/product', [RoomController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
+Route::view('/login-admin', 'login_admin');
