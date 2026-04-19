@@ -20,7 +20,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="javascripst:void(0);">
+      <form onsubmit="return loginUser()">
         @csrf
 
         <div class="input-group mb-3">
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="col-4">
-            <button type="button" class="btn btn-primary btn-block">Sign In</button>
+           <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
         </div>
       </form>
@@ -70,6 +70,20 @@
         $('#password-lock').attr('class', 'fas fa-lock');
     }
   });
+  
+  function loginUser() {
+      let email = document.querySelector('input[name="email"]').value;
+      let password = document.querySelector('input[name="password"]').value;
+
+      if (email && password) {
+          alert('Login berhasil!');
+          window.location.href = '/';
+      } else {
+          alert('Email dan password wajib diisi!');
+      }
+
+      return false;
+  }
 </script>
 </body>
 </html>

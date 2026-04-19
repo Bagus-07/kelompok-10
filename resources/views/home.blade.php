@@ -2,138 +2,254 @@
 <html>
 <head>
     <title>StayEase Hotel</title>
-    <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-        }
+<style>
+    body {
+        font-family: Arial;
+        margin: 0;
+        background: #ffffff;
+    }
 
-        /* NAVBAR */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            background: #333;
-            color: white;
-            padding: 15px;
-        }
+    /* NAVBAR */
+   .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
 
-        .navbar a {
-            color: white;
-            margin-left: 15px;
-            text-decoration: none;
-        }
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
 
-        /* HERO */
-        .hero {
-            background: #ccc;
-            text-align: center;
-            padding: 100px 20px;
-        }
+    padding: 0 40px;
+    box-sizing: border-box;
 
-        .hero button {
-            padding: 10px 20px;
-        }
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
 
-        /* SECTION */
-        .section {
-            padding: 40px;
-            text-align: center;
-        }
+    .navbar a {
+        color: #333;
+        margin-left: 20px;
+        text-decoration: none;
+    }
 
-        .grid {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
+    .navbar a:hover {
+    color: #3b82f6;
+}
 
-        .box {
-            width: 200px;
-            height: 150px;
-            background: #ddd;
-        }
+    .logo {
+        justify-self: start;
+    }
 
-        /* FOOTER */
-        .footer {
-            background: #eee;
-            padding: 30px;
-            text-align: center;
-        }
+    .logo img {
+        height: 60px;
+        object-fit: contain;
+    }
 
-        /* ROOM CARD */
-        .room-card {
-            width: 220px;
-            padding: 20px;
-            background: #ddd;
-            cursor: pointer;
-            border-radius: 8px;
-        }
+    /* Menu Tengah */
+    .nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+}
 
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-        }
+.nav-menu a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
 
-        .modal-content {
-            background: white;
-            width: 400px;
-            margin: 100px auto;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-        }
+    .nav-links {
+    display: flex;
+    gap: 25px;
+    margin-left: auto;
+    }
 
-        .modal-content img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+    .nav-links a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #333;
+    }
+  /* Login signup */
+    .auth {
+        justify-self: end;display: flex;
+        gap: 12px;
+    }
 
-        .close {
-            float: right;
-            font-size: 24px;
-            cursor: pointer;
-        }
+    .auth button {
+        padding: 8px 18px;
+        font-weight: 600;
+        background: #FF13F0;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
 
-        .booking-btn {
-            padding: 10px 20px;
-            background: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-    </style>
+    /* Login */
+    .auth button:first-child {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: #FF13F0;
+    color: white;
+    cursor: pointer;
+}
+
+/* SIGNUP */
+.auth button:last-child {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: #FF13F0;
+    color: white;
+    cursor: pointer;
+}
+
+    /* BOOK NOW BUTTON */
+    .booking-btn {
+        padding: 8px 18px;
+        border-radius: 20px;
+        border: none;
+        background: linear-gradient(to right, #f9a8d4, #fcd34d); /* pink → yellow */
+        color: #333;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+    position: relative;
+    height: 90vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CAROUSEL */
+.carousel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* GRADIENT OVERLAY (your exact colors) */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 216, 168, 0.3),
+        rgba(245, 198, 170, 0.3),
+        rgba(229, 184, 165, 0.3)
+    );
+}
+
+/* TEXT */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+.hero h2 {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+    /* EXPLORE BUTTON */
+    .hero button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        border-radius: 25px;
+        border: none;
+        background: white;
+        color: #FF13F0;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    /* SECTION */
+    .section {
+        padding: 40px;
+        text-align: center;
+    }
+
+    .grid {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .box {
+        width: 200px;
+        height: 150px;
+        background: #f3f4f6;
+        border-radius: 10px;
+    }
+
+    /* FOOTER */
+    .footer {
+        background: #f3f4f6;
+        padding: 30px;
+        text-align: center;
+    }
+</style>
 </head>
 <body>
 
 <!-- NAVBAR -->
 <div class="navbar">
-    <div><b>StayEase LOGO</b></div>
-    <div>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="#">Log In</a>
-        <a href="#">Sign In</a>
+
+    <div class="logo">
+        <img src="/photo/new logo.jpeg">
     </div>
+
+   <div class="nav-menu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+</div>
+
+    <div class="auth">
+        <button>log in</button>
+        <button>sign up</button>
+    </div>
+
 </div>
 
 <!-- HOME -->
 <div class="hero" id="home">
-    <h2>WELCOME TO STAYEASE HOTEL</h2>
-    <button>Explore Rooms</button>
-</div>
-
-<!-- PROMOTION -->
-<div class="section">
-    <h3>PROMOTIONS BANNER</h3>
+    <div class="carousel">
+        <img src="/photo/hotel1.jpeg" class="slide active">
+        <img src="/photo/hotel2.jpeg" class="slide">
+        <img src="/photo/hotel3.jpeg" class="slide">
+        <img src="/photo/hotel4.jpeg" class="slide">
+        <img src="/photo/hotel5.jpeg" class="slide">
+        <img src="/photo/hotel6.jpeg" class="slide">
+    </div>
+    <div class="hero-content">
+        <h2>WELCOME TO STAYEASE HOTEL</h2>
+        <button>Explore Rooms</button>
+    </div>
 </div>
 
 <!-- ROOMS -->
@@ -171,7 +287,7 @@
 </div>
 
 <!-- CONTACT + FOOTER -->
-<div style="background:#333; color:white; padding:40px;">
+<div style="background:#333; color:white; padding:40px;" id="contact">
 
     <h2>Contact Us</h2>
     <p>Email: stayease@gmail.com</p>
@@ -195,13 +311,27 @@
         <p id="roomPrice">Harga</p>
         <p id="roomDesc">Deskripsi kamar</p>
 
-        <button class="booking-btn" onclick="alert('Booking berhasil!')">
-            Booking
-        </button>
+        <a href="/login" class="booking-btn">Booking</a>
+        
     </div>
 </div>
 
 <script>
+
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+function showSlide() {
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+
+    index++;
+    if (index >= slides.length) index = 0;
+}
+
+setInterval(showSlide, 3000);
+
+
 function showRoom(name, price, desc) {
     document.getElementById('roomTitle').innerText = name;
     document.getElementById('roomPrice').innerText = price;
