@@ -277,6 +277,18 @@
         cursor: pointer;
     }
 
+    #about {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    line-height: 1.6;
+}
+
+    #about p {
+        margin-bottom: 15px;
+        color: #555;
+    }
+
     /* FOOTER */
     .footer {
         background: #f3f4f6;
@@ -301,8 +313,8 @@
 </div>
 
     <div class="auth">
-        <button>log in</button>
-        <button>sign up</button>
+        <a href="/login" class="booking-btn">Log in</a>
+        <a href="/register" class="booking-btn">Sign up</a>
     </div>
 
 </div>
@@ -350,16 +362,46 @@
 <div class="section">
     <h3>FACILITIES</h3>
     <div class="grid">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+        <div class="box">
+            <img src="/photo/pool.jpg">
+            pool
+        </div>
+        <div class="box">
+            <img src="/photo/beach.jpg">
+            beach
+        </div>
+        <div class="box">
+            <img src="/photo/hotel2.jpeg">
+            restaurant
+        </div>
+        <div class="box">
+            <img src="/photo/hotel4.jpeg">
+            gym
+        </div>
     </div>
 </div>
 
-<!-- ABOUT -->
+
 <div class="section" id="about">
     <h3>ABOUT US</h3>
-    <p>StayEase Hotel provides comfortable and affordable rooms for your stay.</p>
+
+    <p>
+        <strong>StayEase Hotel</strong> is a modern beachfront hotel designed for comfort and relaxation. 
+        Located just minutes from the beach, we offer a peaceful escape with beautiful surroundings.
+    </p>
+
+    <p>
+        Our hotel features a variety of rooms to suit every guest, from standard to deluxe options, 
+        all equipped with essential amenities for a comfortable stay.
+    </p>
+
+    <p>
+        Enjoy our facilities including a swimming pool, restaurant, and gym, all designed to make your stay more enjoyable.
+    </p>
+
+    <p>
+        Whether you're here for vacation or business, StayEase Hotel is your perfect place to stay.
+    </p>
 </div>
 
 <!-- CONTACT + FOOTER -->
@@ -375,6 +417,7 @@
     <p style="text-align:center;">© 2026 StayEase Hotel</p>
 
 </div>
+
 <!-- ✅ ROOM POPUP MODAL -->
 <div id="roomModal" class="modal">
 
