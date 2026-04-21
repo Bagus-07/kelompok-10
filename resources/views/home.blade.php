@@ -173,7 +173,7 @@
 
 .hero h2 {
     text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
+    }
 
     /* EXPLORE BUTTON */
     .hero button {
@@ -195,15 +195,86 @@
 
     .grid {
         display: flex;
-        gap: 20px;
+        gap: 30px;
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .box {
-        width: 200px;
-        height: 150px;
-        background: #f3f4f6;
-        border-radius: 10px;
+    width: 280px;
+    border-radius: 12px;
+    overflow: hidden;   /* ✅ VERY IMPORTANT */
+    background: #f5f5f5;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .box img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .box p {
+        padding: 15px;
+        font-weight: bold;
+    }
+
+    .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+
+    /* ✅ center everything */
+    justify-content: center;
+    align-items: center;
+    }
+
+    .modal.show {
+    display: flex;
+    }
+
+    .modal-content {
+    background: white;
+    width: 70%;
+    max-width: 800px;   /* ✅ prevents it from being too big */
+    max-height: 90vh;   /* ✅ prevent overflow */
+    overflow-y: auto;   /* scroll if content too long */
+    padding: 20px;
+    border-radius: 10px;
+    }
+
+    .modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    }
+
+    .modal-body {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    }
+
+    .modal-body img {
+        width: 50%;
+    }
+
+    .room-info {
+        width: 50%;
+    }
+
+    .close {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
     }
 
     /* FOOTER */
@@ -256,25 +327,24 @@
 <div class="section">
     <h3>OUR ROOMS</h3>
     <div class="grid">
-        <div class="room-card" onclick="showRoom('Deluxe Room', 'Rp 500.000', 'Spacious room with king-size bed')">
+        <div class="box" onclick="showRoom('Deluxe Room', 'Rp 500.000', 'Spacious room with king-size bed')">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
             Deluxe Room
         </div>
 
-        <div class="room-card" onclick="showRoom('Superior Room', 'Rp 350.000', 'Comfortable room for couples')">
+        <div class="box" onclick="showRoom('Superior Room', 'Rp 350.000', 'Comfortable room for couples')">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
             Superior Room
         </div>
 
-        <div class="room-card" onclick="showRoom('Standard Room', 'Rp 250.000', 'Affordable room with basic facilities')">
+        <div class="box" onclick="showRoom('Standard Room', 'Rp 250.000', 'Affordable room with basic facilities')">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
             Standard Room
         </div>
     </div>
 </div>
 
-<!-- ABOUT -->
-<div class="section" id="about">
-    <h3>ABOUT US</h3>
-    <p>StayEase Hotel provides comfortable and affordable rooms for your stay.</p>
-</div>
+
 
 <!-- FACILITIES -->
 <div class="section">
@@ -284,6 +354,12 @@
         <div class="box"></div>
         <div class="box"></div>
     </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section" id="about">
+    <h3>ABOUT US</h3>
+    <p>StayEase Hotel provides comfortable and affordable rooms for your stay.</p>
 </div>
 
 <!-- CONTACT + FOOTER -->
@@ -299,21 +375,27 @@
     <p style="text-align:center;">© 2026 StayEase Hotel</p>
 
 </div>
-<!-- ROOM POPUP MODAL -->
+<!-- ✅ ROOM POPUP MODAL -->
 <div id="roomModal" class="modal">
+
     <div class="modal-content">
+
         <span class="close" onclick="closeModal()">&times;</span>
 
         <h2 id="roomTitle">Room Name</h2>
 
-        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800" alt="Room Image">
+        <div class="modal-body">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
 
-        <p id="roomPrice">Harga</p>
-        <p id="roomDesc">Deskripsi kamar</p>
+            <div class="room-info">
+                <p id="roomPrice">Harga</p>
+                <p id="roomDesc">Deskripsi kamar</p>
+                <a href="/login" class="booking-btn">Booking</a>
+            </div>
+        </div>
 
-        <a href="/login" class="booking-btn">Booking</a>
-        
     </div>
+
 </div>
 
 <script>
@@ -336,11 +418,12 @@ function showRoom(name, price, desc) {
     document.getElementById('roomTitle').innerText = name;
     document.getElementById('roomPrice').innerText = price;
     document.getElementById('roomDesc').innerText = desc;
-    document.getElementById('roomModal').style.display = 'block';
+
+    document.getElementById('roomModal').classList.add('show');
 }
 
 function closeModal() {
-    document.getElementById('roomModal').style.display = 'none';
+    document.getElementById('roomModal').classList.remove('show');
 }
 </script>
 
