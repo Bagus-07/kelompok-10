@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 
+
   <style>
     body {
         margin: 0;
@@ -84,6 +85,53 @@
     </form>
   </div>
 
+
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>Login</b> Sistem</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <form onsubmit="return loginUser()">
+        @csrf
+
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Email" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
+          <div class="input-group-append show-password" style="cursor: pointer;">
+            <div class="input-group-text">
+              <span class="fas fa-lock" id="password-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">Remember Me</label>
+            </div>
+          </div>
+          <div class="col-4">
+           <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </div>
 
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
@@ -100,7 +148,24 @@
         $('#password-lock').attr('class', 'fas fa-lock');
     }
   });
+
 </script>
 
+
+  
+  function loginUser() {
+      let email = document.querySelector('input[name="email"]').value;
+      let password = document.querySelector('input[name="password"]').value;
+
+      if (email && password) {
+          alert('Login berhasil!');
+          window.location.href = '/';
+      } else {
+          alert('Email dan password wajib diisi!');
+      }
+
+      return false;
+  }
+</script>
 </body>
 </html>
