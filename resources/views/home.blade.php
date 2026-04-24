@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>StayEase Hotel</title>
+
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 <style>
     body {
         font-family: Arial;
@@ -308,6 +311,7 @@
 
    <div class="nav-menu">
     <a href="#home">Home</a>
+    <a href="#facilities">Facilities</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
 </div>
@@ -329,85 +333,74 @@
         <img src="/photo/hotel5.jpeg" class="slide">
         <img src="/photo/hotel6.jpeg" class="slide">
     </div>
-    <div class="hero-content">
-        <h2>WELCOME TO STAYEASE HOTEL</h2>
-        <button>Explore Rooms</button>
+    <div class="text-4xl font-bold text-white drop-shadow-lg">
+        <h2 class="text-4xl font-bold text-white drop-shadow-lg">
+            WELCOME TO STAYEASE HOTEL
+        </h2>
+        <button class="mt-5 px-6 py-3 bg-white text-pink-500 font-semibold rounded-full shadow block mx-auto">
+            Explore Rooms
+        </button>
     </div>
 </div>
-
-<!-- ROOMS -->
-<div class="section">
-    <h3>OUR ROOMS</h3>
-    <div class="grid">
-        <div class="box" onclick="showRoom('Deluxe Room', 'Rp 500.000', 'Spacious room with king-size bed')">
-            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
-            Deluxe Room
-        </div>
-
-        <div class="box" onclick="showRoom('Superior Room', 'Rp 350.000', 'Comfortable room for couples')">
-            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
-            Superior Room
-        </div>
-
-        <div class="box" onclick="showRoom('Standard Room', 'Rp 250.000', 'Affordable room with basic facilities')">
-            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
-            Standard Room
-        </div>
-    </div>
-</div>
-
-
 
 <!-- FACILITIES -->
-<div class="section">
-    <h3>FACILITIES</h3>
+<div class="section py-10" id="facilities">
+    <h3 class="text-2xl font-bold mb-6">FACILITIES</h3>
     <div class="grid">
         <div class="box">
             <img src="/photo/pool.jpg">
-            pool
+            <p class="font-semibold">
+                pool
+            </p>
         </div>
         <div class="box">
             <img src="/photo/beach.jpg">
-            beach
+            <p class="font-semibold">
+                beach
+            </p>
         </div>
         <div class="box">
             <img src="/photo/hotel2.jpeg">
-            restaurant
+            <p class="font-semibold">
+                restaurant
+            </p>
         </div>
         <div class="box">
             <img src="/photo/hotel4.jpeg">
-            gym
+            <p class="font-semibold">
+                gym
+            </p>
         </div>
     </div>
 </div>
 
 
-<div class="section" id="about">
-    <h3>ABOUT US</h3>
+<div class="section py-10" id="about">
+    <h3 class="text-2xl font-bold mb-6">ABOUT US</h3>
 
-    <p>
+    <p class="text-gray-600 mb-4">
         <strong>StayEase Hotel</strong> is a modern beachfront hotel designed for comfort and relaxation. 
         Located just minutes from the beach, we offer a peaceful escape with beautiful surroundings.
     </p>
 
-    <p>
+    <p class="text-gray-600 mb-4">
         Our hotel features a variety of rooms to suit every guest, from standard to deluxe options, 
         all equipped with essential amenities for a comfortable stay.
     </p>
 
-    <p>
+    <p class="text-gray-600 mb-4">
         Enjoy our facilities including a swimming pool, restaurant, and gym, all designed to make your stay more enjoyable.
     </p>
 
-    <p>
+    <p class="text-gray-600">
         Whether you're here for vacation or business, StayEase Hotel is your perfect place to stay.
     </p>
 </div>
 
 <!-- CONTACT + FOOTER -->
-<div style="background:#333; color:white; padding:40px;" id="contact">
+<div class="bg-gray-800 text-white p-10" id="contact">
 
-    <h2>Contact Us</h2>
+    <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
     <p>Email: stayease@gmail.com</p>
     <p>Phone: 08123456789</p>
     <p>Address: Batam, Indonesia</p>
@@ -415,29 +408,6 @@
     <hr style="margin:20px 0; border-color:#555;">
 
     <p style="text-align:center;">© 2026 StayEase Hotel</p>
-
-</div>
-
-<!-- ✅ ROOM POPUP MODAL -->
-<div id="roomModal" class="modal">
-
-    <div class="modal-content">
-
-        <span class="close" onclick="closeModal()">&times;</span>
-
-        <h2 id="roomTitle">Room Name</h2>
-
-        <div class="modal-body">
-            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800">
-
-            <div class="room-info">
-                <p id="roomPrice">Harga</p>
-                <p id="roomDesc">Deskripsi kamar</p>
-                <a href="/login" class="booking-btn">Booking</a>
-            </div>
-        </div>
-
-    </div>
 
 </div>
 
@@ -456,18 +426,6 @@ function showSlide() {
 
 setInterval(showSlide, 3000);
 
-
-function showRoom(name, price, desc) {
-    document.getElementById('roomTitle').innerText = name;
-    document.getElementById('roomPrice').innerText = price;
-    document.getElementById('roomDesc').innerText = desc;
-
-    document.getElementById('roomModal').classList.add('show');
-}
-
-function closeModal() {
-    document.getElementById('roomModal').classList.remove('show');
-}
 </script>
 
 </body>
