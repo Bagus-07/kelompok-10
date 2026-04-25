@@ -6,6 +6,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <style>
+
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         font-family: Arial;
         margin: 0;
@@ -75,6 +80,40 @@
         text-decoration: none;
         color: #333;
     }
+
+    .nav-auth {
+        align-items : center;
+    }
+
+    .nav-auth a {
+        border-radius: 2px;
+        padding: 6px 18px;
+    }
+
+    /*hp */
+    @media (max-width: 576px) {
+        .nav-auth {
+            width: 100%
+        }
+
+        .nav-auth a{
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .nav-auth {
+            justify-content: center;
+        }
+    }
+
+    @media (min-width: 993px) {
+        .nav-auth {
+            justify-content: flex-end;
+        }
+    }
+
   /* Login signup */
     .auth {
         justify-self: end;display: flex;
@@ -185,7 +224,7 @@
         border-radius: 25px;
         border: none;
         background: white;
-        color: #FF13F0;
+        color: rgb(0, 0, 0);
         font-weight: 600;
         cursor: pointer;
     }
@@ -314,12 +353,20 @@
     <a href="#facilities">Facilities</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
-</div>
-
-    <div class="auth">
-        <a href="/login" class="booking-btn">Log in</a>
-        <a href="/register" class="booking-btn">Sign up</a>
     </div>
+
+    <div class="nav-auth flex flex-col md:flex-row gap-2 justify-end">
+    <a href="/login" 
+       class="border border-yellow-400 text-yellow-500 px-4 py-1 rounded-full text-sm text-center">
+       Log in
+    </a>
+
+    <a href="/register" 
+       class="bg-yellow-400 text-white px-4 py-1 rounded-full text-sm text-center">
+       Sign up
+    </a>
+    </div>
+</div>
 
 </div>
 
@@ -333,11 +380,11 @@
         <img src="/photo/hotel5.jpeg" class="slide">
         <img src="/photo/hotel6.jpeg" class="slide">
     </div>
-    <div class="text-4xl font-bold text-white drop-shadow-lg">
+    <div class="font-bold text-white drop-shadow-lg">
         <h2 class="text-4xl font-bold text-white drop-shadow-lg">
             WELCOME TO STAYEASE HOTEL
         </h2>
-        <button class="mt-5 px-6 py-3 bg-white text-pink-500 font-semibold rounded-full shadow block mx-auto">
+        <button class="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-full shadow block mx-auto">
             Explore Rooms
         </button>
     </div>
