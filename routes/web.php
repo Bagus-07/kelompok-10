@@ -49,4 +49,18 @@ Route::get('/customer', [CustomerController::class, 'tampilkan']);
 Route::get('/rooms', [RoomController::class, 'index']);
 Route::get('/product', [RoomController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
+
+Route::view('/login-admin', 'login_admin');
+
+
+
+
+// ===============================
+// GOOGLE LOGIN
+// ===============================
+use App\Http\Controllers\AuthController;
+
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
 Route::view('/login-admin', 'login_admin');
