@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SistemBookingDanReservasiHotel | Log in</title>
+  <title>Sistem Booking Hotel | Login</title>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Fonts & CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
   <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
-
 
   <style>
     body {
@@ -25,6 +24,10 @@
         background: rgba(0,0,0,0.4);
         height: 100vh;
     }
+
+    .card {
+        border-radius: 15px;
+    }
   </style>
 </head>
 
@@ -32,12 +35,12 @@
 
 <div class="overlay d-flex justify-content-center align-items-center">
 
-  <div class="card p-4 shadow" style="max-width: 500px; width: 100%; border-radius:15px;">
+  <div class="card p-4 shadow" style="max-width: 450px; width: 100%;">
     
     <h3 class="mb-2"><b>Booking</b></h3>
-    <p class="text-muted">Welcome back glad to see you</p>
+    <p class="text-muted">Welcome back, glad to see you</p>
 
-    <!-- FORM LOGIN REAL -->
+    <!-- FORM LOGIN -->
     <form method="POST" action="/login">
       @csrf
 
@@ -62,78 +65,33 @@
 
       <!-- REMEMBER -->
       <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input">
-        <label class="form-check-label">Remember me</label>
+        <input type="checkbox" class="form-check-input" id="remember">
+        <label class="form-check-label" for="remember">Remember me</label>
       </div>
 
-      <!-- BUTTON LOGIN -->
+      <!-- LOGIN BUTTON -->
       <button type="submit" class="btn btn-warning btn-block mb-3">
         Log In
       </button>
 
       <p class="text-center">Or</p>
 
-      <!-- GOOGLE -->
+      <!-- GOOGLE LOGIN -->
       <a href="/auth/google" class="btn btn-outline-danger btn-block mb-2">
-    Continue with Google
-  </a>
+        Continue with Google
+      </a>
 
       <p class="text-center mt-3">
-        Don't have account? <span class="text-warning">Register</span>
-      </p>
+  Don't have account? 
+  <a href="/register" class="text-warning">Register</a>
+</p>
 
     </form>
   </div>
 
-
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>Login</b> Sistem</a>
-  </div>
-
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
-      <form onsubmit="return loginUser()">
-        @csrf
-
-        <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
-          <div class="input-group-append show-password" style="cursor: pointer;">
-            <div class="input-group-text">
-              <span class="fas fa-lock" id="password-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">Remember Me</label>
-            </div>
-          </div>
-          <div class="col-4">
-           <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
 </div>
 
+<!-- JS -->
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
@@ -142,30 +100,13 @@
   $('.show-password').on('click', function(){
     if($('#password').attr('type') == 'password'){
         $('#password').attr('type', 'text');
-        $('#password-lock').attr('class', 'fas fa-unlock');
+        $('#password-lock').attr('class', 'fas fa-eye-slash');
     } else {
         $('#password').attr('type', 'password');
-        $('#password-lock').attr('class', 'fas fa-lock');
+        $('#password-lock').attr('class', 'fas fa-eye');
     }
   });
-
 </script>
 
-
-  
-  function loginUser() {
-      let email = document.querySelector('input[name="email"]').value;
-      let password = document.querySelector('input[name="password"]').value;
-
-      if (email && password) {
-          alert('Login berhasil!');
-          window.location.href = '/';
-      } else {
-          alert('Email dan password wajib diisi!');
-      }
-
-      return false;
-  }
-</script>
 </body>
 </html>

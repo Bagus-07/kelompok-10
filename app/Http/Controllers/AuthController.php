@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -21,12 +22,13 @@ class AuthController extends Controller
             ['email' => $googleUser->getEmail()],
             [
                 'name' => $googleUser->getName(),
-                'password' => bcrypt('12345678')
+                'password' => bcrypt(Str::random(16)),
+                'avatar' => $googleUser->getAvatar(),
             ]
         );
 
         Auth::login($user);
 
-        return redirect('/');
+        return redirect('/home');
     }
 }

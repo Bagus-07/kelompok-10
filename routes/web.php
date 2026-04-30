@@ -19,6 +19,7 @@ use App\Http\Controllers\RoomController;
 */
 Route::get('/login', [LoginController::class, 'index']);
 Route::view('/register', 'register');
+Route::post('/register', [LoginController::class, 'register']);
 /*
 |--------------------------------------------------------------------------
 | Main Pages
@@ -50,7 +51,7 @@ Route::get('/rooms', [RoomController::class, 'index']);
 Route::get('/product', [RoomController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
 
-Route::view('/login-admin', 'login_admin');
+
 
 
 
