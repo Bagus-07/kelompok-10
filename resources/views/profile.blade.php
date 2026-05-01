@@ -1,8 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< Updated upstream
     <title>Profile - StayEase Hotel</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+=======
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>Profile - StayEase</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            background: #333;
+            color: white;
+            padding: 15px;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        /* CONTAINER */
+        .container {
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+>>>>>>> Stashed changes
 </head>
 <body class="bg-gray-100">
 

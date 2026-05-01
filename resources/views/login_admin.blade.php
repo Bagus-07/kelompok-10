@@ -1,55 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Admin Login - StayEase</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .login-box {
-            background: white;
-            padding: 30px;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
 
-<div class="login-box">
-    <h2>Admin Login</h2>
+<div class="bg-white p-8 rounded-xl shadow-md w-80">
 
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
+    <h2 class="text-2xl font-bold text-center mb-6">Admin Login</h2>
 
-    <button onclick="login()">Login</button>
+    <input type="text" id="username"
+        placeholder="Username"
+        class="w-full p-2 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+    <input type="password" id="password"
+        placeholder="Password"
+        class="w-full p-2 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+    <button onclick="login()"
+        class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
+        Login
+    </button>
+    <p id="errorMsg" class="text-red-500 text-sm mt-2 hidden">
+        Username atau password salah!
+    </p>
+
 </div>
 
 <script>
@@ -58,13 +34,20 @@ function login() {
     let pass = document.getElementById('password').value;
 
     if(user === "admin" && pass === "123") {
-        // SIMPAN USERNAME
         localStorage.setItem("adminUsername", user);
-
         window.location.href = "/dashboard";
     } else {
         alert("Username atau password salah!");
     }
+
+    document.getElementById("errorMsg").classList.remove("hidden");
+    document.getElementById("username").addEventListener("input", hideError);
+    document.getElementById("password").addEventListener("input", hideError);
+
+    function hideError() {
+        let err = document.getElementById("errorMsg");
+        if(err) err.classList.add("hidden");
+}
 }
 </script>
 

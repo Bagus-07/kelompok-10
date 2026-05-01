@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>StayEase Hotel</title>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,22 +20,22 @@
 
     /* NAVBAR */
    .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 70px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 70px;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
 
-    padding: 0 40px;
-    box-sizing: border-box;
+        padding: 0 40px;
+        box-sizing: border-box;
 
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-}
+        background: rgba(255,255,255,0.7);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+    }
 
     .navbar a {
         color: #333;
@@ -43,8 +44,8 @@
     }
 
     .navbar a:hover {
-    color: #3b82f6;
-}
+        color: #3b82f6;
+    }
 
     .logo {
         justify-self: start;
@@ -57,22 +58,22 @@
 
     /* Menu Tengah */
     .nav-menu {
-    display: flex;
-    justify-content: center;
-    gap: 45px;
-}
+        display: flex;
+        justify-content: center;
+        gap: 45px;
+    }
 
-.nav-menu a {
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-}
+    .nav-menu a {
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+    }
 
     .nav-links {
-    display: flex;
-    gap: 25px;
-    margin-left: auto;
+        display: flex;
+        gap: 25px;
+        margin-left: auto;
     }
 
     .nav-links a {
@@ -131,23 +132,23 @@
 
     /* Login */
     .auth button:first-child {
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: none;
-    background: #FF13F0;
-    color: white;
-    cursor: pointer;
-}
+        padding: 8px 18px;
+        border-radius: 20px;
+        border: none;
+        background: #FF13F0;
+        color: white;
+        cursor: pointer;
+    }
 
-/* SIGNUP */
-.auth button:last-child {
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: none;
-    background: #FF13F0;
-    color: white;
-    cursor: pointer;
-}
+    /* SIGNUP */
+    .auth button:last-child {
+        padding: 8px 18px;
+        border-radius: 20px;
+        border: none;
+        background: #FF13F0;
+        color: white;
+        cursor: pointer;
+    }
 
     /* BOOK NOW BUTTON */
     .booking-btn {
@@ -162,60 +163,60 @@
 
     /* HERO */
     .hero {
-    position: relative;
-    height: 90vh;
-    overflow: hidden;
+        position: relative;
+        height: 90vh;
+        overflow: hidden;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* CAROUSEL */
-.carousel {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.slide.active {
-    opacity: 1;
-}
-
-/* GRADIENT OVERLAY (your exact colors) */
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 216, 168, 0.3),
-        rgba(245, 198, 170, 0.3),
-        rgba(229, 184, 165, 0.3)
-    );
-}
-
-/* TEXT */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: white;
-}
-
-.hero h2 {
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
+    /* CAROUSEL */
+    .carousel {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+
+    /* GRADIENT OVERLAY (your exact colors) */
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 216, 168, 0.3),
+            rgba(245, 198, 170, 0.3),
+            rgba(229, 184, 165, 0.3)
+        );
+    }
+
+    /* TEXT */
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+    }
+
+    .hero h2 {
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
 
     /* EXPLORE BUTTON */
     .hero button {
@@ -243,13 +244,13 @@
     }
 
     .box {
-    width: 280px;
-    border-radius: 12px;
-    overflow: hidden;   /* ✅ VERY IMPORTANT */
-    background: #f5f5f5;
-    cursor: pointer;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        width: 280px;
+        border-radius: 12px;
+        overflow: hidden;   /* ✅ VERY IMPORTANT */
+        background: #f5f5f5;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .box img {
@@ -265,44 +266,44 @@
     }
 
     .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 9999;
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        z-index: 9999;
 
     /* ✅ center everything */
-    justify-content: center;
-    align-items: center;
+        justify-content: center;
+        align-items: center;
     }
 
     .modal.show {
-    display: flex;
+        display: flex;
     }
 
     .modal-content {
-    background: white;
-    width: 70%;
-    max-width: 800px;   /* ✅ prevents it from being too big */
-    max-height: 90vh;   /* ✅ prevent overflow */
-    overflow-y: auto;   /* scroll if content too long */
-    padding: 20px;
-    border-radius: 10px;
+        background: white;
+        width: 70%;
+        max-width: 800px;   /* ✅ prevents it from being too big */
+        max-height: 90vh;   /* ✅ prevent overflow */
+        overflow-y: auto;   /* scroll if content too long */
+        padding: 20px;
+        border-radius: 10px;
     }
 
     .modal-content img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
     }
 
     .modal-body {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
     }
 
     .modal-body img {
@@ -320,11 +321,11 @@
     }
 
     #about {
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-    line-height: 1.6;
-}
+        max-width: 800px;
+        margin: auto;
+        text-align: center;
+        line-height: 1.6;
+    }
 
     #about p {
         margin-bottom: 15px;

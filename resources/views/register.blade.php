@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Register</title>
 </head>
 <body>
