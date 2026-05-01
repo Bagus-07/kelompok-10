@@ -25,7 +25,7 @@ Route::view('/register', 'register');
 |--------------------------------------------------------------------------
 */
 Route::view('/home', 'home');
-Route::view('/profile', 'profile');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,13 @@ Route::view('/profile', 'profile');
 |--------------------------------------------------------------------------
 */
 Route::get('/customer', [CustomerController::class, 'tampilkan']);
+
+use App\Http\Controllers\ProfileController;
+
+Route::view('/profile', 'profile')->middleware('auth');
+
+Route::post('/profile/update', [ProfileController::class, 'update']);
+
 
 /*
 |--------------------------------------------------------------------------

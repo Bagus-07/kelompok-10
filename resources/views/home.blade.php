@@ -350,9 +350,9 @@
 
    <div class="nav-menu">
     <a href="#home">Home</a>
-    <a href="#facilities">Facilities</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#facilities">Fasilitas</a>
+    <a href="#about">Tentang</a>
+    <a href="#contact">kontak</a>
     </div>
 
     <div class="nav-auth flex flex-col md:flex-row gap-2 justify-end">
@@ -382,40 +382,40 @@
     </div>
     <div class="font-bold text-white drop-shadow-lg">
         <h2 class="text-4xl font-bold text-white drop-shadow-lg">
-            WELCOME TO STAYEASE HOTEL
+            SELAMAT DATANG DI STAYEASE HOTEL
         </h2>
         <button class="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-full shadow block mx-auto">
-            Explore Rooms
+            Jelajahi Kamar
         </button>
     </div>
 </div>
 
 <!-- FACILITIES -->
 <div class="section py-10" id="facilities">
-    <h3 class="text-2xl font-bold mb-6">FACILITIES</h3>
+    <h3 class="text-2xl font-bold mb-6">Fasilitas</h3>
     <div class="grid">
         <div class="box">
             <img src="/photo/pool.jpg">
             <p class="font-semibold">
-                pool
+                Kolam Renang
             </p>
         </div>
         <div class="box">
             <img src="/photo/beach.jpg">
             <p class="font-semibold">
-                beach
+                Pantai
             </p>
         </div>
         <div class="box">
             <img src="/photo/hotel2.jpeg">
             <p class="font-semibold">
-                restaurant
+                Restoran
             </p>
         </div>
         <div class="box">
             <img src="/photo/hotel4.jpeg">
             <p class="font-semibold">
-                gym
+                Gym
             </p>
         </div>
     </div>
@@ -423,24 +423,22 @@
 
 
 <div class="section py-10" id="about">
-    <h3 class="text-2xl font-bold mb-6">ABOUT US</h3>
+    <h3 class="text-2xl font-bold mb-6">Tentang Kami</h3>
 
     <p class="text-gray-600 mb-4">
-        <strong>StayEase Hotel</strong> is a modern beachfront hotel designed for comfort and relaxation. 
-        Located just minutes from the beach, we offer a peaceful escape with beautiful surroundings.
+        <strong>StayEase Hotel</strong> adalah hotel tepi pantai modern yang dirancang untuk kenyamanan dan relaksasi. Terletak hanya beberapa menit dari pantai, kami menawarkan tempat peristirahatan yang tenang dengan lingkungan yang indah.
     </p>
 
     <p class="text-gray-600 mb-4">
-        Our hotel features a variety of rooms to suit every guest, from standard to deluxe options, 
-        all equipped with essential amenities for a comfortable stay.
+        Hotel kami menawarkan berbagai pilihan kamar yang sesuai untuk setiap tamu, mulai dari pilihan standar hingga deluxe, semuanya dilengkapi dengan fasilitas penting untuk kenyamanan selama menginap.
     </p>
 
     <p class="text-gray-600 mb-4">
-        Enjoy our facilities including a swimming pool, restaurant, and gym, all designed to make your stay more enjoyable.
+        Nikmati fasilitas kami termasuk kolam renang, restoran, dan pusat kebugaran, semuanya dirancang untuk membuat kunjungan Anda lebih menyenangkan.
     </p>
 
     <p class="text-gray-600">
-        Whether you're here for vacation or business, StayEase Hotel is your perfect place to stay.
+       Baik Anda berada di sini untuk liburan atau bisnis, StayEase Hotel adalah tempat menginap yang sempurna untuk Anda.
     </p>
 </div>
 
@@ -449,8 +447,8 @@
 
     <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
     <p>Email: stayease@gmail.com</p>
-    <p>Phone: 08123456789</p>
-    <p>Address: Batam, Indonesia</p>
+    <p>No.hp: 08123456789</p>
+    <p>Alamat: Batam, Indonesia</p>
 
     <hr style="margin:20px 0; border-color:#555;">
 
