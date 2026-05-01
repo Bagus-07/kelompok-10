@@ -43,12 +43,6 @@
             border-radius: 10px;
         }
 
-        .modal-content img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
         .close {
             float: right;
             font-size: 24px;
@@ -71,21 +65,17 @@
     <h2>OUR ROOMS</h2>
 
     <div class="grid">
+        <div class="room-card" onclick="showRoom('Deluxe Room','Rp 500.000','Spacious room with king bed')">
+            Deluxe Room
+        </div>
 
-        @foreach($rooms as $room)
-            <div class="room-card"
-                onclick="showRoom(
-                    '{{ $room['nama'] }}',
-                    '{{ number_format($room['harga']) }}',
-                    '{{ $room['deskripsi'] }}',
-                    '{{ asset('images/'.$room['gambar']) }}'
-                )">
+        <div class="room-card" onclick="showRoom('Superior Room','Rp 350.000','Comfortable for couples')">
+            Superior Room
+        </div>
 
-                <h4>{{ $room['nama'] }}</h4>
-                <p>Rp {{ number_format($room['harga']) }}</p>
-            </div>
-        @endforeach
-
+        <div class="room-card" onclick="showRoom('Standard Room','Rp 250.000','Affordable basic room')">
+            Standard Room
+        </div>
     </div>
 </div>
 
@@ -93,8 +83,6 @@
 <div id="roomModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-
-        <img id="roomImage" src="">
 
         <h2 id="roomTitle"></h2>
         <p id="roomPrice"></p>
@@ -105,12 +93,10 @@
 </div>
 
 <script>
-function showRoom(name, price, desc, img) {
+function showRoom(name, price, desc) {
     document.getElementById('roomTitle').innerText = name;
-    document.getElementById('roomPrice').innerText = 'Rp ' + price;
+    document.getElementById('roomPrice').innerText = price;
     document.getElementById('roomDesc').innerText = desc;
-    document.getElementById('roomImage').src = img;
-
     document.getElementById('roomModal').style.display = 'block';
 }
 

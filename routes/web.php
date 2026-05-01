@@ -2,26 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
-
 // Controllers
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
-| Authentication Routes
+| LANDING PAGE
 |--------------------------------------------------------------------------
 */
-Route::get('/login', [LoginController::class, 'index']);
-Route::view('/register', 'register');
+Route::get('/', function () {
+    return view('home');
+});
+
 /*
 |--------------------------------------------------------------------------
-| Main Pages
+| MAIN PAGES
 |--------------------------------------------------------------------------
 */
 Route::view('/home', 'home');
@@ -29,7 +28,24 @@ Route::view('/home', 'home');
 
 /*
 |--------------------------------------------------------------------------
-| view Home (about us dan contact), view profile guest - Nayla
+| AUTHENTICATION (USER)
+|--------------------------------------------------------------------------
+*/
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/register', [LoginController::class, 'register']);
+Route::view('/register', 'register');
+
+/*
+|--------------------------------------------------------------------------
+| GOOGLE AUTH
+|--------------------------------------------------------------------------
+*/
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
+
+/*
+|--------------------------------------------------------------------------
+| CUSTOMER / USER DATA
 |--------------------------------------------------------------------------
 */
 Route::get('/customer', [CustomerController::class, 'tampilkan']);
@@ -43,31 +59,23 @@ Route::post('/profile/update', [ProfileController::class, 'update']);
 
 /*
 |--------------------------------------------------------------------------
-| ___ - angels
-|--------------------------------------------------------------------------
-*/
-
-
-/*
-|--------------------------------------------------------------------------
-| Rooms / Product Service, Admin Dashboard, login admin - Bagus
+| PRODUCT / ROOMS (Bagus)
 |--------------------------------------------------------------------------
 */
 Route::get('/rooms', [RoomController::class, 'index']);
+
+// Optional alias (kalau mau tetap ada /product)
 Route::get('/product', [RoomController::class, 'index']);
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN
+|--------------------------------------------------------------------------
+*/
+Route::view('/login-admin', 'login_admin');
 Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
 
-Route::view('/login-admin', 'login_admin');
 
 
 
 
-// ===============================
-// GOOGLE LOGIN
-// ===============================
-use App\Http\Controllers\AuthController;
-
-Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
-Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
-
-Route::view('/login-admin', 'login_admin');

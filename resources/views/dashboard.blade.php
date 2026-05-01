@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>StayEase Admin Dashboard</title>
     <style>
         body{
@@ -127,16 +128,14 @@
 <body>
 
     <!-- SIDEBAR -->
-    <div class="sidebar">
-        <h2>StayEase</h2>
-
-        <p id="adminName" style="text-align:center; margin-bottom:20px;">Admin</p>
-        <a onclick="showSection('dashboard')">Dashboard</a>
-        <a onclick="showSection('tipe')">Tipe Kamar</a>
-        <a onclick="showSection('kamar')">Data Kamar</a>
-        <a onclick="showSection('reservasi')">Reservasi</a>
-        <a onclick="showSection('laporan')">Laporan</a>
-        <a onclick="openLogoutModal()" style="background:#c0392b; margin-top:20px;">Logout</a>
+    <div class="bg-gray-900 text-white w-60 h-screen p-4">
+        <h2 class="text-xl font-bold mb-6">StayEase</h2>
+        <a class="block py-2 hover:bg-gray-700 rounded">Dashboard</a>
+        <a class="block py-2 hover:bg-gray-700 rounded">Tipe Kamar</a>
+        <a class="block py-2 hover:bg-gray-700 rounded">Data Kamar</a>
+        <a class="block py-2 hover:bg-gray-700 rounded">Reservasi</a>
+        <a class="block py-2 hover:bg-gray-700 rounded"</a>
+        <button data-modal-target="logoutModal" data-modal-toggle="logoutModal"class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded mt-4 w-full">Logout</button>
     </div>
 
     <!-- CONTENT -->
@@ -222,16 +221,22 @@
             <p>Bagian laporan akan dibuat pada tahap selanjutnya.</p>
         </div>
         <!-- LOGOUT POPUP -->
-        <div id="logoutModal" class="logout-modal">
-            <div class="logout-box">
-                <h3>Konfirmasi Logout</h3>
-                <p>Apakah Anda yakin ingin keluar?</p>
+        <div id="logoutModal" tabindex="-1" class="hidden fixed top-0 left-0 right-0 z-50 justify-center items-center w-full h-full bg-black bg-opacity-50 flex">
+            <div class="bg-white rounded-lg shadow p-6 w-full max-w-md text-center">
 
-                <button class="btn-yes" onclick="logout()">Ya</button>
-                <button class="btn-no" onclick="closeLogoutModal()">Batal</button>
+                <h3 class="text-lg font-semibold mb-4">Konfirmasi Logout</h3>
+                <p class="mb-6">Apakah Anda yakin ingin keluar?</p>
+
+                <button onclick="logout()" class="bg-red-600 text-white px-4 py-2 rounded mr-2">
+                    Ya
+                </button>
+
+                <button data-modal-hide="logoutModal" class="bg-gray-300 px-4 py-2 rounded">
+                    Batal
+                </button>
+
             </div>
         </div>
-    </div>
 
     <script>
         // TAMPILKAN USERNAME

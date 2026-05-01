@@ -12,21 +12,21 @@ class RoomController extends Controller
         $rooms = [
             [
                 'nama' => 'Deluxe Room',
-                'tipe' => 'Deluxe',
                 'harga' => 500000,
-                'status' => 'Tersedia'
+                'deskripsi' => 'Spacious room with king-size bed',
+                'gambar' => 'room1.jpg'
             ],
             [
                 'nama' => 'Superior Room',
-                'tipe' => 'Superior',
                 'harga' => 350000,
-                'status' => 'Booked'
+                'deskripsi' => 'Comfortable room for couples',
+                'gambar' => 'room2.jpg'
             ],
             [
                 'nama' => 'Standard Room',
-                'tipe' => 'Standard',
                 'harga' => 250000,
-                'status' => 'Tersedia'
+                'deskripsi' => 'Affordable room with basic facilities',
+                'gambar' => 'room3.jpg'
             ]
         ];
 
