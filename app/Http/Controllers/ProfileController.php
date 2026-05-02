@@ -6,21 +6,17 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    //
-}
+    public function update(Request $request)
+    {
+        $user = auth()->user();
 
-use Illuminate\Http\Request;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
 
-public function update(Request $request)
-{
-    $user = auth()->user();
+        $user->save();
 
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->phone = $request->phone;
-    $user->address = $request->address;
-
-    $user->save();
-
-    return redirect()->back();
+        return redirect()->back();
+    }
 }
