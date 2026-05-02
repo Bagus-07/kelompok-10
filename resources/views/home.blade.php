@@ -371,7 +371,6 @@
 
 </div>
 
-<!-- HOME -->
 <div class="hero" id="home">
     <div class="carousel">
         <img src="/photo/hotel1.jpeg" class="slide active">
@@ -381,11 +380,14 @@
         <img src="/photo/hotel5.jpeg" class="slide">
         <img src="/photo/hotel6.jpeg" class="slide">
     </div>
-    <div class="font-bold text-white drop-shadow-lg">
+
+    <!-- ✅ FIXED TEXT -->
+    <div class="hero-content">
         <h2 class="text-4xl font-bold text-white drop-shadow-lg">
             SELAMAT DATANG DI STAYEASE HOTEL
         </h2>
-        <button class="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-full shadow block mx-auto">
+
+        <button class="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-full shadow">
             Jelajahi Kamar
         </button>
     </div>

@@ -32,6 +32,8 @@ Route::view('/home', 'home');
 |--------------------------------------------------------------------------
 */
 Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [LoginController::class, 'register']);
 Route::view('/register', 'register');
 
