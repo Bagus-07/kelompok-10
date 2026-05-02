@@ -11,6 +11,7 @@ html {
 }
 
 body {
+    overflow-y: auto;
     font-family: Arial;
     margin: 0;
     background: #ffffff;
@@ -33,7 +34,7 @@ body {
 
     background: rgba(255,255,255,0.7);
     backdrop-filter: blur(12px);
-    z-index: 1000;
+    z-index: 9999;
 }
 
 .navbar a {
@@ -105,6 +106,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    z-index: 1; /* ADD THIS */
 }
 
 /* CAROUSEL */
@@ -112,6 +115,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
+    pointer-events: none;
 }
 
 .slide {
@@ -119,6 +123,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none;
 
     opacity: 0;
     transition: opacity 1s;
@@ -128,8 +133,16 @@ body {
     opacity: 1;
 }
 
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: white;
+}
+
 /* OVERLAY */
 .hero::after {
+    pointer-events: none;
     content: "";
     position: absolute;
     inset: 0;
@@ -137,13 +150,6 @@ body {
 }
 
 /* TEXT */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: white;
-}
-
 .hero h2 {
     font-size: 40px;
     font-weight: bold;
@@ -236,9 +242,25 @@ body {
     </div>
 
     <div class="nav-auth">
+
+    @auth
+        <!-- Logged in -->
+        <a href="/profile" class="login-btn">
+            {{ Auth::user()->name }}
+        </a>
+
+        <form action="/logout" method="POST" style="display:inline;">
+            @csrf
+            <button class="signup-btn">Logout</button>
+        </form>
+
+    @else
+        <!-- Not logged in -->
         <a href="/login" class="login-btn">Log in</a>
         <a href="/register" class="signup-btn">Sign up</a>
-    </div>
+    @endauth
+
+</div>
 
 </div>
 

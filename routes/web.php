@@ -31,11 +31,17 @@ Route::view('/home', 'home');
 | AUTHENTICATION (USER)
 |--------------------------------------------------------------------------
 */
-Route::get('/login', [LoginController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [LoginController::class, 'register']);
 Route::view('/register', 'register');
+
+use Illuminate\Support\Facades\Auth;
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/home');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +60,7 @@ Route::get('/customer', [CustomerController::class, 'tampilkan']);
 
 use App\Http\Controllers\ProfileController;
 
-Route::view('/profile', 'profile')->middleware('auth');
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
 
 Route::post('/profile/update', [ProfileController::class, 'update']);
 
