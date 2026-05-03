@@ -33,6 +33,15 @@ class ProfileController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
 
+        if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+
+        $file->move(public_path('uploads'), $filename);
+
+        $user->profile_photo = $filename;
+        }
+
         $user->save();
 
         return redirect('/profile')->with('success', 'Profile updated!');

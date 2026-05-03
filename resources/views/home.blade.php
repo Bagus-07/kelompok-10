@@ -243,22 +243,34 @@ body {
 
     <div class="nav-auth">
 
-    @auth
-        <!-- Logged in -->
-        <a href="/profile" class="login-btn">
-            {{ Auth::user()->name }}
+@auth
+    <div class="flex items-center gap-3">
+
+        <!-- PROFILE IMAGE -->
+        <a href="/profile">
+            <img 
+                src="{{ Auth::user()->profile_photo 
+                    ? '/uploads/' . Auth::user()->profile_photo 
+                    : 'https://via.placeholder.com/40' }}"
+                class="w-10 h-10 rounded-full object-cover border-2 border-yellow-400 hover:scale-105 transition"
+            >
         </a>
 
-        <form action="/logout" method="POST" style="display:inline;">
+        <!-- LOGOUT -->
+        <form action="/logout" method="POST">
             @csrf
             <button class="signup-btn">Logout</button>
         </form>
 
-    @else
-        <!-- Not logged in -->
-        <a href="/login" class="login-btn">Log in</a>
-        <a href="/register" class="signup-btn">Sign up</a>
-    @endauth
+    </div>
+
+@else
+    <!-- NOT LOGGED IN -->
+    <a href="/login" class="login-btn">Log in</a>
+    <a href="/register" class="signup-btn">Sign up</a>
+@endauth
+
+</div>
 
 </div>
 

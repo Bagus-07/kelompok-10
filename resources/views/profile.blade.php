@@ -21,12 +21,14 @@
         <a href="/home#contact">Contact</a>
     </div>
 
-    <div class="flex gap-3">
-        <a href="/profile" 
-           class="bg-yellow-400 text-white px-4 py-1 rounded-full text-sm">
-           Profile
-        </a>
-    </div>
+    <a href="/profile">
+        <img 
+            src="{{ auth()->user()->profile_photo 
+                ? '/uploads/' . auth()->user()->profile_photo 
+                : 'https://via.placeholder.com/40' }}"
+            class="w-10 h-10 rounded-full object-cover border-2 border-yellow-400 hover:scale-105 transition"
+        >
+    </a>
 
 </div>
 
@@ -43,30 +45,44 @@
 
         <h1 class="text-3xl font-bold mb-6">Profile</h1>
 
-        <!-- USER INFO -->
-        <div class="grid grid-cols-2 gap-6">
+        <div class="flex gap-10 items-start">
 
-            <div>
-                <p class="text-gray-500">Name</p>
-                <p class="font-semibold">{{ auth()->user()->name }}</p>
-            </div>
+    <!-- PROFILE IMAGE -->
+    <div class="w-40 text-center">
+        <img 
+            src="{{ auth()->user()->profile_photo 
+                ? '/uploads/' . auth()->user()->profile_photo 
+                : 'https://via.placeholder.com/150' }}"
+            class="w-40 h-40 rounded-full object-cover mx-auto shadow"
+        >
+    </div>
 
-            <div>
-                <p class="text-gray-500">Email</p>
-                <p class="font-semibold">{{ auth()->user()->email }}</p>
-            </div>
+    <!-- USER INFO -->
+    <div class="flex-1 grid grid-cols-2 gap-6">
 
-            <div>
-                <p class="text-gray-500">Phone</p>
-                <p class="font-semibold">{{ auth()->user()->phone ?? '-' }}</p>
-            </div>
-
-            <div>
-                <p class="text-gray-500">Address</p>
-                <p class="font-semibold">{{ auth()->user()->address ?? '-' }}</p>
-            </div>
-
+        <div>
+            <p class="text-gray-500">Name</p>
+            <p class="font-semibold">{{ auth()->user()->name }}</p>
         </div>
+
+        <div>
+            <p class="text-gray-500">Email</p>
+            <p class="font-semibold">{{ auth()->user()->email }}</p>
+        </div>
+
+        <div>
+            <p class="text-gray-500">Phone</p>
+            <p class="font-semibold">{{ auth()->user()->phone ?? '-' }}</p>
+        </div>
+
+        <div>
+            <p class="text-gray-500">Address</p>
+            <p class="font-semibold">{{ auth()->user()->address ?? '-' }}</p>
+        </div>
+
+    </div>
+
+</div>
 
         <!-- BUTTON -->
         <div class="mt-6">
@@ -117,8 +133,22 @@
 
         <h2 class="text-xl font-bold mb-4">Edit Profile</h2>
 
-        <form method="POST" action="/profile/update">
+        <form method="POST" action="/profile/update" enctype="multipart/form-data">
             @csrf
+
+            <div class="mb-3">
+                <label>Profile Photo</label>
+                <input type="file" name="photo" class="w-full border rounded-lg px-3 py-2">
+            </div>
+
+            <div class="mb-6 text-center">
+                <img 
+                    src="{{ auth()->user()->profile_photo 
+                        ? '/uploads/' . auth()->user()->profile_photo 
+                        : 'https://via.placeholder.com/120' }}"
+                    class="w-28 h-28 rounded-full object-cover mx-auto shadow"
+                >
+            </div>
 
             <div class="mb-3">
                 <label>Nama</label>
