@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Review;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        // $data = [
-        //     'nama' => 'Budi',
-        //     'pekerjaan' => 'Resepsionis',
-        // ];
-        // return view('home')->with($data);
-
         $nama = "Teddy";
         $pekerjaan = "programmer";
 
-        return view('home', compact('nama', 'pekerjaan'));
+        // GET REVIEWS FROM DATABASE
+        $reviews = Review::latest()->take(3)->get();
+
+        return view('home', compact(
+            'nama',
+            'pekerjaan',
+            'reviews'
+        ));
     }
 
     public function contact()

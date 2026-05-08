@@ -14,16 +14,19 @@ use App\Http\Controllers\AuthController;
 | LANDING PAGE
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return view('home');
-});
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index']);
+
+use App\Http\Controllers\ReviewController;
+Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
 | MAIN PAGES
 |--------------------------------------------------------------------------
 */
-Route::view('/home', 'home');
+Route::get('/home', [HomeController::class, 'index']);
 
 
 /*
