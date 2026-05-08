@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+
     protected $fillable = [
         'user_id',
         'room_name',
@@ -18,4 +19,5 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }
