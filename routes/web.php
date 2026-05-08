@@ -28,7 +28,7 @@ Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
 | MAIN PAGES
 |--------------------------------------------------------------------------
 */
-Route::view('/home', 'home');
+Route::get('/home', [HomeController::class, 'index']);
 
 
 /*
