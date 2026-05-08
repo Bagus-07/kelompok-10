@@ -4,147 +4,164 @@
 
 @section('content')
 
-<style>
-.content-box {
-    background: #f1f5f9;
-    padding: 25px;
-    border-radius: 16px;
-}
+<!-- FILTER -->
+<div class="box">
 
-/* FILTER */
-.filter-box {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.filter-box input, .filter-box button {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-.filter-box button {
-    background: #3b82f6;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-/* CARDS */
-.cards {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.card {
-    flex: 1;
-    padding: 20px;
-    border-radius: 12px;
-    color: white;
-}
-
-.card h1 {
-    margin: 10px 0 0;
-}
-
-.blue { background: #3b82f6; }
-.green { background: #10b981; }
-.orange { background: #f59e0b; }
-
-/* TABLE */
-.table-box {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th {
-    background: #f1f5f9;
-    padding: 14px;
-    text-align: left;
-    color: #475569;
-}
-
-td {
-    padding: 14px;
-    border-bottom: 1px solid #eee;
-    color: #1e293b;
-}
-
-tr:hover {
-    background: #f9fafb;
-}
-</style>
-
-<div class="content-box">
-
-    <!-- FILTER -->
-    <div class="filter-box">
-        <input type="date">
-        <input type="date">
-        <button>Filter</button>
-    </div>
-
-    <!-- RINGKASAN -->
-    <div class="cards">
-        <div class="card blue">
-            Total Booking
-            <h1>80</h1>
+    <div class="box-header">
+        <div>
+            <h3>Laporan Hotel</h3>
+            <p>Monitoring pendapatan dan booking hotel</p>
         </div>
 
-        <div class="card green">
-            Pendapatan
-            <h1>Rp 40.000.000</h1>
+        <div class="filter-box">
+            <input type="date">
+            <input type="date">
+
+            <button class="btn btn-blue">
+                Filter
+            </button>
         </div>
-
-        <div class="card orange">
-            Kamar Terpakai
-            <h1>65</h1>
-        </div>
-    </div>
-
-    <!-- TABEL LAPORAN -->
-    <div class="table-box">
-        <h3>Laporan Booking</h3>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Kamar</th>
-                    <th>Tanggal</th>
-                    <th>Harga</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Cia</td>
-                    <td>Deluxe</td>
-                    <td>12 Mei 2026</td>
-                    <td>Rp 500.000</td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Andi</td>
-                    <td>Suite</td>
-                    <td>14 Mei 2026</td>
-                    <td>Rp 900.000</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
 </div>
+
+<!-- CARD -->
+<div class="cards">
+
+    <div class="card blue">
+        <h4>Total Booking</h4>
+        <h1>80</h1>
+        <p>↑ 12% dari bulan lalu</p>
+    </div>
+
+    <div class="card green">
+        <h4>Pendapatan</h4>
+        <h1>40JT</h1>
+        <p>↑ 18% minggu ini</p>
+    </div>
+
+    <div class="card orange">
+        <h4>Kamar Terisi</h4>
+        <h1>65</h1>
+        <p>80% okupansi</p>
+    </div>
+
+</div>
+
+<!-- GRAFIK -->
+<div class="box">
+
+    <div class="box-header">
+        <div>
+            <h3>Grafik Pendapatan</h3>
+            <p>Statistik pendapatan hotel per bulan</p>
+        </div>
+    </div>
+
+    <canvas id="revenueChart" height="90"></canvas>
+
+</div>
+
+<!-- TABLE -->
+<div class="box">
+
+    <div class="box-header">
+
+        <div>
+            <h3>Laporan Booking</h3>
+            <p>Daftar booking terbaru hotel</p>
+        </div>
+
+        <button class="btn btn-green">
+            Export PDF
+        </button>
+
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kamar</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Harga</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>1</td>
+                <td>Cia</td>
+                <td>Deluxe</td>
+                <td>12 Mei 2026</td>
+
+                <td>
+                    <span class="status success">
+                        Success
+                    </span>
+                </td>
+
+                <td>Rp 500.000</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Andi</td>
+                <td>Suite</td>
+                <td>14 Mei 2026</td>
+
+                <td>
+                    <span class="status pending">
+                        Pending
+                    </span>
+                </td>
+
+                <td>Rp 900.000</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- CHART -->
+<script>
+
+const ctx = document.getElementById('revenueChart');
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+
+        datasets: [{
+            label: 'Pendapatan',
+            data: [12000000, 18000000, 15000000, 25000000, 30000000, 40000000],
+
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37,99,235,0.1)',
+
+            borderWidth: 4,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5
+        }]
+    },
+
+    options: {
+        responsive: true
+    }
+
+});
+
+</script>
 
 @endsection
