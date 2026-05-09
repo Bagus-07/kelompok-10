@@ -87,10 +87,22 @@ Route::get('/product', [RoomController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
+| ADMIN LOGIN
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin/login', function () {
+    return view('login_admin');
+});
+
+Route::post('/admin/login', [LoginController::class, 'login']);
+
+/*
+|--------------------------------------------------------------------------
 | ADMIN
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth')->group(function () {
+Route::middleware('admin')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'tampilkan'])
         ->name('dashboard');
