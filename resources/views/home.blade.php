@@ -261,22 +261,24 @@ body {
     <div class="nav-auth">
 
 @auth
-    <div class="flex items-center gap-3">
+    <a href="/profile">
 
-        <!-- PROFILE IMAGE -->
-        <img 
-    src="{{ auth()->user()->profile_photo 
-        ? asset('uploads/' . auth()->user()->profile_photo) 
-        : 'https://via.placeholder.com/50' }}"
+    <img 
+        src="{{ auth()->user()->profile_photo 
+            ? asset('uploads/' . auth()->user()->profile_photo) 
+            : 'https://via.placeholder.com/50' }}"
         
-    style="
-        width:50px;
-        height:50px;
-        border-radius:50%;
-        object-fit:cover;
-        display:block;
-    "
->
+        style="
+            width:50px;
+            height:50px;
+            border-radius:50%;
+            object-fit:cover;
+            display:block;
+            cursor:pointer;
+        "
+    >
+
+</a>
 
         <!-- LOGOUT -->
         <form action="/logout" method="POST">
