@@ -48,10 +48,22 @@ Route::post('/register', [LoginController::class, 'register']);
 |--------------------------------------------------------------------------
 */
 Route::post('/logout', function () {
+
+    $isAdmin = auth()->check() && auth()->user()->role == 'admin';
+
     Auth::logout();
+
     request()->session()->invalidate();
     request()->session()->regenerateToken();
-    return redirect('/login');
+
+    // ADMIN
+    if ($isAdmin) {
+        return redirect('/admin/login');
+    }
+
+    // GUEST
+    return redirect('/home');
+
 })->name('logout');
 
 /*
@@ -91,18 +103,17 @@ Route::get('/product', [RoomController::class, 'index']);
 |--------------------------------------------------------------------------
 */
 
-Route::get('/admin/login', function () {
-    return view('login_admin');
-});
+use App\Http\Controllers\AdminLoginController;
 
-Route::post('/admin/login', [LoginController::class, 'login']);
+Route::get('/admin/login', [AdminLoginController::class, 'index']);
+Route::post('/admin/login', [AdminLoginController::class, 'login']);
 
 /*
 |--------------------------------------------------------------------------
 | ADMIN
 |--------------------------------------------------------------------------
 */
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'tampilkan'])
         ->name('dashboard');
