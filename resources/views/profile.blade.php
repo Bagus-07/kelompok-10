@@ -3,32 +3,141 @@
 <head>
     <title>Profile - StayEase Hotel</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        /* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+
+    padding: 0 40px;
+    box-sizing: border-box;
+
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    z-index: 9999;
+}
+
+.navbar a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* LOGO */
+.logo {
+    justify-self: start;
+}
+
+.logo img {
+    height: 60px;
+}
+
+/* MENU */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.nav-menu a {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* RIGHT */
+.nav-auth {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* BUTTON */
+.signup-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(45deg, #F4A261, #E9C46A);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.signup-btn:hover {
+    transform: scale(1.05);
+}
+
+/* FOOTER */
+.footer {
+    background: #e5e7eb;
+    padding: 15px;
+    text-align: center;
+    border-top: 2px solid #ccc;
+}
+    </style>
 </head>
 
-<body class="bg-gray-100">
+<body style="
+    padding-top:70px;
+    overflow-y:auto;
+    font-family:Arial;
+    margin:0;
+    background:#f3f4f6;
+">
 
 <!-- NAVBAR -->
-<div class="navbar flex justify-between items-center p-4 bg-white shadow">
+<div class="navbar">
 
+    <!-- LOGO -->
     <div class="logo">
-        <img src="/photo/new logo.jpeg" class="h-12">
+        <img src="/photo/new logo.jpeg">
     </div>
 
-    <div class="flex gap-6">
+    <!-- MENU -->
+    <div class="nav-menu">
         <a href="/home">Home</a>
         <a href="/home#facilities">Facilities</a>
         <a href="/home#about">About</a>
         <a href="/home#contact">Contact</a>
     </div>
 
-    <a href="/profile">
-        <img 
-            src="{{ auth()->user()->profile_photo 
-                ? '/uploads/' . auth()->user()->profile_photo 
-                : 'https://via.placeholder.com/40' }}"
-            class="w-10 h-10 rounded-full object-cover border-2 border-yellow-400 hover:scale-105 transition"
-        >
-    </a>
+    <!-- RIGHT SIDE -->
+    <div class="nav-auth">
+
+        <!-- PROFILE -->
+        <a href="/profile">
+            <img 
+                src="{{ auth()->user()->profile_photo 
+                    ? asset('uploads/' . auth()->user()->profile_photo) 
+                    : 'https://via.placeholder.com/50' }}"
+                
+                style="
+                    width:50px;
+                    height:50px;
+                    border-radius:50%;
+                    object-fit:cover;
+                    display:block;
+                    cursor:pointer;
+                "
+            >
+        </a>
+
+        <!-- LOGOUT -->
+        <form action="/logout" method="POST">
+            @csrf
+            <button class="signup-btn">
+                Logout
+            </button>
+        </form>
+
+    </div>
 
 </div>
 
@@ -192,6 +301,28 @@
         </form>
 
     </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" style="
+    background:#1f2937;
+    color:white;
+    padding:40px;
+    margin-top:60px;
+">
+
+    <h2 style="font-size:28px; font-weight:bold; margin-bottom:15px;">
+        Contact Us
+    </h2>
+
+    <p class="mt-2">Email: stayease@gmail.com</p>
+    <p class="mt-2">Phone Number: 08123456789</p>
+    <p class="mt-2">Address: Batam, Indonesia</p>
+
+</div>
+
+<div class="footer">
+    © 2026 StayEase Hotel. All Rights Reserved.
 </div>
 
 <script>

@@ -16,11 +16,20 @@ use App\Http\Controllers\ProfileController;
 | LANDING PAGE
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return view('home');
-});
+use App\Http\Controllers\HomeController;
 
-Route::view('/home', 'home');
+Route::get('/', [HomeController::class, 'index']);
+
+use App\Http\Controllers\ReviewController;
+Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
+
+/*
+|--------------------------------------------------------------------------
+| MAIN PAGES
+|--------------------------------------------------------------------------
+*/
+Route::get('/home', [HomeController::class, 'index']);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +48,22 @@ Route::post('/register', [LoginController::class, 'register']);
 |--------------------------------------------------------------------------
 */
 Route::post('/logout', function () {
+
+    $isAdmin = auth()->check() && auth()->user()->role == 'admin';
+
     Auth::logout();
+
     request()->session()->invalidate();
     request()->session()->regenerateToken();
-    return redirect('/login');
+
+    // ADMIN
+    if ($isAdmin) {
+        return redirect('/admin/login');
+    }
+
+    // GUEST
+    return redirect('/home');
+
 })->name('logout');
 
 /*
@@ -78,10 +99,21 @@ Route::get('/product', [RoomController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
+| ADMIN LOGIN
+|--------------------------------------------------------------------------
+*/
+
+use App\Http\Controllers\AdminLoginController;
+
+Route::get('/admin/login', [AdminLoginController::class, 'index']);
+Route::post('/admin/login', [AdminLoginController::class, 'login']);
+
+/*
+|--------------------------------------------------------------------------
 | ADMIN
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'tampilkan'])
         ->name('dashboard');

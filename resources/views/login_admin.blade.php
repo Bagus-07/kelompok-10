@@ -10,7 +10,7 @@
 
     <h2 class="text-2xl font-bold text-center mb-6">Admin Login</h2>
 
-    <form method="POST" action="/login">
+    <form method="POST" action="/admin/login">
         @csrf
 
         <!-- ERROR MESSAGE DI SINI -->
