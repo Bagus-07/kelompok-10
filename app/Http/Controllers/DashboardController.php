@@ -17,6 +17,30 @@ class DashboardController extends Controller
 
         $bookingTerbaru = Booking::latest()->take(5)->get();
 
-        return view('dashboard', compact('users', 'bookings', 'rooms', 'bookingTerbaru'));
+        return view('dashboard', compact(
+            'users',
+            'bookings',
+            'rooms',
+            'bookingTerbaru'
+        ));
+    }
+
+    // LAPORAN
+    public function laporan()
+    {
+        $totalBooking = Booking::count();
+
+        $totalPendapatan = Booking::sum('harga');
+
+        $kamarTerisi = Room::where('status', 'Penuh')->count();
+
+        $bookings = Booking::latest()->get();
+
+        return view('laporan', compact(
+            'totalBooking',
+            'totalPendapatan',
+            'kamarTerisi',
+            'bookings'
+        ));
     }
 }

@@ -98,8 +98,6 @@ Route::middleware('auth')->group(function () {
         return view('booking');
     });
 
-    Route::get('/laporan', function () {
-        return view('laporan');
-    });
+   Route::get('/laporan', [DashboardController::class, 'laporan']);
 
 });
