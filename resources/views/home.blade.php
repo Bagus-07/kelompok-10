@@ -313,7 +313,9 @@ body {
 
     <div class="hero-content">
         <h2>WELCOME TO STAYEASE HOTEL</h2>
-        <button>Explore Rooms</button>
+        <a href="/rooms">
+    <button>Explore Rooms</button>
+</a>
     </div>
 </div>
 

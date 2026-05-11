@@ -41,7 +41,7 @@ Route::get('/rooms', function () {
 
 Route::get('/payment', function () {
     return view('payment');
-})->name('payment');
+})->middleware('auth')->name('payment');
 
 /*
 |--------------------------------------------------------------------------

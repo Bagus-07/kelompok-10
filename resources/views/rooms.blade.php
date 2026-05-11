@@ -477,9 +477,19 @@
                 <p id="modalDesc"></p>
                 <h3 id="modalPrice"></h3>
 
-                <a href="{{ route('payment') }}">
-                    <button class="book-btn">Book Now</button>
-                </a>
+                @auth
+    <a href="{{ route('payment') }}">
+        <button class="book-btn">
+            Book Now
+        </button>
+    </a>
+@else
+    <a href="{{ route('login') }}">
+        <button class="book-btn">
+            Login to Book
+        </button>
+    </a>
+@endauth
             </div>
         </div>
     </div>
