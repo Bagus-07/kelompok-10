@@ -30,6 +30,18 @@ Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
 */
 Route::get('/home', [HomeController::class, 'index']);
 
+/*
+|--------------------------------------------------------------------------
+| ROOMS PAGE
+|--------------------------------------------------------------------------
+*/
+Route::get('/rooms', function () {
+    return view('rooms');
+})->name('rooms');
+
+Route::get('/payment', function () {
+    return view('payment');
+})->name('payment');
 
 /*
 |--------------------------------------------------------------------------
@@ -94,8 +106,8 @@ Route::post('/profile/update', [ProfileController::class, 'update']);
 | ROOMS
 |--------------------------------------------------------------------------
 */
-Route::get('/rooms', [RoomController::class, 'index']);
-Route::get('/product', [RoomController::class, 'index']);
+//Route::get('/rooms', [RoomController::class, 'index']);
+//Route::get('/product', [RoomController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
