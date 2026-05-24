@@ -1,98 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>
-        Rooms - StayEase Hotel
-    </title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@extends('layouts.guest')
 
-    <style>
+@section('title', 'Profile')
 
-        html {
-            scroll-behavior: smooth;
-        }
+@section('content')
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #ffffff;
-            padding-top: 90px;
-        }
-
-        /* NAVBAR */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 70px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-
-    padding: 0 40px;
-    box-sizing: border-box;
-
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(12px);
-    z-index: 9999;
-}
-
-.navbar a {
-    color: #333;
-    text-decoration: none;
-}
-
-/* LOGO */
-.logo {
-    justify-self: start;
-}
-
-.logo img {
-    height: 60px;
-}
-
-/* MENU */
-.nav-menu {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-}
-
-.nav-menu a {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-/* AUTH BUTTON */
-.nav-auth {
-    justify-self: end;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* LOGIN */
-.login-btn {
-    padding: 8px 18px;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #F4A261, #E9C46A);
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* SIGNUP */
-.signup-btn {
-    padding: 8px 18px;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #F4A261, #E9C46A);
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* HOVER */
+<style>
+    /* HOVER */
 .login-btn:hover,
 .signup-btn:hover {
     transform: scale(1.05);
@@ -293,89 +206,11 @@
             font-size: 16px;
             margin-top: 15px;
         }
-
+        
         .book-btn:hover {
             background: #2563eb;
         }
-
-        /* CONTACT */
-.contact {
-    background: #1f2937;
-    color: white;
-
-    padding: 50px;
-    text-align: center;
-}
-
-.contact h2 {
-    margin-bottom: 20px;
-}
-
-/* FOOTER */
-.footer {
-    background: #e5e7eb;
-    padding: 18px;
-    text-align: center;
-    border-top: 2px solid #ccc;
-}
-    </style>
-    </head>
-
-    <body>
-
-    <!-- NAVBAR -->
-<div class="navbar">
-
-    <div class="logo">
-        <img src="/photo/new logo.jpeg">
-    </div>
-
-    <div class="nav-menu">
-        <a href="/home">Home</a>
-        <a href="/home#facilities">Facilities</a>
-        <a href="/home#about">About</a>
-        <a href="/home#contact">Contact</a>
-    </div>
-
-    <div class="nav-auth">
-
-@auth
-    <a href="/profile">
-
-    <img 
-        src="{{ auth()->user()->profile_photo 
-            ? asset('uploads/' . auth()->user()->profile_photo) 
-            : 'https://via.placeholder.com/50' }}"
-        
-        style="
-            width:50px;
-            height:50px;
-            border-radius:50%;
-            object-fit:cover;
-            display:block;
-            cursor:pointer;
-        "
-    >
-
-</a>
-
-        <!-- LOGOUT -->
-        <form action="/logout" method="POST">
-            @csrf
-            <button class="signup-btn">Logout</button>
-        </form>
-
-    </div>
-
-@else
-    <!-- NOT LOGGED IN -->
-    <a href="/login" class="login-btn">Log in</a>
-    <a href="/register" class="signup-btn">Sign up</a>
-@endauth
-
-</div>
-
-</div>
+</style>
 
 </div>
 
@@ -494,19 +329,7 @@
         </div>
     </div>
 
-    <!-- CONTACT -->
-<div class="contact" id="contact">
-    <h2>Contact Us</h2>
 
-    <p>Email: stayease@gmail.com</p>
-    <p>Phone Number: 08123456789</p>
-    <p>Address: Batam, Indonesia</p>
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-    © 2026 StayEase Hotel
-</div>
 
     <script>
             // SEARCH FUNCTION
@@ -556,7 +379,5 @@
         }
     }
     </script>
-    </body>
-    
 
-</html>
+@endsection

@@ -9,7 +9,7 @@ class AdminLoginController extends Controller
 {
     public function index()
     {
-        return view('login_admin');
+        return view('pages.login_admin');
     }
 
     public function login(Request $request)

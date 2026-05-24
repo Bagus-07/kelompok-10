@@ -30,17 +30,12 @@ Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
 */
 Route::get('/home', [HomeController::class, 'index']);
 
-/*
-|--------------------------------------------------------------------------
-| ROOMS PAGE
-|--------------------------------------------------------------------------
-*/
 Route::get('/rooms', function () {
-    return view('rooms');
+    return view('pages.rooms');
 })->name('rooms');
 
 Route::get('/payment', function () {
-    return view('payment');
+    return view('pages.payment');
 })->middleware('auth')->name('payment');
 
 /*
@@ -51,7 +46,7 @@ Route::get('/payment', function () {
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::view('/register', 'register');
+Route::view('/register', 'pages.register');
 Route::post('/register', [LoginController::class, 'register']);
 
 /*
@@ -131,15 +126,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
         ->name('dashboard');
 
     Route::get('/user', function () {
-        return view('user');
+        return view('pages.user');
     });
 
     Route::get('/kamar', function () {
-        return view('kamar');
+        return view('pages.kamar');
     });
 
     Route::get('/booking', function () {
-        return view('booking');
+        return view('pages.booking');
     });
 
    Route::get('/laporan', [DashboardController::class, 'laporan']);

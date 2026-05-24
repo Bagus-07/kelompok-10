@@ -16,7 +16,7 @@ class ProfileController extends Controller
                             ->latest()
                             ->get();
 
-        return view('profile', compact('bookings'));
+        return view('pages.profile', compact('bookings'));
     }
 
     public function update(Request $request)

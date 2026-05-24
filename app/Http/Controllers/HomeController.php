@@ -10,6 +10,6 @@ class HomeController extends Controller
     {
         $reviews = Review::with('user')->latest()->get();
 
-        return view('home', compact('reviews'));
+        return view('pages.home', compact('reviews'));
     }
 }
