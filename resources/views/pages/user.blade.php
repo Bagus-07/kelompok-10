@@ -118,6 +118,17 @@ tr:hover {
                         <button class="btn delete">Hapus</button>
                     </td>
                 </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Bagus</td>
+                    <td>Bagus@gmail.com</td>
+                    <td>08234567899</td>
+                    <td>
+                        <button class="btn edit">Edit</button>
+                        <button class="btn delete">Hapus</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
