@@ -120,23 +120,16 @@ Route::post('/admin/login', [AdminLoginController::class, 'login']);
 | ADMIN
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'tampilkan'])
-        ->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
 
-    Route::get('/user', function () {
-        return view('pages.user');
-    });
+    Route::view('/user', 'pages.user');
 
-    Route::get('/kamar', function () {
-        return view('pages.kamar');
-    });
+    Route::view('/kamar', 'pages.kamar');
 
-    Route::get('/booking', function () {
-        return view('pages.booking');
-    });
+    Route::view('/booking', 'pages.booking');
 
-   Route::get('/laporan', [DashboardController::class, 'laporan']);
+    Route::view('/laporan', 'pages.laporan');
 
 });

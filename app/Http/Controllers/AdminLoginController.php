@@ -21,7 +21,7 @@ class AdminLoginController extends Controller
             // CHECK ADMIN ROLE
             if (auth()->user()->role == 'admin') {
 
-                return redirect('/dashboard');
+                return redirect('/admin/dashboard');
             }
 
             // NOT ADMIN
