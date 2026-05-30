@@ -5,143 +5,345 @@
 @section('content')
 
 <style>
-.content-box {
-    background: #f1f5f9;
-    padding: 25px;
-    border-radius: 16px;
+
+.room-container{
+    background:white;
+    border-radius:20px;
+    padding:25px;
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 14px;
+.room-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+.room-actions{
+    display:flex;
+    gap:10px;
 }
 
-.btn-add {
-    background: #10b981;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
+.btn-room{
+    padding:10px 16px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+    font-weight:600;
 }
 
-/* TABLE */
-table {
-    width: 100%;
-    border-collapse: collapse;
+.btn-room.secondary{
+    background:#10b981;
 }
 
-th {
-    background: #f1f5f9;
-    padding: 14px;
-    text-align: left;
-    color: #475569;
+.room-type{
+    border:1px solid #ddd;
+    border-radius:15px;
+    margin-bottom:15px;
+    overflow:hidden;
 }
 
-td {
-    padding: 14px;
-    border-bottom: 1px solid #eee;
-    color: #1e293b;
+.room-type-header{
+    display:grid;
+    grid-template-columns:
+        50px
+        1.5fr
+        1fr
+        1fr
+        1fr
+        180px;
+
+    align-items:center;
+    padding:15px;
+    background:#f8fafc;
 }
 
-/* STATUS */
-.status {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
+.dropdown-btn{
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.available {
-    background: #d1fae5;
-    color: #065f46;
+.action-buttons{
+    display:flex;
+    gap:8px;
 }
 
-.full {
-    background: #fee2e2;
-    color: #991b1b;
+.btn-edit{
+    background:#3b82f6;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-/* BUTTON */
-.btn {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+.btn-delete{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
-.edit {
-    background: #3b82f6;
-    color: white;
+.room-details{
+    display:none;
+    padding:15px;
 }
 
-.delete {
-    background: #ef4444;
-    color: white;
+.room-details.active{
+    display:block;
 }
 
-/* HOVER */
-tr:hover {
-    background: #f9fafb;
+.room-table{
+    width:100%;
+    border-collapse:collapse;
 }
+
+.room-table th,
+.room-table td{
+    border-bottom:1px solid #eee;
+    padding:12px;
+    text-align:center;
+}
+
+.status-available{
+    color:green;
+    font-weight:600;
+}
+
+.status-used{
+    color:red;
+    font-weight:600;
+}
+
 </style>
 
-<div class="content-box">
+<div class="room-container">
 
-    <div class="header">
+    <div class="room-header">
+
         <h3>Data Kamar</h3>
-        <button class="btn-add">+ Tambah Kamar</button>
+
+        <div class="room-actions">
+
+            <button class="btn-room">
+                Tambah Tipe Kamar
+            </button>
+
+            <button class="btn-room secondary">
+                Tambah Kamar
+            </button>
+
+        </div>
+
     </div>
 
-    <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Kamar</th>
-                    <th>Tipe</th>
-                    <th>Harga</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
+    {{-- STANDARD --}}
+    <div class="room-type">
 
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Deluxe Room</td>
-                    <td>Deluxe</td>
-                    <td>Rp 500.000</td>
-                    <td><span class="status available">Tersedia</span></td>
-                    <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
-                    </td>
-                </tr>
+        <div class="room-type-header">
 
-                <tr>
-                    <td>2</td>
-                    <td>Suite Room</td>
-                    <td>Suite</td>
-                    <td>Rp 900.000</td>
-                    <td><span class="status full">Penuh</span></td>
-                    <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <div class="dropdown-btn"
+                 onclick="toggleRoom('standard')">
+                 ▼
+            </div>
+
+            <div>Standard</div>
+
+            <div>Rp 200.000</div>
+
+            <div>1</div>
+
+            <div>1</div>
+
+            <div class="action-buttons">
+
+                <button class="btn-edit">
+                    Edit
+                </button>
+
+                <button class="btn-delete">
+                    Hapus
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="standard" class="room-details active">
+
+            <table class="room-table">
+
+                <thead>
+                    <tr>
+                        <th>No Kamar</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Tersedia</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>101</td>
+                        <td>31/05/2026 12:00</td>
+                        <td>01/06/2026 08:00</td>
+                        <td>01/06/2026 11:00</td>
+
+                        <td>
+                            <span class="status-used">
+                                Dipakai
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button class="btn-edit">
+                                Edit
+                            </button>
+
+                            <button class="btn-delete">
+                                Hapus
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>102</td>
+                        <td>31/05/2026 12:00</td>
+                        <td>31/05/2026 12:00</td>
+                        <td>28/05/2026 12:00</td>
+
+                        <td>
+                            <span class="status-available">
+                                Tersedia
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button class="btn-edit">
+                                Edit
+                            </button>
+
+                            <button class="btn-delete">
+                                Hapus
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {{-- SUPERIOR --}}
+    <div class="room-type">
+
+        <div class="room-type-header">
+
+            <div class="dropdown-btn"
+                 onclick="toggleRoom('superior')">
+                 ▶
+            </div>
+
+            <div>Superior</div>
+
+            <div>Rp 350.000</div>
+
+            <div>1</div>
+
+            <div>1</div>
+
+            <div class="action-buttons">
+
+                <button class="btn-edit">
+                    Edit
+                </button>
+
+                <button class="btn-delete">
+                    Hapus
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="superior" class="room-details">
+
+            <p>Data kamar superior...</p>
+
+        </div>
+
+    </div>
+
+    {{-- DELUXE --}}
+    <div class="room-type">
+
+        <div class="room-type-header">
+
+            <div class="dropdown-btn"
+                 onclick="toggleRoom('deluxe')">
+                 ▶
+            </div>
+
+            <div>Deluxe</div>
+
+            <div>Rp 500.000</div>
+
+            <div>1</div>
+
+            <div>1</div>
+
+            <div class="action-buttons">
+
+                <button class="btn-edit">
+                    Edit
+                </button>
+
+                <button class="btn-delete">
+                    Hapus
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="deluxe" class="room-details">
+
+            <p>Data kamar deluxe...</p>
+
+        </div>
+
     </div>
 
 </div>
+
+<script>
+
+function toggleRoom(id){
+
+    let section = document.getElementById(id);
+
+    section.classList.toggle('active');
+
+}
+
+</script>
 
 @endsection
