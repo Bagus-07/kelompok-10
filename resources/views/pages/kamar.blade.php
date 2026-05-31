@@ -6,6 +6,47 @@
 
 <style>
 
+.room-guide{
+    display:grid;
+    grid-template-columns:
+        2fr
+        1.2fr
+        1fr
+        1fr
+        1.2fr;
+
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+
+    padding:14px 20px;
+    margin-bottom:15px;
+
+    font-weight:600;
+    color:#64748b;
+}
+
+.room-header-table{
+    display:grid;
+    grid-template-columns:
+        50px
+        1.5fr
+        1fr
+        1fr
+        1fr
+        180px;
+
+    background:#e2e8f0;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+}
+
 .room-container{
     background:white;
     border-radius:20px;
@@ -120,213 +161,348 @@
     font-weight:600;
 }
 
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    z-index:9999;
+
+    justify-content:center;
+    align-items:center;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-content{
+    background:white;
+    width:500px;
+    padding:25px;
+    border-radius:20px;
+}
+
+.modal-content h3{
+    margin-bottom:20px;
+}
+
+.modal-form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form select{
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.modal-footer{
+    margin-top:20px;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+.btn-close{
+    background:#64748b;
+    color:white;
+    border:none;
+    padding:10px 16px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.alert-success{
+    background:#dcfce7;
+    color:#166534;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
 </style>
 
+@if(session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="room-container">
-
     <div class="room-header">
-
         <h3>Data Kamar</h3>
 
         <div class="room-actions">
-
-            <button class="btn-room">
+            <button class="btn-room"
+                    onclick="openModal('modalTipe')">
                 Tambah Tipe Kamar
             </button>
 
-            <button class="btn-room secondary">
+            <button class="btn-room secondary"
+                    onclick="openModal('modalKamar')">
                 Tambah Kamar
             </button>
-
         </div>
-
     </div>
 
-    {{-- STANDARD --}}
+    <!-- TAMBAHKAN DI SINI -->
+    <div class="room-guide">
+        <div>Tipe Kamar</div>
+        <div>Harga/Malam</div>
+        <div>Kamar Terpakai</div>
+        <div>Kamar Tersedia</div>
+        <div>Aksi</div>
+    </div>
+    
+    @foreach($tipeKamars as $tipe)
+
     <div class="room-type">
-
         <div class="room-type-header">
-
             <div class="dropdown-btn"
-                 onclick="toggleRoom('standard')">
-                 ▼
+                onclick="toggleRoom('room{{ $tipe->id }}')">
+                ▼
             </div>
 
-            <div>Standard</div>
+            <div>{{ $tipe->nama_tipe }}</div>
 
-            <div>Rp 200.000</div>
+            <div>Rp {{ number_format($tipe->harga_per_malam,0,',','.') }}</div>
 
-            <div>1</div>
+            <div>0</div>
 
-            <div>1</div>
+            <div>0</div>
 
             <div class="action-buttons">
 
-                <button class="btn-edit">
+                <button
+                    class="btn-edit"
+                    onclick="openModal('editModal{{ $tipe->id }}')"
+                >
                     Edit
                 </button>
 
-                <button class="btn-delete">
-                    Hapus
-                </button>
+                <form
+                    action="{{ route('tipe-kamar.destroy', $tipe->id) }}"
+                    method="POST"
+                    style="display:inline;"
+                >
+                    @csrf
+                    @method('DELETE')
 
+                    <button
+                        class="btn-delete"
+                        onclick="return confirm('Hapus tipe kamar ini?')"
+                    >
+                        Hapus
+                    </button>
+                </form>
             </div>
-
         </div>
 
-        <div id="standard" class="room-details active">
+        <div class="room-list"
+            id="room{{ $tipe->id }}"
+            style="display:none;">
 
-            <table class="room-table">
+            <table>
+                <tr>
+                    <th>No Kamar</th>
+                    <th>Status</th>
+                </tr>
 
-                <thead>
-                    <tr>
-                        <th>No Kamar</th>
-                        <th>Check In</th>
-                        <th>Check Out</th>
-                        <th>Tersedia</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td>101</td>
-                        <td>31/05/2026 12:00</td>
-                        <td>01/06/2026 08:00</td>
-                        <td>01/06/2026 11:00</td>
-
-                        <td>
-                            <span class="status-used">
-                                Dipakai
-                            </span>
-                        </td>
-
-                        <td>
-
-                            <button class="btn-edit">
-                                Edit
-                            </button>
-
-                            <button class="btn-delete">
-                                Hapus
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>102</td>
-                        <td>31/05/2026 12:00</td>
-                        <td>31/05/2026 12:00</td>
-                        <td>28/05/2026 12:00</td>
-
-                        <td>
-                            <span class="status-available">
-                                Tersedia
-                            </span>
-                        </td>
-
-                        <td>
-
-                            <button class="btn-edit">
-                                Edit
-                            </button>
-
-                            <button class="btn-delete">
-                                Hapus
-                            </button>
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
+                <tr>
+                    <td>Belum ada kamar</td>
+                    <td>-</td>
+                </tr>
             </table>
-
         </div>
+    </div>
+
+@endforeach
+
+{{-- modal edit --}}
+<div id="editModal{{ $tipe->id }}" class="modal">
+
+    <div class="modal-content">
+
+        <h3>Edit Tipe Kamar</h3>
+
+        <form
+            method="POST"
+            action="{{ route('tipe-kamar.update', $tipe->id) }}"
+            class="modal-form"
+        >
+
+            @csrf
+            @method('PUT')
+
+            <input
+                type="text"
+                name="nama_tipe"
+                value="{{ $tipe->nama_tipe }}"
+            >
+
+            <input
+                type="number"
+                name="harga_per_malam"
+                value="{{ $tipe->harga_per_malam }}"
+            >
+
+            <textarea name="fasilitas">{{ $tipe->fasilitas }}</textarea>
+
+            <textarea name="deskripsi">{{ $tipe->deskripsi }}</textarea>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    onclick="closeModal('editModal{{ $tipe->id }}')"
+                >
+                    Batal
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-room"
+                >
+                    Update
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 
-    {{-- SUPERIOR --}}
-    <div class="room-type">
+</div>
 
-        <div class="room-type-header">
+</div>
 
-            <div class="dropdown-btn"
-                 onclick="toggleRoom('superior')">
-                 ▶
-            </div>
+<!-- MODAL TIPE KAMAR -->
 
-            <div>Superior</div>
+<div id="modalTipe" class="modal">
+    <div class="modal-content">
+        <h3>Tambah Tipe Kamar</h3>
 
-            <div>Rp 350.000</div>
+        <form
+            class="modal-form"
+            method="POST"
+            action="{{ route('tipe-kamar.store') }}"
+        >
+            @csrf
 
-            <div>1</div>
+            <input
+                type="text"
+                name="nama_tipe"
+                placeholder="Nama Tipe">
 
-            <div>1</div>
+            <input
+                type="number"
+                name="harga_per_malam"
+                placeholder="Harga per malam">
 
-            <div class="action-buttons">
+            <textarea
+                name="fasilitas"
+                placeholder="Fasilitas">
+            </textarea>
 
-                <button class="btn-edit">
-                    Edit
+            <textarea
+                name="deskripsi"
+                placeholder="Deskripsi">
+            </textarea>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    onclick="closeModal('modalTipe')">
+                    Batal
                 </button>
 
-                <button class="btn-delete">
-                    Hapus
+                <button
+                    type="submit"
+                    class="btn-room">
+                    Simpan
                 </button>
-
             </div>
-
-        </div>
-
-        <div id="superior" class="room-details">
-
-            <p>Data kamar superior...</p>
-
-        </div>
-
+        </form>
     </div>
+</div>
 
-    {{-- DELUXE --}}
-    <div class="room-type">
+<!-- MODAL KAMAR -->
 
-        <div class="room-type-header">
+<div id="modalKamar" class="modal">
+    <div class="modal-content">
+        <h3>Tambah Kamar</h3>
 
-            <div class="dropdown-btn"
-                 onclick="toggleRoom('deluxe')">
-                 ▶
-            </div>
+        <form class="modal-form">
+            <input
+                type="text"
+                placeholder="Nomor Kamar">
 
-            <div>Deluxe</div>
+            <select>
+                <option>
+                    Pilih Tipe Kamar
+                </option>
 
-            <div>Rp 500.000</div>
+                <option>
+                    Standard
+                </option>
 
-            <div>1</div>
+                <option>
+                    Superior
+                </option>
 
-            <div>1</div>
+                <option>
+                    Deluxe
+                </option>
 
-            <div class="action-buttons">
+            </select>
 
-                <button class="btn-edit">
-                    Edit
-                </button>
+            <select>
 
-                <button class="btn-delete">
-                    Hapus
-                </button>
+                <option>
+                    Tersedia
+                </option>
 
-            </div>
+                <option>
+                    Dipakai
+                </option>
 
-        </div>
+                <option>
+                    Maintenance
+                </option>
 
-        <div id="deluxe" class="room-details">
+                <option>
+                    Cleaning
+                </option>
 
-            <p>Data kamar deluxe...</p>
+            </select>
+
+        </form>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn-close"
+                onclick="closeModal('modalKamar')">
+
+                Batal
+
+            </button>
+
+            <button class="btn-room secondary">
+
+                Simpan
+
+            </button>
 
         </div>
 
@@ -344,6 +520,23 @@ function toggleRoom(id){
 
 }
 
-</script>
+function openModal(id){
 
+    document
+        .getElementById(id)
+        .classList
+        .add('active');
+
+}
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList
+        .remove('active');
+
+}
+
+</script>
 @endsection
