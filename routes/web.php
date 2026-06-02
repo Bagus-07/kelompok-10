@@ -10,7 +10,6 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\KamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +30,13 @@ Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
 */
 Route::get('/home', [HomeController::class, 'index']);
 
+Route::get('/rooms', function () {
+    return view('pages.rooms');
+})->name('rooms');
+
+Route::get('/payment', function () {
+    return view('pages.payment');
+})->middleware('auth')->name('payment');
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +46,7 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::view('/register', 'register');
+Route::view('/register', 'pages.register');
 Route::post('/register', [LoginController::class, 'register']);
 
 /*
@@ -95,8 +101,8 @@ Route::post('/profile/update', [ProfileController::class, 'update']);
 | ROOMS
 |--------------------------------------------------------------------------
 */
-Route::get('/rooms', [RoomController::class, 'index']);
-Route::get('/product', [RoomController::class, 'index']);
+//Route::get('/rooms', [RoomController::class, 'index']);
+//Route::get('/product', [RoomController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -114,24 +120,20 @@ Route::post('/admin/login', [AdminLoginController::class, 'login']);
 | ADMIN
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'tampilkan'])
-        ->name('dashboard');
-
-    Route::get('/user', function () {
-        return view('user');
-    });
-
-    Route::get('/kamar', function () {
-        return view('kamar');
-    });
-
-    Route::get('/booking', function () {
-        return view('booking');
-    });
-
-   Route::get('/laporan', [DashboardController::class, 'laporan']);
+    Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
+    Route::view('/user', 'pages.user');
+    Route::get('/kamar', [TipeKamarController::class, 'index'])
+        ->name('kamar');
+    Route::post('/tipe-kamar', [TipeKamarController::class, 'store'])
+        ->name('tipe-kamar.store');
+    Route::put('/tipe-kamar/{id}',[TipeKamarController::class, 'update']
+        )->name('tipe-kamar.update');
+    Route::delete('/tipe-kamar/{id}',[TipeKamarController::class, 'destroy']
+        )->name('tipe-kamar.destroy');
+    Route::view('/booking', 'pages.booking');
+    Route::view('/laporan', 'pages.laporan');
 
 });
 Route::get('/admin/kamar', [KamarController::class, 'index']);

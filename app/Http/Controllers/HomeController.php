@@ -10,6 +10,6 @@ class HomeController extends Controller
     {
         $reviews = collect();
 
-        return view('home', compact('reviews'));
+        return view('pages.home', compact('reviews'));
     }
 }

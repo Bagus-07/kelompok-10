@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Data User')
 
@@ -110,9 +110,10 @@ tr:hover {
 
                 <tr>
                     <td>2</td>
-                    <td>Andi</td>
-                    <td>andi@gmail.com</td>
-                    <td>08234567890</td>
+                    <td>Suite Room</td>
+                    <td>Suite</td>
+                    <td>Rp 900.000</td>
+                    <td><span class="status full">Penuh</span></td>
                     <td>
                         <button class="btn edit">Edit</button>
                         <button class="btn delete">Hapus</button>

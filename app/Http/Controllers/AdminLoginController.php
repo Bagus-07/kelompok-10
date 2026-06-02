@@ -9,7 +9,7 @@ class AdminLoginController extends Controller
 {
     public function index()
     {
-        return view('login_admin');
+        return view('pages.login_admin');
     }
 
     public function login(Request $request)
@@ -21,7 +21,7 @@ class AdminLoginController extends Controller
             // CHECK ADMIN ROLE
             if (auth()->user()->role == 'admin') {
 
-                return redirect('/dashboard');
+                return redirect('/admin/dashboard');
             }
 
             // NOT ADMIN

@@ -17,7 +17,7 @@ class DashboardController extends Controller
 
         $bookingTerbaru = Booking::latest()->take(5)->get();
 
-        return view('dashboard', compact(
+        return view('pages.dashboard', compact(
             'users',
             'bookings',
             'rooms',
@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
         $bookings = Booking::latest()->get();
 
-        return view('laporan', compact(
+        return view('pages.laporan', compact(
             'totalBooking',
             'totalPendapatan',
             'kamarTerisi',
