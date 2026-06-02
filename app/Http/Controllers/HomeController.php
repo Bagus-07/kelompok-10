@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $reviews = Review::with('user')->latest()->get();
+        $reviews = collect();
 
         return view('home', compact('reviews'));
     }

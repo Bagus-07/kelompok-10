@@ -114,31 +114,51 @@ tr:hover {
                 </tr>
             </thead>
 
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Deluxe Room</td>
-                    <td>Deluxe</td>
-                    <td>Rp 500.000</td>
-                    <td><span class="status available">Tersedia</span></td>
-                    <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
-                    </td>
-                </tr>
+           <tbody>
 
-                <tr>
-                    <td>2</td>
-                    <td>Suite Room</td>
-                    <td>Suite</td>
-                    <td>Rp 900.000</td>
-                    <td><span class="status full">Penuh</span></td>
-                    <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
-                    </td>
-                </tr>
-            </tbody>
+@foreach($kamars as $kamar)
+
+<tr>
+
+    <td>{{ $loop->iteration }}</td>
+
+    <td>{{ $kamar->nomor_kamar }}</td>
+
+    <td>-</td>
+
+    <td>-</td>
+
+    <td>
+        <span class="status available">
+            {{ $kamar->status }}
+        </span>
+    </td>
+
+    <td>
+
+        <form
+            action="{{ route('kamar.destroy', $kamar->id) }}"
+            method="POST"
+        >
+            @csrf
+            @method('DELETE')
+
+            <button
+                type="submit"
+                class="btn delete"
+            >
+                Hapus
+            </button>
+
+        </form>
+
+    </td>
+
+</tr>
+
+@endforeach
+
+</tbody>
         </table>
     </div>
 

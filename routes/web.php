@@ -10,6 +10,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,3 +134,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
    Route::get('/laporan', [DashboardController::class, 'laporan']);
 
 });
+Route::get('/admin/kamar', [KamarController::class, 'index']);
+
+Route::post(
+    '/admin/kamar/store',
+    [KamarController::class, 'store']
+)->name('kamar.store');
+
+Route::delete(
+    '/admin/kamar/{id}',
+    [KamarController::class, 'destroy']
+)->name('kamar.destroy');
