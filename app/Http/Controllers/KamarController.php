@@ -7,24 +7,19 @@ use App\Models\Kamar;
 
 class KamarController extends Controller
 {
-    public function index()
-    {
-        $kamars = Kamar::all();
-
-        return view(
-            'kamar',
-            compact('kamars')
-        );
-    }
 
     public function store(Request $request)
     {
+        $request->validate([
+            'tipe_kamar_id' => 'required|exists:tipe_kamars,id',
+            'nomor_kamar'   => 'required|unique:kamars,nomor_kamar',
+            'status'        => 'required'
+        ]);
+
         Kamar::create([
-
+            'tipe_kamar_id' => $request->tipe_kamar_id,
             'nomor_kamar' => $request->nomor_kamar,
-
             'status' => $request->status
-
         ]);
 
         return redirect()->back()

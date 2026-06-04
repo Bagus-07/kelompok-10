@@ -101,6 +101,15 @@
     background:#f8fafc;
 }
 
+.room-list{
+    display:none;
+    padding:15px;
+}
+
+.room-list.active{
+    display:block;
+}
+
 .dropdown-btn{
     cursor:pointer;
     font-size:18px;
@@ -274,9 +283,9 @@
 
             <div>Rp {{ number_format($tipe->harga_per_malam,0,',','.') }}</div>
 
-            <div>0</div>
+            <div>{{ $tipe->kamars->where('status', 'Dipakai')->count() }}</div>
 
-            <div>0</div>
+            <div>{{ $tipe->kamars->where('status', 'Tersedia')->count() }}</div>
 
             <div class="action-buttons">
 
@@ -306,19 +315,29 @@
         </div>
 
         <div class="room-list"
-            id="room{{ $tipe->id }}"
-            style="display:none;">
+            id="room{{ $tipe->id }}">
 
             <table>
                 <tr>
                     <th>No Kamar</th>
                     <th>Status</th>
                 </tr>
-
-                <tr>
-                    <td>Belum ada kamar</td>
-                    <td>-</td>
-                </tr>
+                @if($tipe->kamars->count())
+                    @foreach($tipe->kamars as $kamar)
+                        <tr>
+                            <td>{{ $kamar->nomor_kamar }}</td>
+                            <td>
+                                {{ $kamar->status }}
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="2">
+                            Belum ada kamar
+                        </td>
+                    </tr>
+                @endif
             </table>
         </div>
     </div>
@@ -442,72 +461,60 @@
     <div class="modal-content">
         <h3>Tambah Kamar</h3>
 
-        <form class="modal-form">
+        <form
+            class="modal-form"
+            method="POST"
+            action="{{ route('kamar.store') }}">
+
+            @csrf
+
             <input
                 type="text"
+                name="nomor_kamar"
                 placeholder="Nomor Kamar">
 
-            <select>
-                <option>
+            <select name="tipe_kamar_id">
+
+                <option value="">
                     Pilih Tipe Kamar
                 </option>
 
-                <option>
-                    Standard
-                </option>
+                @foreach($tipeKamars as $tipe)
 
-                <option>
-                    Superior
-                </option>
+                    <option value="{{ $tipe->id }}">
+                        {{ $tipe->nama_tipe }}
+                    </option>
 
-                <option>
-                    Deluxe
-                </option>
+                @endforeach
 
             </select>
 
-            <select>
+            <select name="status">
 
-                <option>
-                    Tersedia
-                </option>
-
-                <option>
-                    Dipakai
-                </option>
-
-                <option>
-                    Maintenance
-                </option>
-
-                <option>
-                    Cleaning
-                </option>
+                <option value="Tersedia">Tersedia</option>
+                <option value="Dipakai">Dipakai</option>
+                <option value="Cleaning">Cleaning</option>
+                <option value="Maintenance">Maintenance</option>
 
             </select>
-
-        </form>
 
         <div class="modal-footer">
 
             <button
+                type="button"
                 class="btn-close"
                 onclick="closeModal('modalKamar')">
-
                 Batal
-
             </button>
 
-            <button class="btn-room secondary">
-
+            <button 
+                type="submit"
+                class="btn-room secondary">
                 Simpan
-
             </button>
-
         </div>
-
+    </form>
     </div>
-
 </div>
 
 <script>

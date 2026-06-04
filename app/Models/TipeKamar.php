@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Kamar;
 
 class TipeKamar extends Model
 {
@@ -14,4 +15,9 @@ class TipeKamar extends Model
         'deskripsi'
 
     ];
+    
+    public function kamars()
+    {
+        return $this->hasMany(Kamar::class);
+    }
 }
