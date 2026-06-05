@@ -10,6 +10,9 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TipeKamarController;
+use App\Http\Controllers\KamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +37,17 @@ Route::get('/rooms', function () {
     return view('pages.rooms');
 })->name('rooms');
 
-Route::get('/payment', function () {
-    return view('pages.payment');
-})->middleware('auth')->name('payment');
+// PAYMENT
+Route::get('/payment', [PaymentController::class, 'index'])
+    ->middleware('auth')
+    ->name('payment');
 
+Route::post('/payment/process', [PaymentController::class, 'process'])
+    ->middleware('auth')
+    ->name('payment.process');
+Route::get('/payment-success', function () {
+    return view('payment.success');
+})->name('payment.success');
 /*
 |--------------------------------------------------------------------------
 | AUTH USER
