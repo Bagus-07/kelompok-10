@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TipeKamar;
+use App\Models\Kamar;
 
 class TipeKamarController extends Controller
 {
     public function index()
     {
-        $tipeKamars = TipeKamar::all();
+        $tipeKamars = TipeKamar::with('kamars')->get();
 
         return view(
             'pages.kamar',

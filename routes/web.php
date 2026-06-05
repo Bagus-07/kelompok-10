@@ -133,27 +133,32 @@ Route::post('/admin/login', [AdminLoginController::class, 'login']);
 Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
+
     Route::view('/user', 'pages.user');
+
+    // CRUD tipe kamar
     Route::get('/kamar', [TipeKamarController::class, 'index'])
         ->name('kamar');
+
     Route::post('/tipe-kamar', [TipeKamarController::class, 'store'])
         ->name('tipe-kamar.store');
-    Route::put('/tipe-kamar/{id}',[TipeKamarController::class, 'update']
-        )->name('tipe-kamar.update');
-    Route::delete('/tipe-kamar/{id}',[TipeKamarController::class, 'destroy']
-        )->name('tipe-kamar.destroy');
+
+    Route::put('/tipe-kamar/{id}', [TipeKamarController::class, 'update'])
+        ->name('tipe-kamar.update');
+
+    Route::delete('/tipe-kamar/{id}', [TipeKamarController::class, 'destroy'])
+        ->name('tipe-kamar.destroy');
+
+    // CRUD KAMAR
+    Route::post('/kamar/store', [KamarController::class, 'store'])
+        ->name('kamar.store');
+
+    Route::put('/kamar/{id}', [KamarController::class, 'update'])
+        ->name('kamar.update');
+
+    Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])
+        ->name('kamar.destroy');
+
     Route::view('/booking', 'pages.booking');
     Route::view('/laporan', 'pages.laporan');
-
 });
-Route::get('/admin/kamar', [KamarController::class, 'index']);
-
-Route::post(
-    '/admin/kamar/store',
-    [KamarController::class, 'store']
-)->name('kamar.store');
-
-Route::delete(
-    '/admin/kamar/{id}',
-    [KamarController::class, 'destroy']
-)->name('kamar.destroy');

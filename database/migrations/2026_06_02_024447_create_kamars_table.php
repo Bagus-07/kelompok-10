@@ -21,6 +21,10 @@ return new class extends Migration
                 'Maintenance'
             ]);
 
+            $table->foreignId('tipe_kamar_id')
+                  ->constrained()
+                  ->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
