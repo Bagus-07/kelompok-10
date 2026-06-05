@@ -270,139 +270,98 @@
         <div>Aksi</div>
     </div>
     
-    @foreach($tipeKamars as $tipe)
+   @foreach($tipeKamars as $tipe)
 
-    <div class="room-type">
-        <div class="room-type-header">
-            <div class="dropdown-btn"
-                onclick="toggleRoom('room{{ $tipe->id }}')">
-                ▼
-            </div>
+<div class="room-type">
 
-            <div>{{ $tipe->nama_tipe }}</div>
+    <div class="room-type-header">
 
-            <div>Rp {{ number_format($tipe->harga_per_malam,0,',','.') }}</div>
-
-            <div>{{ $tipe->kamars->where('status', 'Dipakai')->count() }}</div>
-
-            <div>{{ $tipe->kamars->where('status', 'Tersedia')->count() }}</div>
-
-            <div class="action-buttons">
-
-                <button
-                    class="btn-edit"
-                    onclick="openModal('editModal{{ $tipe->id }}')"
-                >
-                    Edit
-                </button>
-
-                <form
-                    action="{{ route('tipe-kamar.destroy', $tipe->id) }}"
-                    method="POST"
-                    style="display:inline;"
-                >
-                    @csrf
-                    @method('DELETE')
-
-                    <button
-                        class="btn-delete"
-                        onclick="return confirm('Hapus tipe kamar ini?')"
-                    >
-                        Hapus
-                    </button>
-                </form>
-            </div>
+        <div class="dropdown-btn"
+            onclick="toggleRoom('room{{ $tipe->id }}')">
+            ▼
         </div>
 
-        <div class="room-list"
-            id="room{{ $tipe->id }}">
+        <div>{{ $tipe->nama_tipe }}</div>
 
-            <table>
+        <div>
+            Rp {{ number_format($tipe->harga_per_malam,0,',','.') }}
+        </div>
+
+        <div>
+            {{ $tipe->kamars->where('status','Dipakai')->count() }}
+        </div>
+
+        <div>
+            {{ $tipe->kamars->where('status','Tersedia')->count() }}
+        </div>
+
+        <div class="action-buttons">
+
+            <button
+                class="btn-edit"
+                onclick="openModal('editModal{{ $tipe->id }}')">
+                Edit
+            </button>
+
+            <form
+                action="{{ route('tipe-kamar.destroy',$tipe->id) }}"
+                method="POST"
+                style="display:inline">
+
+                @csrf
+                @method('DELETE')
+
+                <button
+                    type="submit"
+                    class="btn-delete"
+                    onclick="return confirm('Hapus tipe kamar ini?')">
+                    Hapus
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="room-list" id="room{{ $tipe->id }}">
+
+        <table class="room-table">
+
+            <thead>
                 <tr>
                     <th>No Kamar</th>
                     <th>Status</th>
                 </tr>
-                @if($tipe->kamars->count())
-                    @foreach($tipe->kamars as $kamar)
-                        <tr>
-                            <td>{{ $kamar->nomor_kamar }}</td>
-                            <td>
-                                {{ $kamar->status }}
-                            </td>
-                        </tr>
-                    @endforeach
-                @else
+            </thead>
+
+            <tbody>
+
+                @forelse($tipe->kamars as $kamar)
+
+                    <tr>
+                        <td>{{ $kamar->nomor_kamar }}</td>
+                        <td>{{ $kamar->status }}</td>
+                    </tr>
+
+                @empty
+
                     <tr>
                         <td colspan="2">
                             Belum ada kamar
                         </td>
                     </tr>
-                @endif
-            </table>
-        </div>
+
+                @endforelse
+
+            </tbody>
+
+        </table>
+
     </div>
 
+</div>
 @endforeach
-
-{{-- modal edit --}}
-<div id="editModal{{ $tipe->id }}" class="modal">
-
-    <div class="modal-content">
-
-        <h3>Edit Tipe Kamar</h3>
-
-        <form
-            method="POST"
-            action="{{ route('tipe-kamar.update', $tipe->id) }}"
-            class="modal-form"
-        >
-
-            @csrf
-            @method('PUT')
-
-            <input
-                type="text"
-                name="nama_tipe"
-                value="{{ $tipe->nama_tipe }}"
-            >
-
-            <input
-                type="number"
-                name="harga_per_malam"
-                value="{{ $tipe->harga_per_malam }}"
-            >
-
-            <textarea name="fasilitas">{{ $tipe->fasilitas }}</textarea>
-
-            <textarea name="deskripsi">{{ $tipe->deskripsi }}</textarea>
-
-            <div class="modal-footer">
-
-                <button
-                    type="button"
-                    class="btn-close"
-                    onclick="closeModal('editModal{{ $tipe->id }}')"
-                >
-                    Batal
-                </button>
-
-                <button
-                    type="submit"
-                    class="btn-room"
-                >
-                    Update
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-</div>
-
 <!-- MODAL TIPE KAMAR -->
 
 <div id="modalTipe" class="modal">
