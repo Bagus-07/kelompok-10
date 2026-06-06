@@ -20,15 +20,30 @@
             </h2>
 
             <div class="space-y-3 text-gray-700">
-                <p><b>Nama Tamu :</b> Angel</p>
-                <p><b>Email :</b> angel@gmail.com</p>
-                <p><b>No Telepon :</b> 08123456789</p>
+               <p><strong>Nama Tamu :</strong> {{ $user->name }}</p>
+               <p><strong>Email :</strong> {{ $user->email }}</p>
+               
+               <p><strong>No Telepon :</strong>
+               {{ $user->phone ?? '-' }}
+            </p>
 
                 <hr>
 
-                <p><b>Tipe Kamar :</b> Deluxe Room</p>
-                <p><b>Check In :</b> 10 Juni 2026</p>
-                <p><b>Check Out :</b> 12 Juni 2026</p>
+               <p><strong>Tipe Kamar :</strong>
+               {{ $booking->room->nama_kamar }}
+            </p>
+            
+            <p><strong>Check In :</strong>
+            {{ $booking->check_in }}
+        </p>
+        
+        <p><strong>Check Out :</strong>
+        {{ $booking->check_out }}
+    </p>
+    
+    <p><strong>Total :</strong>
+    Rp{{ number_format($booking->total_harga,0,',','.') }}
+</p>
             </div>
 
             <div class="mt-8 border-t pt-4">

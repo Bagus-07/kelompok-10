@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Booking; // tambahkan ini
 
 class PaymentController extends Controller
 {
     public function index()
     {
-        return view('payment.index');
+        $user = Auth::user();
+
+        $booking = Booking::where('user_id', $user->id)
+            ->latest()
+            ->first();
+
+        return view('payment.index', compact('user', 'booking'));
     }
 
     public function process(Request $request)
