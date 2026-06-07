@@ -11,7 +11,7 @@
         <img src="/photo/hotel2.jpeg" class="slide">
         <img src="/photo/hotel3.jpeg" class="slide">
         <img src="/photo/hotel4.jpeg" class="slide">
-        <img src="/photo/hotel5.jpeg" class="slide">
+        <img src="/photo/hotel5.jpg" class="slide">
         <img src="/photo/hotel6.jpeg" class="slide">
     </div>
 

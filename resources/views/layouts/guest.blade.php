@@ -462,59 +462,12 @@ body {
     font-weight:bold;
 }
 
-@media(max-width:992px){
+.menu-toggle{
+    display:none;
+}
 
-    .hero{
-        height:auto;
-        min-height:unset;
-
-        padding:30px 15px;
-    }
-
-    .hero-content{
-        margin-top:40px;
-    }
-
-    .hero h2{
-        font-size:40px;
-        line-height:1.1;
-    }
-
-    .hero-subtitle{
-        font-size:16px;
-        margin-bottom:20px;
-    }
-
-    .hero-search{
-        display:grid;
-
-        grid-template-columns:1fr 1fr;
-
-        gap:12px;
-
-        padding:18px;
-
-        max-width:95%;
-
-        margin:auto;
-
-        border-radius:16px;
-    }
-
-    .hero-search input,
-    .hero-search select{
-        height:50px;
-        font-size:14px;
-    }
-    
-    .hero-search button{
-        grid-column:1 / -1;
-
-        height:50px;
-
-        margin-top:5px;
-    }
-
+.mobile-menu{
+    display:none;
 }
 
 @media(max-width:768px){
@@ -523,9 +476,14 @@ body {
         padding-top:60px;
     }
 
+    /* NAVBAR */
     .navbar{
-        padding:0 10px;
         height:60px;
+        padding:0 15px;
+
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
     }
 
     .logo img{
@@ -533,17 +491,153 @@ body {
     }
 
     .nav-menu{
-        gap:12px;
+        display:none;
     }
 
-    .nav-menu a{
-        font-size:12px;
+    .menu-toggle{
+        display:block;
+
+        background:none;
+        border:none;
+
+        font-size:28px;
+        cursor:pointer;
     }
 
-    .login-btn,
-    .signup-btn{
-        padding:6px 10px;
-        font-size:11px;
+    .nav-auth{
+        display:none;
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu{
+        display:none;
+
+        position:fixed;
+        top:60px;
+        left:0;
+
+        width:100%;
+
+        background:white;
+
+        box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+        z-index:9999;
+    }
+
+    .mobile-menu.show{
+        display:block;
+    }
+
+    .mobile-menu a{
+        display:block;
+
+        padding:15px 20px;
+
+        border-bottom:1px solid #eee;
+
+        text-decoration:none;
+        color:#333;
+    }
+
+    /* HERO */
+    .hero{
+        position:relative;
+
+        height:auto;
+        min-height:auto;
+
+        padding:20px 10px 30px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .hero-search input,
+    .hero-search select{
+        width:100%;
+        height:50px;
+
+        font-size:15px;
+    }
+
+    .hero-content{
+        margin-top: 0;
+        width:100%;
+        padding:0 10px;
+        box-sizing:border-box;
+    }
+
+    .hero h2{
+        font-size:34px;
+        line-height:1.1;
+        margin-bottom:10px;
+    }
+
+    .hero-content{
+        max-width:320px;
+        margin:auto;
+    }
+
+    .hero-subtitle{
+        font-size:15px;
+        margin-bottom:20px;
+    }
+
+    /* SEARCH */
+    .hero-search{
+        width:100%;
+        max-width:300px;
+        margin:auto;
+
+        display:grid;
+        grid-template-columns:1fr;
+
+        gap:10px;
+        padding:12px;
+    }
+
+    .hero-search,
+    .hero-search *{
+        box-sizing:border-box;
+    }
+
+    .hero-search button{
+        width:100%;
+        height:48px;
+        font-size:16px;
+        white-space:nowrap;
+    }
+
+    .search-field label{
+        font-size:14px;
+        margin-bottom:6px;
+    }
+
+    /* FACILITIES */
+    .box{
+        width:90%;
+        max-width:300px;
+    }
+
+    /* ABOUT */
+    #about{
+        width:90%;
+        padding:20px;
+    }
+
+    .mobile-logout{
+        width:100%;
+        padding:15px 20px;
+
+        border:none;
+        background:none;
+
+        text-align:left;
+
+        font-size:16px;
+        cursor:pointer;
     }
 
 }
@@ -558,54 +652,85 @@ body {
 <body>
 
    <!-- NAVBAR -->
-<div class="navbar">
+    <div class="navbar">
 
-    <div class="logo">
-        <img src="/photo/new logo.jpeg">
-    </div>
+        <div class="logo">
+            <img src="/photo/new logo.jpeg">
+        </div>
 
-    <div class="nav-menu">
-        <a href="/home#home">Home</a>
-        <a href="/home#facilities">Facilities</a>
-        <a href="/home#about">About</a>
-        <a href="javascript:void(0)" onclick="openContactModal()">
-            Contact
-        </a>
-    </div>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            ☰
+        </button>
 
-    <div class="nav-auth">
-
-        @auth
-
-            <a href="/profile">
-                <img
-                    src="{{ auth()->user()->profile_photo
-                        ? asset('uploads/' . auth()->user()->profile_photo)
-                        : 'https://via.placeholder.com/50' }}"
-                    style="
-                        width:50px;
-                        height:50px;
-                        border-radius:50%;
-                        object-fit:cover;
-                        display:block;
-                        cursor:pointer;
-                    "
-                >
+        <div class="nav-menu">
+            <a href="/home#home">Home</a>
+            <a href="/home#facilities">Facilities</a>
+            <a href="/home#about">About</a>
+            <a href="javascript:void(0)" onclick="openContactModal()">
+                Contact
             </a>
+        </div>
 
-            <form action="/logout" method="POST">
-                @csrf
-                <button class="signup-btn">Logout</button>
-            </form>
+        <div class="nav-auth desktop-auth">
 
-        @else
+            @auth
 
-            <a href="/login" class="login-btn">Log in</a>
-            <a href="/register" class="signup-btn">Sign up</a>
+                <a href="/profile">
+                    <img
+                        src="{{ auth()->user()->profile_photo
+                            ? asset('uploads/' . auth()->user()->profile_photo)
+                            : 'https://via.placeholder.com/50' }}"
+                        style="
+                            width:50px;
+                            height:50px;
+                            border-radius:50%;
+                            object-fit:cover;
+                            display:block;
+                            cursor:pointer;
+                        "
+                    >
+                </a>
 
-        @endauth
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button class="signup-btn">Logout</button>
+                </form>
+
+            @else
+
+                <a href="/login" class="login-btn">Log in</a>
+                <a href="/register" class="signup-btn">Sign up</a>
+
+            @endauth
+
+        </div>
 
     </div>
+
+    <div id="mobileMenu" class="mobile-menu">
+
+    <a href="/home#home">Home</a>
+    <a href="/home#facilities">Facilities</a>
+    <a href="/home#about">About</a>
+    <a href="javascript:void(0)" onclick="openContactModal()">
+        Contact
+    </a>
+
+    @guest
+        <a href="/login">Login</a>
+        <a href="/register">Sign Up</a>
+    @endguest
+
+    @auth
+        <a href="/profile">Profile</a>
+
+        <form action="/logout" method="POST">
+            @csrf
+            <button class="mobile-logout">
+                Logout
+            </button>
+        </form>
+    @endauth
 
 </div>
 
@@ -667,6 +792,26 @@ window.addEventListener('click', function(event) {
     }
 
 });
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById('mobileMenu');
+
+    if(menu.style.display === 'flex'){
+        menu.style.display = 'none';
+    }else{
+        menu.style.display = 'flex';
+    }
+
+}
+
+function toggleMenu() {
+    document
+        .getElementById('mobileMenu')
+        .classList.toggle('show');
+}
+
 
 </script>
 </body>
