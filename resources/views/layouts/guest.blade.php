@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>@yield('title')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -9,10 +10,12 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
     overflow-y: auto;
+    overflow-x: hidden;
     font-family: Arial;
     margin: 0;
     background: #ffffff;
@@ -99,16 +102,17 @@ body {
 }
 
 /* HERO */
-.hero {
-    position: relative;
-    height: 90vh;
-    overflow: hidden;
+.hero{
+    position:relative;
+    height:550px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow:hidden;
 
-    z-index: 1; /* ADD THIS */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:1;
 }
 
 /* CAROUSEL */
@@ -134,27 +138,18 @@ body {
     opacity: 1;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    color: white;
-}
+
 
 /* OVERLAY */
 .hero::after {
-    pointer-events: none;
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(255,255,255,0.35); 
+    background: rgba(0,0,0,0.60);
+    z-index: 1;
 }
 
 /* TEXT */
-.hero h2 {
-    font-size: 40px;
-    font-weight: bold;
-}
 
 /* BUTTON */
 .hero button {
@@ -216,19 +211,15 @@ body {
     transform: translateY(-5px);
 }
 
-/* CONTACT */
-#contact {
-    background: #1f2937;
-    color: white;
-    padding: 40px;
-}
-
 /* FOOTER */
-.footer {
-    background: #e5e7eb;
-    padding: 15px;
-    text-align: center;
-    border-top: 2px solid #ccc;
+.footer{
+    background:#e5e7eb;
+    padding:15px;
+    text-align:center;
+    border-top:2px solid #ccc;
+
+    min-height:auto;
+    height:auto;
 }
 
 /* REVIEW PROFILE FIX */
@@ -239,6 +230,328 @@ body {
     object-fit: cover !important;
     flex-shrink: 0;
 }
+
+/*new*/
+
+.hero-content{
+    position:relative;
+    z-index:10;
+
+    width:100%;
+    max-width:1200px;
+
+    text-align:center;
+
+    color:white;
+
+    padding:0 20px;
+}
+
+.hero-subtitle{
+    font-size:22px;
+    margin-bottom:25px;
+    color:white;
+}
+
+.hero h2{
+    font-size:64px;
+    font-weight:800;
+    margin-bottom:10px;
+
+    text-shadow:0 4px 12px rgba(0,0,0,.5);
+}
+
+
+.hero-card h2{
+    font-size: clamp(36px, 5vw, 48px);
+    margin-bottom:15px;
+}
+
+.hero-card p{
+    color:white;
+    margin-bottom:25px;
+    line-height:1.8;
+}
+
+
+
+.hero-search{
+    background:rgba(255,255,255,.95);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    display:grid;
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        1fr
+        180px;
+
+    gap:12px;
+
+    max-width:1150px;
+
+    margin:auto;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.hero-search{
+    box-sizing:border-box;
+    width:100%;
+}
+
+.hero-search *{
+    box-sizing:border-box;
+}
+
+.search-field{
+    text-align: left;
+}
+
+.search-field label{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+}
+
+.search-field input,
+.search-field select{
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.hero-search input,
+.hero-search select{
+    height:50px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:0 12px;
+}
+
+.hero-search button{
+    height: 55px;
+    align-self: end;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(
+        45deg,
+        #F4A261,
+        #E9C46A
+    );
+
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+.primary-btn{
+    background:#c89b3c;
+    color:white;
+}
+
+.secondary-btn{
+    background:white;
+    color:#8b6a29;
+}
+
+
+
+.booking-card h3{
+    text-align:center;
+    margin-bottom:25px;
+    color:#8b6a29;
+}
+
+
+
+.booking-grid label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#8b6a29;
+}
+
+.search-field input,
+.search-field select{
+    width: 100%;
+    height: 55px;
+    padding: 0 15px;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    color: #333;          
+    background: white;    
+}
+
+/*new contact */
+.contact-modal{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.6);
+
+    z-index:10000;
+
+    justify-content:center;
+    align-items:center;
+}
+
+.contact-modal-content{
+    background:white;
+
+    width:400px;
+    max-width:90%;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.close-modal{
+    position:absolute;
+
+    right:20px;
+    top:10px;
+
+    font-size:30px;
+
+    cursor:pointer;
+}
+
+.contact-buttons{
+    margin-top:20px;
+}
+
+.wa-btn{
+    display:inline-block;
+
+    padding:12px 25px;
+
+    background:#25D366;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:10px;
+
+    font-weight:bold;
+}
+
+@media(max-width:992px){
+
+    .hero{
+        height:auto;
+        min-height:unset;
+
+        padding:30px 15px;
+    }
+
+    .hero-content{
+        margin-top:40px;
+    }
+
+    .hero h2{
+        font-size:40px;
+        line-height:1.1;
+    }
+
+    .hero-subtitle{
+        font-size:16px;
+        margin-bottom:20px;
+    }
+
+    .hero-search{
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+
+        gap:12px;
+
+        padding:18px;
+
+        max-width:95%;
+
+        margin:auto;
+
+        border-radius:16px;
+    }
+
+    .hero-search input,
+    .hero-search select{
+        height:50px;
+        font-size:14px;
+    }
+    
+    .hero-search button{
+        grid-column:1 / -1;
+
+        height:50px;
+
+        margin-top:5px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    body{
+        padding-top:60px;
+    }
+
+    .navbar{
+        padding:0 10px;
+        height:60px;
+    }
+
+    .logo img{
+        height:40px;
+    }
+
+    .nav-menu{
+        gap:12px;
+    }
+
+    .nav-menu a{
+        font-size:12px;
+    }
+
+    .login-btn,
+    .signup-btn{
+        padding:6px 10px;
+        font-size:11px;
+    }
+
+}
+/*
+*{
+    outline:1px solid red;
+}
+    */
 
 </style>
 
@@ -252,70 +565,109 @@ body {
     </div>
 
     <div class="nav-menu">
-    <a href="/home#home">Home</a>
-    <a href="/home#facilities">Facilities</a>
-    <a href="/home#about">About</a>
-    <a href="/home#contact">Contact</a>
-</div>
+        <a href="/home#home">Home</a>
+        <a href="/home#facilities">Facilities</a>
+        <a href="/home#about">About</a>
+        <a href="javascript:void(0)" onclick="openContactModal()">
+            Contact
+        </a>
+    </div>
 
     <div class="nav-auth">
 
-@auth
-    <a href="/profile">
+        @auth
 
-    <img 
-        src="{{ auth()->user()->profile_photo 
-            ? asset('uploads/' . auth()->user()->profile_photo) 
-            : 'https://via.placeholder.com/50' }}"
-        
-        style="
-            width:50px;
-            height:50px;
-            border-radius:50%;
-            object-fit:cover;
-            display:block;
-            cursor:pointer;
-        "
-    >
+            <a href="/profile">
+                <img
+                    src="{{ auth()->user()->profile_photo
+                        ? asset('uploads/' . auth()->user()->profile_photo)
+                        : 'https://via.placeholder.com/50' }}"
+                    style="
+                        width:50px;
+                        height:50px;
+                        border-radius:50%;
+                        object-fit:cover;
+                        display:block;
+                        cursor:pointer;
+                    "
+                >
+            </a>
 
-</a>
+            <form action="/logout" method="POST">
+                @csrf
+                <button class="signup-btn">Logout</button>
+            </form>
 
-        <!-- LOGOUT -->
-        <form action="/logout" method="POST">
-            @csrf
-            <button class="signup-btn">Logout</button>
-        </form>
+        @else
+
+            <a href="/login" class="login-btn">Log in</a>
+            <a href="/register" class="signup-btn">Sign up</a>
+
+        @endauth
 
     </div>
-
-@else
-    <!-- NOT LOGGED IN -->
-    <a href="/login" class="login-btn">Log in</a>
-    <a href="/register" class="signup-btn">Sign up</a>
-@endauth
-
-</div>
-
-</div>
 
 </div>
 
 <!-- PAGE CONTENT -->
-    @yield('content')
-
-<!-- CONTACT -->
-<div id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: stayease@gmail.com</p>
-    <p>Phone Number : 08123456789</p>
-    <p>Address: Batam, Indonesia</p>
-</div>
+@yield('content')
 
 <!-- FOOTER -->
 <div class="footer">
     © 2026 StayEase Hotel
 </div>
 
+<div id="contactModal" class="contact-modal">
+
+    <div class="contact-modal-content">
+
+        <span class="close-modal"
+              onclick="closeContactModal()">
+            &times;
+        </span>
+
+        <h2>Contact Customer Service</h2>
+
+        <p>📞 0812-3456-7890</p>
+
+        <p>✉ stayease@gmail.com</p>
+
+        <p>📍 Batam, Indonesia</p>
+
+        <div class="contact-buttons">
+
+            <a href="https://wa.me/6281234567890"
+               target="_blank"
+               class="wa-btn">
+                WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
 </div>
+
+<script>
+
+function openContactModal() {
+    document.getElementById('contactModal').style.display = 'flex';
+}
+
+function closeContactModal() {
+    document.getElementById('contactModal').style.display = 'none';
+}
+
+window.addEventListener('click', function(event) {
+
+    const modal = document.getElementById('contactModal');
+
+    if(event.target === modal){
+        modal.style.display = 'none';
+    }
+
+});
+
+</script>
 </body>
 </html>
