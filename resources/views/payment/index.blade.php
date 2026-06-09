@@ -29,21 +29,35 @@
 
                 <hr>
 
-               <p><strong>Tipe Kamar :</strong>
-               {{ $booking->room->nama_kamar }}
-            </p>
-            
-            <p><strong>Check In :</strong>
-            {{ $booking->check_in }}
-        </p>
-        
-        <p><strong>Check Out :</strong>
-        {{ $booking->check_out }}
-    </p>
-    
-    <p><strong>Total :</strong>
-    Rp{{ number_format($booking->total_harga,0,',','.') }}
+               @if($booking)
+
+<p>
+    <strong>Tipe Kamar :</strong>
+    {{ $booking->room_name }}
 </p>
+
+<p>
+    <strong>Check In :</strong>
+    {{ $booking->check_in }}
+</p>
+
+<p>
+    <strong>Check Out :</strong>
+    {{ $booking->check_out }}
+</p>
+
+<p>
+    <strong>Total :</strong>
+    Rp{{ number_format($booking->total_price ?? 0,0,',','.') }}
+</p>
+
+@else
+
+<p class="text-red-500">
+    Belum ada data booking.
+</p>
+
+@endif
             </div>
 
             <div class="mt-8 border-t pt-4">

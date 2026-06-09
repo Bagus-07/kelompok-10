@@ -1,7 +1,21 @@
 <div class="sidebar">
-    <a href="{{ url('/admin/dashboard') }}">Dashboard</a>
-    <a href="{{ url('/admin/user') }}">Data User</a>
-    <a href="{{ url('/admin/kamar') }}">Kamar</a>
-    <a href="{{ url('/admin/booking') }}">Booking</a>
-    <a href="{{ url('/admin/laporan') }}">Laporan</a>
+    <a href="{{ url('/admin/dashboard') }}">
+        {{ __('messages.dashboard') }}
+    </a>
+
+    <a href="{{ url('/admin/user') }}">
+        {{ __('messages.user_data') }}
+    </a>
+
+    <a href="{{ url('/admin/kamar') }}">
+        {{ __('messages.rooms') }}
+    </a>
+
+    <a href="{{ url('/admin/booking') }}">
+        {{ __('messages.booking') }}
+    </a>
+
+    <a href="{{ url('/admin/laporan') }}">
+        {{ __('messages.report') }}
+    </a>
 </div>

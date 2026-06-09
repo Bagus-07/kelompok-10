@@ -299,47 +299,68 @@
 
 @auth
 <div class="sidebar">
-    <h2>Admin</h2>
-
-    <div class="menu-title">MENU</div>
-
-    <a href="/dashboard" class="{{ request()->is('dashboard*') ? 'active' : '' }}">
-        Dashboard
+   <h2>{{ __('messages.admin') }}</h2>
+   
+   <div class="menu-title">{{ __('messages.menu') }}</div>
+   
+   <a href="/dashboard" class="{{ request()->is('dashboard*') ? 'active' : '' }}">
+     {{ __('messages.dashboard') }}
     </a>
-
+    
     <a href="/user" class="{{ request()->is('user*') ? 'active' : '' }}">
-        Data User
-    </a>
+    {{ __('messages.user_data') }}
+</a>
 
-    <a href="/kamar" class="{{ request()->is('kamar*') ? 'active' : '' }}">
-        Kamar
-    </a>
+<a href="/kamar" class="{{ request()->is('kamar*') ? 'active' : '' }}">
+    {{ __('messages.rooms') }}
+</a>
 
-    <a href="/booking" class="{{ request()->is('booking*') ? 'active' : '' }}">
-        Booking
-    </a>
+<a href="/booking" class="{{ request()->is('booking*') ? 'active' : '' }}">
+    {{ __('messages.booking') }}
+</a>
 
-    <a href="/laporan" class="{{ request()->is('laporan*') ? 'active' : '' }}">
-        Laporan
-    </a>
+<a href="/laporan" class="{{ request()->is('laporan*') ? 'active' : '' }}">
+    {{ __('messages.report') }}
+</a>
 
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button class="menu-link">Logout</button>
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button class="menu-link">
+        {{ __('messages.logout') }}
+    </button>
+</form>
     </form>
 
 </div>
 @endauth
 
 <div class="main">
+<div class="topbar">
+    <h2>@yield('title')</h2>
 
-    <div class="topbar">
-        <h2>@yield('title')</h2>
+    <div style="display:flex;align-items:center;gap:15px;">
+
+        <select onchange="window.location.href=this.value"
+                style="padding:8px;border-radius:8px;">
+
+            <option value="{{ url('/language/id') }}"
+                {{ app()->getLocale() == 'id' ? 'selected' : '' }}>
+                🇮🇩 Indonesia
+            </option>
+
+            <option value="{{ url('/language/en') }}"
+                {{ app()->getLocale() == 'en' ? 'selected' : '' }}>
+                🇬🇧 English
+            </option>
+
+        </select>
 
         <div class="badge">
-            Admin
+            {{ __('messages.admin') }}
         </div>
+
     </div>
+</div>
 
     @yield('content')
 

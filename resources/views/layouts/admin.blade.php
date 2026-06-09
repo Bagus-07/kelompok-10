@@ -293,9 +293,27 @@
 
     <x-admin-sidebar />
 
-    <div class="main">
-        @yield('content')
+   <div class="main">
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:20px;">
+        <select onchange="window.location.href=this.value"
+                style="padding:8px;border-radius:8px;">
+
+            <option value="{{ url('/language/id') }}"
+                {{ app()->getLocale() == 'id' ? 'selected' : '' }}>
+                🇮🇩 Indonesia
+            </option>
+
+            <option value="{{ url('/language/en') }}"
+                {{ app()->getLocale() == 'en' ? 'selected' : '' }}>
+                🇬🇧 English
+            </option>
+
+        </select>
     </div>
 
+    @yield('content')
+
+</div>
 </body>
 </html>

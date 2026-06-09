@@ -706,6 +706,37 @@ body {
 
     </div>
 
+    <div class="nav-menu">
+    <a href="/home#home">{{ __('messages.home') }}</a>
+    <a href="/home#facilities">{{ __('messages.facilities') }}</a>
+    <a href="/home#about">{{ __('messages.about') }}</a>
+    <a href="/home#contact">{{ __('messages.contact') }}</a>
+</div>
+
+   <div class="nav-auth">
+
+    <!-- LANGUAGE -->
+    <select onchange="window.location.href=this.value"
+            style="
+                padding:8px 12px;
+                border-radius:20px;
+                border:none;
+                background:white;
+                cursor:pointer;
+            ">
+
+        <option value="{{ url('/language/id') }}"
+            {{ app()->getLocale() == 'id' ? 'selected' : '' }}>
+            🇮🇩 ID
+        </option>
+
+        <option value="{{ url('/language/en') }}"
+            {{ app()->getLocale() == 'en' ? 'selected' : '' }}>
+            🇬🇧 EN
+        </option>
+
+    </select>
+
     <div id="mobileMenu" class="mobile-menu">
 
     <a href="/home#home">Home</a>
@@ -718,17 +749,42 @@ body {
         <a href="/login">Login</a>
         <a href="/register">Sign Up</a>
     @endguest
+>>>>>>> 03e03df591babd6375fa2b072554b0e28107bad5
 
     @auth
         <a href="/profile">Profile</a>
 
         <form action="/logout" method="POST">
             @csrf
+
+            <button class="signup-btn">
+    {{ __('messages.logout') }}
+</button>
+        </form>
+
+    </div>
+
+@else
+    <!-- NOT LOGGED IN -->
+    <a href="/login" class="login-btn">
+    {{ __('messages.login') }}
+</a>
+
+<a href="/register" class="signup-btn">
+    {{ __('messages.signup') }}
+</a>
+@endauth
+
+</div>
+
+</div>
+
             <button class="mobile-logout">
                 Logout
             </button>
         </form>
     @endauth
+
 
 </div>
 
