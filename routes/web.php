@@ -37,6 +37,17 @@ Route::get('/rooms', function () {
     return view('pages.rooms');
 })->name('rooms');
 
+Route::get('/language/{locale}', function ($locale) {
+
+    if (!in_array($locale, ['id', 'en'])) {
+        abort(400);
+    }
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+});
+
 // PAYMENT
 Route::get('/payment', [PaymentController::class, 'index'])
     ->middleware('auth')
@@ -48,6 +59,7 @@ Route::post('/payment/process', [PaymentController::class, 'process'])
 Route::get('/payment-success', function () {
     return view('payment.success');
 })->name('payment.success');
+
 /*
 |--------------------------------------------------------------------------
 | AUTH USER
