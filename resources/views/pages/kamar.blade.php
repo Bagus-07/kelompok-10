@@ -273,15 +273,29 @@
    @foreach($tipeKamars as $tipe)
 
 <div class="room-type">
-
     <div class="room-type-header">
-
         <div class="dropdown-btn"
             onclick="toggleRoom('room{{ $tipe->id }}')">
             ▼
         </div>
 
-        <div>{{ $tipe->nama_tipe }}</div>
+        <div style="display:flex; align-items:center; gap:10px;">
+
+            @if($tipe->gambar)
+                <img
+                    src="{{ asset('storage/' . $tipe->gambar) }}"
+                    alt="{{ $tipe->nama_tipe }}"
+                    style="
+                        width:60px;
+                        height:60px;
+                        object-fit:cover;
+                        border-radius:8px;
+                    "
+                >
+            @endif
+
+            <span>{{ $tipe->nama_tipe }}</span>
+        </div>
 
         <div>
             Rp {{ number_format($tipe->harga_per_malam,0,',','.') }}
@@ -332,9 +346,9 @@
                 <tr>
                     <th>No Kamar</th>
                     <th>Status</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
-
             <tbody>
 
                 @forelse($tipe->kamars as $kamar)
@@ -342,6 +356,29 @@
                     <tr>
                         <td>{{ $kamar->nomor_kamar }}</td>
                         <td>{{ $kamar->status }}</td>
+
+                        <td>
+                            <button
+                                class="btn-edit"
+                                onclick="openModal('editKamar{{ $kamar->id }}')">
+                                Edit
+                            </button>
+
+                            <form
+                                action="{{ route('kamar.destroy', $kamar->id) }}"
+                                method="POST"
+                                style="display:inline;">
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button
+                                    class="btn-delete"
+                                    onclick="return confirm('Hapus kamar ini?')">
+                                    Hapus
+                                </button>
+                            </form>
+                        </td>
                     </tr>
 
                 @empty
@@ -353,14 +390,147 @@
                     </tr>
 
                 @endforelse
-
             </tbody>
-
         </table>
-
     </div>
-
 </div>
+@endforeach
+
+@foreach($tipeKamars as $tipe)
+
+<div id="editModal{{ $tipe->id }}" class="modal">
+    <div class="modal-content">
+        <h3>Edit Tipe Kamar</h3>
+
+        <form
+            method="POST"
+            action="{{ route('tipe-kamar.update', $tipe->id) }}"
+            class="modal-form">
+
+            @csrf
+            @method('PUT')
+
+            <input
+                type="text"
+                name="nama_tipe"
+                value="{{ $tipe->nama_tipe }}">
+
+            <input
+                type="number"
+                name="harga_per_malam"
+                value="{{ $tipe->harga_per_malam }}">
+            
+            <input
+                type="file"
+                name="gambar[]"
+                multiple>
+
+            <textarea
+                name="fasilitas">{{ $tipe->fasilitas }}</textarea>
+
+            <textarea
+                name="deskripsi">{{ $tipe->deskripsi }}</textarea>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    onclick="closeModal('editModal{{ $tipe->id }}')">
+                    Batal
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-room">
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@endforeach
+@foreach($tipeKamars as $tipe)
+    @foreach($tipe->kamars as $kamar)
+    <div id="editKamar{{ $kamar->id }}" class="modal">
+        <div class="modal-content">
+            <h3>Edit Kamar</h3>
+            <form
+                method="POST"
+                action="{{ route('kamar.update', $kamar->id) }}"
+                class="modal-form"
+            >
+
+                @csrf
+                @method('PUT')
+
+                <input
+                    type="text"
+                    name="nomor_kamar"
+                    value="{{ $kamar->nomor_kamar }}"
+                >
+
+                <select name="tipe_kamar_id">
+
+                    @foreach($tipeKamars as $option)
+
+                        <option
+                            value="{{ $option->id }}"
+                            {{ $kamar->tipe_kamar_id == $option->id ? 'selected' : '' }}
+                        >
+                            {{ $option->nama_tipe }}
+                        </option>
+
+                    @endforeach
+
+                </select>
+
+                <select name="status">
+
+                    <option value="Tersedia"
+                        {{ $kamar->status == 'Tersedia' ? 'selected' : '' }}>
+                        Tersedia
+                    </option>
+
+                    <option value="Dipakai"
+                        {{ $kamar->status == 'Dipakai' ? 'selected' : '' }}>
+                        Dipakai
+                    </option>
+
+                    <option value="Cleaning"
+                        {{ $kamar->status == 'Cleaning' ? 'selected' : '' }}>
+                        Cleaning
+                    </option>
+
+                    <option value="Maintenance"
+                        {{ $kamar->status == 'Maintenance' ? 'selected' : '' }}>
+                        Maintenance
+                    </option>
+
+                </select>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        onclick="closeModal('editKamar{{ $kamar->id }}')"
+                    >
+                        Batal
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-room"
+                    >
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @endforeach
 @endforeach
 <!-- MODAL TIPE KAMAR -->
 
@@ -372,6 +542,7 @@
             class="modal-form"
             method="POST"
             action="{{ route('tipe-kamar.store') }}"
+            enctype="multipart/form-data"
         >
             @csrf
 
@@ -385,15 +556,18 @@
                 name="harga_per_malam"
                 placeholder="Harga per malam">
 
+            <input
+                type="file"
+                name="gambar"
+                accept="image/*">
+
             <textarea
                 name="fasilitas"
-                placeholder="Fasilitas">
-            </textarea>
+                placeholder="Fasilitas"></textarea>
 
             <textarea
                 name="deskripsi"
-                placeholder="Deskripsi">
-            </textarea>
+                placeholder="Deskripsi"></textarea>
 
             <div class="modal-footer">
 

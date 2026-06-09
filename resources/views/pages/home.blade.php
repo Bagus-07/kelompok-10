@@ -11,16 +11,61 @@
         <img src="/photo/hotel2.jpeg" class="slide">
         <img src="/photo/hotel3.jpeg" class="slide">
         <img src="/photo/hotel4.jpeg" class="slide">
-        <img src="/photo/hotel5.jpeg" class="slide">
+        <img src="/photo/hotel5.jpg" class="slide">
         <img src="/photo/hotel6.jpeg" class="slide">
     </div>
 
     <div class="hero-content">
-        <h2>WELCOME TO STAYEASE HOTEL</h2>
-        <a href="/rooms">
-    <button>Explore Rooms</button>
-</a>
+
+    <h2>WELCOME TO STAYEASE HOTEL</h2>
+
+    <p class="hero-subtitle">
+    Luxury rooms, modern facilities, and unforgettable experiences.
+    </p>
+
+    <form action="/rooms" method="GET" class="hero-search">
+
+    <div class="search-field">
+        <label>Check In</label>
+        <input type="date" name="check_in" required>
     </div>
+
+    <div class="search-field">
+        <label>Check Out</label>
+        <input type="date" name="check_out" required>
+    </div>
+
+    <div class="search-field">
+        <label>Guests</label>
+        <input
+            type="number"
+            name="guests"
+            min="1"
+            value="1"
+        >
+    </div>
+
+    <div class="search-field">
+        <label>Room Type</label>
+        <select name="room_type">
+            <option value="">All Rooms</option>
+            <option>Standard</option>
+            <option>Superior</option>
+            <option>Deluxe</option>
+        </select>
+    </div>
+
+    <button type="submit">
+        Search Rooms
+    </button>
+
+</form>
+
+</div>
+
+    </div>
+
+    
 </div>
 
 <!-- FACILITIES -->

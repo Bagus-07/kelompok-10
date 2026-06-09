@@ -18,8 +18,8 @@ class KamarController extends Controller
 
         Kamar::create([
             'tipe_kamar_id' => $request->tipe_kamar_id,
-            'nomor_kamar' => $request->nomor_kamar,
-            'status' => $request->status
+            'nomor_kamar'   => $request->nomor_kamar,
+            'status'        => $request->status
         ]);
 
         return redirect()->back()
@@ -32,5 +32,24 @@ class KamarController extends Controller
 
         return redirect()->back()
             ->with('success', 'Kamar berhasil dihapus');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nomor_kamar'   => 'required',
+            'status'        => 'required'
+        ]);
+
+        $kamar = Kamar::findOrFail($id);
+
+        $kamar->update([
+            'tipe_kamar_id' => $request->tipe_kamar_id,
+            'nomor_kamar'   => $request->nomor_kamar,
+            'status'        => $request->status
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Kamar berhasil diupdate');
     }
 }
