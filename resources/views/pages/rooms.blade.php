@@ -1,6 +1,6 @@
 @extends('layouts.guest')
 
-@section('title', 'Profile')
+@section('title', 'Rooms')
 
 @section('content')
 

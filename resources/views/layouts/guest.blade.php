@@ -664,10 +664,9 @@ body {
 
         <div class="nav-menu">
             <a href="/home#home">Home</a>
-            <a href="/home#facilities">Facilities</a>
-            <a href="/home#about">About</a>
+            <a href="/rooms">Rooms</a>
             <a href="javascript:void(0)" onclick="openContactModal()">
-                Contact
+                Contact Us
             </a>
         </div>
 
@@ -710,10 +709,9 @@ body {
     <div id="mobileMenu" class="mobile-menu">
 
     <a href="/home#home">Home</a>
-    <a href="/home#facilities">Facilities</a>
-    <a href="/home#about">About</a>
+    <a href="/Rooms">Rooms</a>
     <a href="javascript:void(0)" onclick="openContactModal()">
-        Contact
+        Contact Us
     </a>
 
     @guest
