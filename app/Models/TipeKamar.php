@@ -12,12 +12,18 @@ class TipeKamar extends Model
         'nama_tipe',
         'harga_per_malam',
         'fasilitas',
-        'deskripsi'
+        'deskripsi',
+        'gambar'
 
     ];
     
     public function kamars()
     {
         return $this->hasMany(Kamar::class);
+    }
+
+    public function fotos()
+    {
+        return $this->hasMany(FotoKamar::class);
     }
 }
