@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\KamarController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,7 +147,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
 
-    Route::view('/user', 'pages.user');
+    //crud user
+    Route::get('/user', [UserController::class, 'index'])
+        ->name('user');
+
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])
+        ->name('user.destroy');
 
     // CRUD tipe kamar
     Route::get('/kamar', [TipeKamarController::class, 'index'])
