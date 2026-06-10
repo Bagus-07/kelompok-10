@@ -36,7 +36,8 @@ body {
     padding: 0 40px;
     box-sizing: border-box;
 
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.92);
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
     backdrop-filter: blur(12px);
     z-index: 9999;
 }
@@ -167,8 +168,15 @@ body {
 
 /* SECTION */
 .section {
-    padding: 40px;
+    padding: 40px 40px;
     text-align: center;
+}
+
+.section h2{
+    font-size:36px;
+    font-weight:700;
+    margin-bottom:40px;
+    color:#222;
 }
 
 .grid {
@@ -180,10 +188,11 @@ body {
 
 .box {
     width: 280px;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     background: #f5f5f5;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transition: all .3s ease;
 }
 
 .box > img {
@@ -197,18 +206,13 @@ body {
     font-weight: bold;
 }
 
-/* ABOUT */
-#about {
-    max-width: 800px;
-    margin: auto;
-}
-
 .box {
     transition: 0.3s;
 }
 
 .box:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
 }
 
 /* FOOTER */
@@ -623,8 +627,34 @@ body {
 
     /* ABOUT */
     #about{
-        width:90%;
-        padding:20px;
+        max-width:1100px;
+        margin:50px auto;
+        text-align:center;
+        background:#f8fafc;
+        border-radius:20px;
+        padding:60px;
+    }
+
+    #about h2{
+        font-size:36px;
+        margin-bottom:25px;
+        color:#222;
+    }
+
+    #about p{
+        font-size:18px;
+        line-height:1.8;
+        color:#555;
+        max-width:800px;
+        margin:20px auto;
+    }
+
+    #facilities{
+        background:#f8fafc;
+    }
+
+    #about strong{
+        color:#222;
     }
 
     .mobile-logout{
@@ -706,41 +736,11 @@ body {
 
     </div>
 
-    <div class="nav-menu">
-    <a href="/home#home">{{ __('messages.home') }}</a>
-    <a href="/home#facilities">{{ __('messages.facilities') }}</a>
-    <a href="/home#about">{{ __('messages.about') }}</a>
-    <a href="/home#contact">{{ __('messages.contact') }}</a>
-</div>
-
-   <div class="nav-auth">
-
-    <!-- LANGUAGE -->
-    <select onchange="window.location.href=this.value"
-            style="
-                padding:8px 12px;
-                border-radius:20px;
-                border:none;
-                background:white;
-                cursor:pointer;
-            ">
-
-        <option value="{{ url('/language/id') }}"
-            {{ app()->getLocale() == 'id' ? 'selected' : '' }}>
-            🇮🇩 ID
-        </option>
-
-        <option value="{{ url('/language/en') }}"
-            {{ app()->getLocale() == 'en' ? 'selected' : '' }}>
-            🇬🇧 EN
-        </option>
-
-    </select>
-
     <div id="mobileMenu" class="mobile-menu">
 
     <a href="/home#home">Home</a>
-    <a href="/Rooms">Rooms</a>
+    <a href="/rooms">Rooms</a>
+
     <a href="javascript:void(0)" onclick="openContactModal()">
         Contact Us
     </a>
@@ -749,42 +749,17 @@ body {
         <a href="/login">Login</a>
         <a href="/register">Sign Up</a>
     @endguest
->>>>>>> 03e03df591babd6375fa2b072554b0e28107bad5
 
     @auth
         <a href="/profile">Profile</a>
 
         <form action="/logout" method="POST">
             @csrf
-
-            <button class="signup-btn">
-    {{ __('messages.logout') }}
-</button>
-        </form>
-
-    </div>
-
-@else
-    <!-- NOT LOGGED IN -->
-    <a href="/login" class="login-btn">
-    {{ __('messages.login') }}
-</a>
-
-<a href="/register" class="signup-btn">
-    {{ __('messages.signup') }}
-</a>
-@endauth
-
-</div>
-
-</div>
-
-            <button class="mobile-logout">
+            <button type="submit" class="mobile-logout">
                 Logout
             </button>
         </form>
     @endauth
-
 
 </div>
 

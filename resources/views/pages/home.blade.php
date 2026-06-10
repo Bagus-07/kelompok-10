@@ -70,7 +70,7 @@
 
 <!-- FACILITIES -->
 <div class="section" id="facilities">
-    <h3>Facilities</h3>
+    <h2>Facilities</h2>
     <div class="grid">
         <div class="box"><img src="/photo/pool.jpg"><p>Swimming Pool</p></div>
         <div class="box"><img src="/photo/beach.jpg"><p>Beach</p></div>
@@ -81,7 +81,7 @@
 
 <!-- ABOUT -->
 <div class="section" id="about">
-    <h3>About Us</h3>
+    <h2>About Us</h2>
     <p><strong>StayEase Hotel</strong> is a modern beachfront hotel designed for comfort and relaxation. Located just minutes from the beach, we offer a peaceful retreat with a beautiful environment.</p>
     
     <p class="text-gray-600 mb-4"> Our hotel offers a variety of room options suitable for every guest, ranging from standard to deluxe choices, all equipped with essential facilities for comfort during the stay. </p>
