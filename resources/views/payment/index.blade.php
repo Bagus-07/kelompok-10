@@ -20,54 +20,59 @@
             </h2>
 
             <div class="space-y-3 text-gray-700">
-               <p><strong>Nama Tamu :</strong> {{ $user->name }}</p>
-               <p><strong>Email :</strong> {{ $user->email }}</p>
-               
-               <p><strong>No Telepon :</strong>
-               {{ $user->phone ?? '-' }}
-            </p>
 
-                <hr>
+    <p><strong>Nama Tamu :</strong> {{ $user->name }}</p>
 
-               @if($booking)
+    <p><strong>Email :</strong> {{ $user->email }}</p>
 
-<p>
-    <strong>Tipe Kamar :</strong>
-    {{ $booking->room_name }}
-</p>
+    <p><strong>No Telepon :</strong>
+        {{ $user->phone ?? '-' }}
+    </p>
 
-<p>
-    <strong>Check In :</strong>
-    {{ $booking->check_in }}
-</p>
+    <hr>
 
-<p>
-    <strong>Check Out :</strong>
-    {{ $booking->check_out }}
-</p>
+    @if($booking)
 
-<p>
-    <strong>Total :</strong>
-    Rp{{ number_format($booking->total_price ?? 0,0,',','.') }}
-</p>
+        <p>
+            <strong>Tipe Kamar :</strong>
+            {{ $booking->room_name }}
+        </p>
 
-@else
+        <p>
+            <strong>Check In :</strong>
+            {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}
+        </p>
 
-<p class="text-red-500">
-    Belum ada data booking.
-</p>
+        <p>
+            <strong>Check Out :</strong>
+            {{ \Carbon\Carbon::parse($booking->check_out)->format('d M Y') }}
+        </p>
 
-@endif
-            </div>
+    @else
+
+        <p class="text-red-500">
+            Belum ada data booking.
+        </p>
+
+    @endif
+
+</div>
 
             <div class="mt-8 border-t pt-4">
-                <div class="flex justify-between">
-                    <span>Total</span>
-                    <span class="font-bold text-yellow-600">
-                        Rp750.000
-                    </span>
-                </div>
-            </div>
+    <div class="flex justify-between">
+        <span>Total Pembayaran</span>
+
+        <span class="font-bold text-yellow-600 text-lg">
+
+            @if($booking)
+                Rp{{ number_format($booking->total_price,0,',','.') }}
+            @else
+                Rp0
+            @endif
+
+        </span>
+    </div>
+</div>
 
         </div>
 
@@ -85,8 +90,8 @@
     @endif
 
             <form action="{{ route('payment.process') }}"
-                  method="POST">
-
+      method="POST"
+      enctype="multipart/form-data">
                 @csrf
 
                 <!-- Payment Method -->

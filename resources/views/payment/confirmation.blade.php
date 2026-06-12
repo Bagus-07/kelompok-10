@@ -17,45 +17,53 @@
             Instruksi Pembayaran
         </h1>
 
+        <!-- INFORMASI PEMBAYARAN -->
         <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
 
             @if($payment_method == 'QRIS')
 
-    <h2 class="text-xl font-semibold text-green-700 mb-4">
-        Pembayaran QRIS
-    </h2>
+                <h2 class="text-xl font-semibold text-green-700 mb-4">
+                    Pembayaran QRIS
+                </h2>
 
-    <div class="text-center">
-        <img src="{{ asset('images/qris.jpg.jpeg') }}"
-             class="w-64 mx-auto">
-        <p class="mt-4 text-gray-600">
-            Scan QR Code menggunakan aplikasi pembayaran Anda.
-        </p>
-    </div>
+                <div class="text-center">
+                    <img src="{{ asset('images/qris.jpg.jpeg') }}"
+                         class="w-64 mx-auto">
 
-@else
+                    <p class="mt-4 text-gray-600">
+                        Scan QR Code menggunakan aplikasi pembayaran Anda.
+                    </p>
+                </div>
 
-    <h2 class="text-xl font-semibold text-green-700 mb-4">
-        Transfer Bank {{ $bank }}
-    </h2>
+            @else
 
-    <div class="grid md:grid-cols-2 gap-6">
-        <div>
-            <p class="text-gray-500">Nomor Rekening</p>
-            <p class="font-bold text-lg">
-                1234567890
-            </p>
+                <h2 class="text-xl font-semibold text-green-700 mb-4">
+                    Transfer Bank {{ $bank }}
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    <div>
+                        <p class="text-gray-500">Nomor Rekening</p>
+                        <p class="font-bold text-lg">
+                            1234567890
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="text-gray-500">Atas Nama</p>
+                        <p class="font-bold text-lg">
+                            STAYEASE HOTEL
+                        </p>
+                    </div>
+
+                </div>
+
+            @endif
+
         </div>
 
-        <div>
-            <p class="text-gray-500">Atas Nama</p>
-            <p class="font-bold text-lg">
-                STAYEASE HOTEL
-            </p>
-        </div>
-    </div>
-
-@endif
+        <!-- INFORMASI -->
         <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-5 mb-6">
 
             <h3 class="font-semibold text-yellow-700 mb-2">
@@ -70,38 +78,58 @@
 
         </div>
 
-        <div class="border rounded-xl p-6">
+        <!-- ERROR -->
+        @if ($errors->any())
+            <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+                {{ $errors->first() }}
+            </div>
+        @endif
 
-            <h3 class="text-xl font-semibold mb-4">
-                Upload Bukti Transfer
-            </h3>
+        <!-- FORM UPLOAD -->
+        <form action="{{ route('payment.uploadProof') }}"
+              method="POST"
+              enctype="multipart/form-data">
 
-            <input
-                type="file"
-                class="w-full border rounded-lg p-3"
-            >
+            @csrf
 
-            <textarea
-                class="w-full border rounded-lg p-3 mt-4"
-                rows="4"
-                placeholder="Tambahkan catatan jika diperlukan..."
-            ></textarea>
+            <input type="hidden"
+                   name="payment_method"
+                   value="{{ $payment_method }}">
 
-        </div>
+            <div class="border rounded-xl p-6">
 
-        <div class="mt-8 flex justify-end">
-            
-        <form action="{{ route('payment.success') }}" method="GET">
+                <h3 class="text-xl font-semibold mb-4">
+                    Upload Bukti Transfer
+                </h3>
 
-            <button
-                type="submit"
-                class="bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow">
+                <input
+                    type="file"
+                    name="payment_proof"
+                    class="w-full border rounded-lg p-3"
+                    required>
 
-                Saya Sudah Transfer
+                <textarea
+                    name="note"
+                    class="w-full border rounded-lg p-3 mt-4"
+                    rows="4"
+                    placeholder="Tambahkan catatan jika diperlukan..."
+                ></textarea>
 
-            </button>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+
+                <button
+                    type="submit"
+                    class="bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-lg shadow">
+
+                    Saya Sudah Transfer
+
+                </button>
+
+            </div>
+
         </form>
-    </div>
 
     </div>
 

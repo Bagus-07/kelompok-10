@@ -9,11 +9,15 @@ class Booking extends Model
 {
     protected $fillable = [
         'user_id',
+        'nama',
+        'kamar',
+        'tanggal',
         'room_name',
         'check_in',
         'check_out',
         'total_price',
         'payment_method',
+        'payment_proof',
         'status',
     ];
 
@@ -22,9 +26,6 @@ class Booking extends Model
         'check_out' => 'date',
     ];
 
-    /**
-     * Relasi ke User
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

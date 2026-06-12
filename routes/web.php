@@ -33,9 +33,8 @@ Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
 */
 Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/rooms', function () {
-    return view('pages.rooms');
-})->name('rooms');
+Route::get('/rooms', [RoomController::class, 'index'])
+    ->name('rooms');
 
 Route::get('/language/{locale}', function ($locale) {
 
@@ -56,9 +55,20 @@ Route::get('/payment', [PaymentController::class, 'index'])
 Route::post('/payment/process', [PaymentController::class, 'process'])
     ->middleware('auth')
     ->name('payment.process');
+
+    Route::post('/payment/upload-proof',
+    [PaymentController::class, 'uploadProof'])
+    ->middleware('auth')
+    ->name('payment.uploadProof');
+    
 Route::get('/payment-success', function () {
     return view('payment.success');
 })->name('payment.success');
+
+Route::post('/booking/store',
+    [RoomController::class, 'book'])
+    ->name('booking.store')
+    ->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
