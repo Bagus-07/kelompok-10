@@ -17,26 +17,26 @@
 
     <div class="hero-content">
 
-    <h2>WELCOME TO STAYEASE HOTEL</h2>
+    <h2>{{ __('messages.welcome') }}</h2>
 
     <p class="hero-subtitle">
-    Luxury rooms, modern facilities, and unforgettable experiences.
+        {{ __('messages.subtitle') }}
     </p>
 
     <form action="/rooms" method="GET" class="hero-search">
 
     <div class="search-field">
-        <label>Check In</label>
+        <label>{{ __('messages.check_in') }}</label>
         <input type="date" name="check_in" required>
     </div>
 
     <div class="search-field">
-        <label>Check Out</label>
+        <label>{{ __('messages.check_out') }}</label>
         <input type="date" name="check_out" required>
     </div>
 
     <div class="search-field">
-        <label>Guests</label>
+        <label>{{ __('messages.guests') }}</label>
         <input
             type="number"
             name="guests"
@@ -46,17 +46,17 @@
     </div>
 
     <div class="search-field">
-        <label>Room Type</label>
+        <label>{{ __('messages.room_type') }}</label>
         <select name="room_type">
-            <option value="">All Rooms</option>
-            <option>Standard</option>
-            <option>Superior</option>
-            <option>Deluxe</option>
+            <option value="">{{ __('messages.all_rooms') }}</option>
+            <option>{{ __('messages.standard') }}</option>
+            <option>{{ __('messages.superior') }}</option>
+            <option>{{ __('messages.deluxe') }}</option>
         </select>
     </div>
 
     <button type="submit">
-        Search Rooms
+        {{ __('messages.search_rooms') }}
     </button>
 
 </form>
@@ -70,25 +70,51 @@
 
 <!-- FACILITIES -->
 <div class="section" id="facilities">
-    <h2>Facilities</h2>
+    <h2>{{ __('messages.facilities') }}</h2>
     <div class="grid">
-        <div class="box"><img src="/photo/pool.jpg"><p>Swimming Pool</p></div>
-        <div class="box"><img src="/photo/beach.jpg"><p>Beach</p></div>
-        <div class="box"><img src="/photo/hotel2.jpeg"><p>Restaurant</p></div>
-        <div class="box"><img src="/photo/hotel4.jpeg"><p>Fitness Center</p></div>
+        <div class="box">
+    <img src="/photo/pool.jpg">
+    <p>{{ __('messages.swimming_pool') }}</p>
+</div>
+
+<div class="box">
+    <img src="/photo/beach.jpg">
+    <p>{{ __('messages.beach') }}</p>
+</div>
+
+<div class="box">
+    <img src="/photo/hotel2.jpeg">
+    <p>{{ __('messages.restaurant') }}</p>
+</div>
+
+<div class="box">
+    <img src="/photo/hotel4.jpeg">
+    <p>{{ __('messages.fitness_center') }}</p>
+</div>
     </div>
 </div>
 
 <!-- ABOUT -->
 <div class="section" id="about">
-    <h2>About Us</h2>
-    <p><strong>StayEase Hotel</strong> is a modern beachfront hotel designed for comfort and relaxation. Located just minutes from the beach, we offer a peaceful retreat with a beautiful environment.</p>
-    
-    <p class="text-gray-600 mb-4"> Our hotel offers a variety of room options suitable for every guest, ranging from standard to deluxe choices, all equipped with essential facilities for comfort during the stay. </p>
-    
-    <p class="text-gray-600 mb-4"> Enjoy our facilities including a swimming pool, restaurant, and fitness center, all designed to make your visit more enjoyable. </p>
 
-    <p class="text-gray-600"> Whether you are here for vacation or business, StayEase Hotel is the perfect place for you to stay. </p>
+    <h2>{{ __('messages.about_us') }}</h2>
+
+    <p>
+        {{ __('messages.about_text_1') }}
+    </p>
+
+    <p class="text-gray-600 mb-4">
+        {{ __('messages.about_text_2') }}
+    </p>
+
+    <p class="text-gray-600 mb-4">
+        {{ __('messages.about_text_3') }}
+    </p>
+
+    <p class="text-gray-600">
+        {{ __('messages.about_text_4') }}
+    </p>
+
 </div>
 
 <!-- REVIEWS -->
@@ -97,14 +123,16 @@
     @auth
 <div class="max-w-xl mx-auto mb-10 bg-white p-6 rounded-xl shadow">
 
-    <h3 class="text-xl font-bold mb-4">Leave a Review</h3>
+    <h3 class="text-xl font-bold mb-4">
+        {{ __('messages.leave_review') }}
+    </h3>
 
     <form action="/review" method="POST">
         @csrf
 
         <textarea 
             name="review"
-            placeholder="Write your review..."
+            placeholder="{{ __('messages.write_review') }}"
             class="w-full border rounded-lg p-3 mb-4"
             required
         ></textarea>
@@ -121,7 +149,7 @@
         </select>
 
         <button class="px-5 py-2 bg-yellow-500 text-white rounded-lg">
-            Submit Review
+            {{ __('messages.submit_review') }}
         </button>
 
     </form>
@@ -129,7 +157,7 @@
 @endauth
 
     <h3 class="text-2xl font-bold mb-8">
-        What Our Guests Say
+        {{ __('messages.reviews') }}
     </h3>
 
     <div class="grid">
@@ -145,7 +173,7 @@
         <img 
     src="{{ $review->user && $review->user->profile_photo
         ? asset('uploads/' . $review->user->profile_photo)
-        : 'https://via.placeholder.com/60' }}"
+        : '/photo/user-icon.png' }}"
         
     style="
         width:56px;
@@ -189,11 +217,37 @@
         {{ $review->created_at->diffForHumans() }}
     </p>
 
+        @if(auth()->check() && auth()->id() == $review->user_id)
+    
+    <form action="/review/{{ $review->id }}" method="POST"
+          onsubmit="return confirm('Delete this review?')">
+    
+        @csrf
+        @method('DELETE')
+    
+        <button
+            type="submit"
+            style="
+                margin-top:10px;
+                background:#ef4444;
+                color:white;
+                border:none;
+                padding:8px 14px;
+                border-radius:8px;
+                cursor:pointer;
+            ">
+            Delete Review
+        </button>
+    
+    </form>
+    
+    @endif
+
 </div>
 
 @empty
 
-<p>No reviews yet.</p>
+<p>{{ __('messages.no_reviews') }}</p>
 
 @endforelse
 

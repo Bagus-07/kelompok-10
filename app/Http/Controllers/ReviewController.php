@@ -24,4 +24,15 @@ class ReviewController extends Controller
 
         return redirect('/home');
     }
+
+    public function destroy(Review $review)
+    {
+        if ($review->user_id != auth()->id()) {
+            abort(403);
+        }
+    
+        $review->delete();
+    
+        return back()->with('success', 'Review deleted successfully.');
+    }
 }

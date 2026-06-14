@@ -14,7 +14,7 @@
 }
 
 .profile-card{
-    max-width:1100px;
+    max-width:1000px;
     margin:auto;
     background:white;
     border-radius:28px;
@@ -28,6 +28,7 @@
     font-size:36px;
     font-weight:bold;
     margin-bottom:40px;
+    text-align:center;
 }
 
 .profile-top{
@@ -110,6 +111,93 @@
     font-size:18px;
 }
 
+/* DARK MODE PROFILE */
+
+.dark-mode .profile-wrapper{
+    background:#0f172a;
+}
+
+.dark-mode .profile-card{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode .profile-title{
+    color:white;
+}
+
+.dark-mode .info-box h4{
+    color:#cbd5e1;
+}
+
+.dark-mode .info-box p{
+    color:white;
+}
+
+.dark-mode .info-grid-bottom{
+    border-top:2px solid #475569;
+}
+
+.dark-mode .booking-history{
+    border-top:2px solid #475569;
+}
+
+.dark-mode .booking-history h3{
+    color:white;
+}
+
+.dark-mode .booking-history p{
+    color:#cbd5e1;
+}
+
+.dark-mode .edit-btn{
+    background:#2563eb;
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+/* EDIT PROFILE MODAL DARK MODE */
+
+.dark-mode #editModal > div{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode #editModal h2,
+.dark-mode #editModal label{
+    color:white;
+}
+
+.dark-mode #editModal input{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+.dark-mode #editModal input::placeholder{
+    color:#cbd5e1;
+}
+
+.dark-mode .account-actions p{
+    color:#cbd5e1;
+}
+
+.dark-mode .bg-gray-300{
+    background:#475569 !important;
+    color:white !important;
+}
+
+.dark-mode .bg-gray-300:hover{
+    background:#64748b !important;
+}
+
+
 </style>
 
 
@@ -133,7 +221,7 @@
                 <img 
                     src="{{ auth()->user()->profile_photo 
                         ? '/uploads/' . auth()->user()->profile_photo 
-                        : 'https://via.placeholder.com/180' }}"
+                        : '/photo/user-icon.png'  }}"
                     class="profile-image"
                 >
 
@@ -238,7 +326,7 @@
                 <img 
                     src="{{ auth()->user()->profile_photo 
                         ? '/uploads/' . auth()->user()->profile_photo 
-                        : 'https://via.placeholder.com/120' }}"
+                        : '/photo/user-icon.png'  }}"
                     class="w-28 h-28 rounded-full object-cover mx-auto shadow mb-4"
                 >
 
@@ -299,28 +387,61 @@
 
             <!-- BUTTONS -->
             <div class="flex justify-end gap-3">
-
-                <button 
+            
+                <button
                     type="button"
                     onclick="closeModal()"
                     class="px-5 py-2 rounded-xl bg-gray-300"
                 >
                     Cancel
                 </button>
-
-                <button 
+            
+                <button
                     type="submit"
                     class="px-5 py-2 rounded-xl bg-blue-500 text-white"
                 >
                     Save
                 </button>
-
+            
             </div>
-
+            
+            <hr class="my-6">
+            
         </form>
 
-    </div>
-</div>
+        <hr class="my-6">
+
+        <!-- ACCOUNT ACTIONS -->
+        <div class="account-actions">
+        
+            <h3 class="text-red-600 font-bold text-lg mb-2">
+                Account Actions
+            </h3>
+        
+            <p class="text-gray-500 text-sm mb-4">
+                Permanently delete your account and all reviews.
+            </p>
+        
+            <form action="/profile/delete"
+                  method="POST"
+                  onsubmit="return confirm('Delete your account permanently? This action cannot be undone.')">
+        
+                @csrf
+                @method('DELETE')
+        
+                <button
+                    type="submit"
+                    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl"
+                >
+                    Delete Account
+                </button>
+            
+            </form>
+        
+        </div>
+
+            </div>
+        </div>
 
 <!-- CONTACT -->
 
@@ -335,6 +456,14 @@ function closeModal() {
     document.getElementById('editModal').classList.add('hidden');
     document.getElementById('editModal').classList.remove('flex');
 }
+
+window.addEventListener('load', function(){
+
+    if(localStorage.getItem('theme') === 'dark'){
+        document.body.classList.add('dark-mode');
+    }
+
+});
 </script>
 
 @endsection

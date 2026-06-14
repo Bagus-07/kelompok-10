@@ -102,6 +102,117 @@ body {
     transform: scale(1.05);
 }
 
+/*new*/
+.profile-menu{
+
+    display:none;
+
+    position:absolute;
+
+    right:0;
+    top:75px;
+
+    width:180px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+    overflow:hidden;
+
+    z-index:10000;
+}
+
+.profile-menu.show{
+    display:block;
+}
+
+.profile-menu a,
+.profile-menu button{
+
+    display:block;
+
+    width:100%;
+
+    padding:12px;
+
+    background:none;
+
+    border:none;
+
+    text-align:left;
+
+    text-decoration:none;
+
+    color:#333;
+
+    cursor:pointer;
+}
+
+.profile-menu a:hover,
+.profile-menu button:hover{
+    background:#f5f5f5;
+}
+
+
+.profile-icon{
+    border:none;
+    background:none;
+    cursor:pointer;
+}
+
+.profile-avatar{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    cursor:pointer;
+}
+
+
+.profile-icon img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+
+.profile-dropdown{
+    position:relative;
+}
+
+
+.profile-dropdown.show{
+    display:block;
+}
+
+
+.profile-dropdown a,
+.profile-dropdown button{
+
+    display:block;
+
+    width:100%;
+
+    padding:12px;
+
+    background:none;
+
+    border:none;
+
+    text-align:left;
+
+    text-decoration:none;
+
+    color:#333;
+
+    cursor:pointer;
+
+}
+
 /* HERO */
 .hero{
     position:relative;
@@ -235,6 +346,55 @@ body {
     flex-shrink: 0;
 }
 
+.dark-mode .review-card{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode .reviews-section{
+    background:#111827;
+}
+
+.dark-mode #reviews{
+    background:#0f172a;
+}
+
+.dark-mode #reviews .bg-white{
+    background:#1e293b !important;
+    color:white !important;
+}
+
+.dark-mode #reviews .bg-gray-50{
+    background:#0f172a !important;
+}
+
+.dark-mode #reviews .text-gray-800{
+    color:white !important;
+}
+
+.dark-mode #reviews .text-gray-600{
+    color:#cbd5e1 !important;
+}
+
+.dark-mode #reviews .text-gray-500{
+    color:#94a3b8 !important;
+}
+
+.dark-mode #reviews .text-gray-400{
+    color:#94a3b8 !important;
+}
+
+.dark-mode #reviews textarea,
+.dark-mode #reviews select{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+.dark-mode #reviews textarea::placeholder{
+    color:#cbd5e1;
+}
+
 /*new*/
 
 .hero-content{
@@ -338,8 +498,18 @@ body {
 .hero-search select{
     height:50px;
     border:1px solid #ddd;
+    background:white;
+    color:#333;
     border-radius:10px;
     padding:0 12px;
+}
+
+/*new*/
+.dark-mode .hero-search input,
+.dark-mode .hero-search select{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
 }
 
 .hero-search button{
@@ -446,6 +616,90 @@ body {
     cursor:pointer;
 }
 
+.dark-mode .contact-modal-content{
+    background:#1e293b;
+    color:#f8fafc;
+}
+
+.dark-mode .contact-modal-content h2{
+    color:#f8fafc;
+}
+
+.dark-mode .contact-modal-content p{
+    color:#cbd5e1;
+}
+
+.dark-mode .close-modal{
+    color:white;
+}
+
+.dark-mode .wa-btn{
+    background:#25D366;
+    color:white;
+}
+
+.dark-mode .contact-modal{
+    background:rgba(0,0,0,.8);
+}
+
+/*new modal*/
+.settings-modal{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    z-index:10000;
+
+    justify-content:center;
+    align-items:center;
+}
+
+.settings-content{
+
+    background:white;
+
+    width:400px;
+    max-width:90%;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    position:relative;
+}
+
+.close-settings{
+    position:absolute;
+
+    top:15px;
+    right:20px;
+
+    font-size:28px;
+
+    cursor:pointer;
+}
+
+.settings-content h2{
+    margin-top:0;
+}
+
+.settings-content button{
+    width:100%;
+
+    margin-top:10px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
 .contact-buttons{
     margin-top:20px;
 }
@@ -472,6 +726,70 @@ body {
 
 .mobile-menu{
     display:none;
+}
+
+.dark-mode{
+    background:#0f172a;
+    color:#f8fafc;
+}
+
+.dark-mode .navbar{
+    background:rgba(15,23,42,0.95);
+}
+
+.dark-mode .box{
+    background:#222;
+    color:white;
+}
+
+.dark-mode .footer{
+    background:#1e1e1e;
+    color:white;
+}
+
+.dark-mode #about{
+    background:#0f172a;
+    color:#f8fafc;
+}
+
+.dark-mode .profile-card,
+.dark-mode .box,
+.dark-mode .settings-content{
+    background:#1e293b;
+}
+
+.dark-mode p{
+    color:#cbd5e1;
+}
+
+.dark-mode #languageSelect{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+.dark-mode select{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+.dark-mode input{
+    background:#334155;
+}
+
+.dark-mode .settings-content{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode .settings-content h2,
+.dark-mode .settings-content h3{
+    color:white;
+}
+
+.dark-mode .settings-content hr{
+    border-color:#475569;
 }
 
 @media(max-width:768px){
@@ -620,9 +938,28 @@ body {
     }
 
     /* FACILITIES */
+    .grid{
+        display:flex !important;
+        flex-wrap:nowrap !important;
+        justify-content:flex-start !important;
+
+        overflow-x:auto !important;
+        overflow-y:hidden;
+
+        gap:15px;
+        padding:10px 15px;
+
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .grid::-webkit-scrollbar{
+        display:none;
+    }
+
     .box{
-        width:90%;
-        max-width:300px;
+        flex:0 0 260px !important;
+        width:auto !important;
+        max-width:none !important;
     }
 
     /* ABOUT */
@@ -704,34 +1041,47 @@ body {
 
             @auth
 
-                <a href="/profile">
-                    <img
-                        src="{{ auth()->user()->profile_photo
-                            ? asset('uploads/' . auth()->user()->profile_photo)
-                            : 'https://via.placeholder.com/50' }}"
-                        style="
-                            width:50px;
-                            height:50px;
-                            border-radius:50%;
-                            object-fit:cover;
-                            display:block;
-                            cursor:pointer;
-                        "
-                    >
-                </a>
-
-                <form action="/logout" method="POST">
-                    @csrf
-                    <button class="signup-btn">Logout</button>
-                </form>
-
+            <div class="profile-dropdown">
+            
+                <img
+                    src="{{ auth()->user()->profile_photo
+                        ? asset('uploads/' . auth()->user()->profile_photo)
+                        : '/photo/user-icon.png' }}"
+                    class="profile-avatar"
+                    onclick="toggleProfileMenu()"
+                >
+            
+                <div id="profileMenu" class="profile-menu">
+                
+                    <a href="/profile">Profile</a>
+                
+                    <a href="#" onclick="openSettingsModal()">
+                        Settings
+                    </a>
+                
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit">
+                            Logout
+                        </button>
+                    </form>
+                
+                </div>
+            
+            </div>
+        
             @else
-
-                <a href="/login" class="login-btn">Log in</a>
-                <a href="/register" class="signup-btn">Sign up</a>
-
+        
+            <a href="/login" class="login-btn">
+                Log in
+            </a>
+        
+            <a href="/register" class="signup-btn">
+                Sign up
+            </a>
+        
             @endauth
-
+        
         </div>
 
     </div>
@@ -803,6 +1153,51 @@ body {
 </div>
 
 <script>
+function toggleProfileMenu(){
+    document
+        .getElementById("profileMenu")
+        .classList.toggle("show");
+}
+
+function openSettingsModal(){
+    document.getElementById('settingsModal').style.display = 'flex';
+}
+
+function closeSettingsModal(){
+    document.getElementById('settingsModal').style.display = 'none';
+}
+
+function setTheme(theme){
+
+    if(theme === 'dark'){
+        document.body.classList.add('dark-mode');
+    }else{
+        document.body.classList.remove('dark-mode');
+    }
+
+    localStorage.setItem('theme', theme);
+}
+
+window.addEventListener('load', function(){
+
+    const savedTheme =
+        localStorage.getItem('theme');
+
+    if(savedTheme === 'dark'){
+        document.body.classList.add('dark-mode');
+    }
+
+});
+
+function toggleMenu() {
+    document
+        .getElementById('mobileMenu')
+        .classList.toggle('show');
+}
+
+function changeLanguage(url){
+    window.location.href = url;
+}
 
 function openContactModal() {
     document.getElementById('contactModal').style.display = 'flex';
@@ -843,5 +1238,48 @@ function toggleMenu() {
 
 
 </script>
+
+<div id="settingsModal" class="settings-modal">
+
+    <div class="settings-content">
+
+        <span class="close-settings"
+              onclick="closeSettingsModal()">
+            &times;
+        </span>
+
+        <h2>Settings</h2>
+
+        <hr>
+
+       <h3>Language</h3>
+
+            <select onchange="changeLanguage(this.value)">
+                <option value="/language/en"
+                    {{ app()->getLocale() == 'en' ? 'selected' : '' }}>
+                    English
+                </option>
+            
+                <option value="/language/id"
+                    {{ app()->getLocale() == 'id' ? 'selected' : '' }}>
+                    Indonesia
+                </option>
+            </select>
+
+        <hr>
+
+        <h3>Theme</h3>
+
+        <button onclick="setTheme('light')">
+            ☀ Light Mode
+        </button>
+
+        <button onclick="setTheme('dark')">
+            🌙 Dark Mode
+        </button>
+
+    </div>
+
+</div>
 </body>
 </html>

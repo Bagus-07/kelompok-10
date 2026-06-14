@@ -15,7 +15,7 @@
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
-        }
+            padding-top: 40px;        }
 
         .search-bar {
             width: 60%;

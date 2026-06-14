@@ -26,6 +26,9 @@ Route::get('/', [HomeController::class, 'index']);
 use App\Http\Controllers\ReviewController;
 Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
 
+Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
+    ->middleware('auth');
+
 /*
 |--------------------------------------------------------------------------
 | MAIN PAGES
@@ -118,6 +121,8 @@ Route::get('/customer', [CustomerController::class, 'tampilkan']);
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::post('/profile/update', [ProfileController::class, 'update']);
 
+Route::delete('/profile/delete', [ProfileController::class, 'destroy'])
+    ->middleware('auth');
 /*
 |--------------------------------------------------------------------------
 | ROOMS
