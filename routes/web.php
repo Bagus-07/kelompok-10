@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\KamarController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,8 @@ Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
 */
 Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/rooms', function () {
-    return view('pages.rooms');
-})->name('rooms');
+Route::get('/rooms', [RoomController::class, 'index'])
+    ->name('rooms');
 
 Route::get('/language/{locale}', function ($locale) {
 
@@ -59,9 +59,20 @@ Route::get('/payment', [PaymentController::class, 'index'])
 Route::post('/payment/process', [PaymentController::class, 'process'])
     ->middleware('auth')
     ->name('payment.process');
+
+    Route::post('/payment/upload-proof',
+    [PaymentController::class, 'uploadProof'])
+    ->middleware('auth')
+    ->name('payment.uploadProof');
+    
 Route::get('/payment-success', function () {
     return view('payment.success');
 })->name('payment.success');
+
+Route::post('/booking/store',
+    [RoomController::class, 'book'])
+    ->name('booking.store')
+    ->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -151,7 +162,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'tampilkan']);
 
-    Route::view('/user', 'pages.user');
+    //crud user
+    Route::get('/user', [UserController::class, 'index'])
+        ->name('user');
+
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])
+        ->name('user.destroy');
 
     // CRUD tipe kamar
     Route::get('/kamar', [TipeKamarController::class, 'index'])

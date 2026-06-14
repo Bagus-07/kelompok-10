@@ -224,7 +224,7 @@
     <!-- ROOM CARD -->
     <div class="room-card"
      data-name="Deluxe Room"
-     data-price="IDR 999999 / NIGHT"
+     data-price="999999"
      data-desc="Luxury room with king-sized bed and sea view."
      data-img="https://images.unsplash.com/photo-1566073771259-6a8506099945">
 
@@ -263,7 +263,7 @@
     <!-- SECOND ROOM -->
     <div class="room-card"
      data-name="Family Suite"
-     data-price="IDR 799999 / NIGHT"
+     data-price="799999"
      data-desc="Perfect for family vacation
                 with spacious living area
                 and modern interior."
@@ -312,18 +312,60 @@
                 <p id="modalDesc"></p>
                 <h3 id="modalPrice"></h3>
 
-                @auth
-    <a href="{{ route('payment') }}">
-        <button class="book-btn">
-            Book Now
-        </button>
-    </a>
+              @auth
+
+<form action="{{ route('booking.store') }}"
+      method="POST">
+
+    @csrf
+
+    <input type="hidden"
+           name="room_name"
+           id="bookingRoomName">
+
+    <input type="hidden"
+           name="total_price"
+           id="bookingRoomPrice">
+
+    <!-- Ambil tanggal dari halaman Home -->
+    <input type="hidden"
+           name="check_in"
+           value="{{ request('check_in') }}">
+
+    <input type="hidden"
+           name="check_out"
+           value="{{ request('check_out') }}">
+
+    <!-- Tampilkan informasi tanggal -->
+    <div class="mt-4 p-3 border rounded bg-gray-50">
+
+        <p>
+            <strong>Check In :</strong>
+            {{ request('check_in') }}
+        </p>
+
+        <p class="mt-2">
+            <strong>Check Out :</strong>
+            {{ request('check_out') }}
+        </p>
+
+    </div>
+
+    <button type="submit"
+            class="book-btn">
+        Book Now
+    </button>
+
+</form>
+
 @else
-    <a href="{{ route('login') }}">
-        <button class="book-btn">
-            Login to Book
-        </button>
-    </a>
+
+<a href="{{ route('login') }}">
+    <button class="book-btn">
+        Login to Book
+    </button>
+</a>
+
 @endauth
             </div>
         </div>
@@ -358,16 +400,27 @@
     const modalPrice = document.getElementById('modalPrice');
     const closeBtn = document.querySelector('.close');
 
-    roomCards.forEach(card => {
-        card.addEventListener('click', () => {
-            modal.style.display = 'flex';
+    const bookingRoomName =
+document.getElementById('bookingRoomName');
 
-            modalImg.src = card.dataset.img;
-            modalTitle.innerText = card.dataset.name;
-            modalDesc.innerText = card.dataset.desc;
-            modalPrice.innerText = card.dataset.price;
-        });
+const bookingRoomPrice =
+document.getElementById('bookingRoomPrice');
+
+roomCards.forEach(card => {
+    card.addEventListener('click', () => {
+        modal.style.display = 'flex';
+
+        modalImg.src = card.dataset.img;
+        modalTitle.innerText = card.dataset.name;
+        modalDesc.innerText = card.dataset.desc;
+
+        modalPrice.innerText =
+            'Rp ' + Number(card.dataset.price).toLocaleString('id-ID');
+
+        bookingRoomName.value = card.dataset.name;
+        bookingRoomPrice.value = card.dataset.price;
     });
+});
 
         closeBtn.onclick = function() {
         modal.style.display = 'none';

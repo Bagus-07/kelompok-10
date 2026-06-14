@@ -24,14 +24,12 @@
     margin-bottom: 20px;
 }
 
-.btn-add {
-    background: #3b82f6;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
+.alert-success{
+    background:#dcfce7;
+    color:#166534;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
 }
 
 /* TABLE */
@@ -77,11 +75,18 @@ tr:hover {
 }
 </style>
 
+@if(session('success'))
+
+<div class="alert-success">
+    {{ session('success') }}
+</div>
+
+@endif
+
 <div class="content-box">
 
     <div class="header">
         <h3>Data User</h3>
-        <button class="btn-add">+ Tambah User</button>
     </div>
 
     <div class="card">
@@ -97,32 +102,43 @@ tr:hover {
             </thead>
 
             <tbody>
+                @forelse($users as $user)
                 <tr>
-                    <td>1</td>
-                    <td>Cia</td>
-                    <td>cia@gmail.com</td>
-                    <td>08123456789</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->phone ?? '-' }}</td>
                     <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
-                    </td>
-                </tr>
+                        <button class="btn edit">
+                            Edit
+                        </button>
+                        <form
+                            action="{{ route('user.destroy', $user->id) }}"
+                            method="POST"
+                            style="display:inline;"
+                        >
 
-                <tr>
-                    <td>2</td>
-                    <td>Suite Room</td>
-                    <td>Suite</td>
-                    <td>Rp 900.000</td>
-                    <td><span class="status full">Penuh</span></td>
-                    <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                class="btn delete"
+                                onclick="return confirm('Hapus user ini?')"
+                            >
+                                Hapus
+                            </button>
+                        </form>
                     </td>
                 </tr>
+                @empty
+                <tr>
+                    <td colspan="5" style="text-align:center;">
+                        Belum ada data user
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
-
 </div>
-
 @endsection
