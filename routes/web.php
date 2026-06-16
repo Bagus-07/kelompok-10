@@ -167,6 +167,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/user', [UserController::class, 'index'])
         ->name('user');
 
+    Route::post('/user/store', [UserController::class, 'store'])
+        ->name('user.store');
+    
+    Route::put('/user/{id}', [UserController::class, 'update'])
+        ->name('user.update');
+
     Route::delete('/user/{id}', [UserController::class, 'destroy'])
         ->name('user.destroy');
 
