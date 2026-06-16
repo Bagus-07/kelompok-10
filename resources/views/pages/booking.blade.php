@@ -67,6 +67,16 @@
         background: #fef3c7;
         color: #92400e;
     }
+    
+    .rejected {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .waiting {
+        background: #dbeafe;
+        color: #1e40af;
+    }
 
     .btn {
         padding: 6px 12px;
@@ -107,30 +117,123 @@
             </thead>
 
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Cia</td>
-                    <td>Deluxe</td>
-                    <td>12 Mei 2026</td>
-                    <td><span class="status confirmed">Confirmed</span></td>
-                    <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td>2</td>
-                    <td>Andi</td>
-                    <td>Suite</td>
-                    <td>14 Mei 2026</td>
-                    <td><span class="status pending">Pending</span></td>
-                    <td>
-                        <button class="btn edit">Edit</button>
-                        <button class="btn delete">Hapus</button>
-                    </td>
-                </tr>
-            </tbody>
+@forelse($bookings as $booking)
+
+<tr>
+
+    <td>{{ $loop->iteration }}</td>
+
+    <td>{{ $booking->nama }}</td>
+
+    <td>{{ $booking->room_name }}</td>
+
+    <td>
+        {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}
+        -
+        {{ \Carbon\Carbon::parse($booking->check_out)->format('d M Y') }}
+    </td>
+
+    <td>
+
+        @if($booking->status == 'confirmed')
+
+    <span class="status confirmed">
+        Confirmed
+    </span>
+
+@elseif($booking->status == 'waiting_verification')
+
+    <span class="status waiting">
+        Waiting Verification
+    </span>
+
+@elseif($booking->status == 'rejected')
+
+    <span class="status rejected">
+        Rejected
+    </span>
+
+@else
+
+    <span class="status pending">
+        Pending
+    </span>
+
+@endif
+
+    </td>
+
+    <td>
+
+    @if($booking->payment_proof)
+
+        <a href="{{ asset('storage/'.$booking->payment_proof) }}"
+           target="_blank"
+           class="btn edit">
+
+            Lihat Bukti
+
+        </a>
+
+    @endif
+
+    @if($booking->status == 'waiting_verification')
+
+        <form
+            action="{{ route('booking.approve', $booking->id) }}"
+            method="POST"
+            style="display:inline;">
+
+            @csrf
+            @method('PUT')
+
+            <button
+                type="submit"
+                class="btn"
+                style="background:#10b981;color:white;">
+
+                Approve
+
+            </button>
+
+        </form>
+
+        <form
+            action="{{ route('booking.reject', $booking->id) }}"
+            method="POST"
+            style="display:inline;">
+
+            @csrf
+            @method('PUT')
+
+            <button
+                type="submit"
+                class="btn delete">
+
+                Reject
+
+            </button>
+
+        </form>
+
+    @endif
+
+</td>
+
+</tr>
+
+@empty
+
+<tr>
+    <td colspan="6" style="text-align:center;">
+        Belum ada data booking
+    </td>
+</tr>
+
+@endforelse
+
+</tbody>
         </table>
     </div>
 

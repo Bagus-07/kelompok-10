@@ -329,24 +329,24 @@
 
     <!-- Ambil tanggal dari halaman Home -->
     <input type="hidden"
-           name="check_in"
-           value="{{ request('check_in') }}">
-
+       name="check_in"
+       value="{{ $check_in }}">
+       
     <input type="hidden"
-           name="check_out"
-           value="{{ request('check_out') }}">
+       name="check_out"
+       value="{{ $check_out }}">
 
     <!-- Tampilkan informasi tanggal -->
     <div class="mt-4 p-3 border rounded bg-gray-50">
 
         <p>
             <strong>Check In :</strong>
-            {{ request('check_in') }}
+            {{ $check_in }}
         </p>
 
         <p class="mt-2">
             <strong>Check Out :</strong>
-            {{ request('check_out') }}
+            {{ $check_out }}
         </p>
 
     </div>

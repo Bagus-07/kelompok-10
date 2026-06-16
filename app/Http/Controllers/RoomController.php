@@ -8,54 +8,58 @@ use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $rooms = [
             [
                 'nama' => 'Deluxe Room',
-                'harga' => 500000,
-                'deskripsi' => 'Spacious room with king-size bed',
+                'harga' => 999999,
+                'deskripsi' => 'Luxury room with king-sized bed and sea view',
                 'gambar' => 'room1.jpg'
             ],
             [
-                'nama' => 'Superior Room',
-                'harga' => 350000,
-                'deskripsi' => 'Comfortable room for couples',
+                'nama' => 'Family Suite',
+                'harga' => 799999,
+                'deskripsi' => 'Perfect for family vacation with spacious living area',
                 'gambar' => 'room2.jpg'
-            ],
-            [
-                'nama' => 'Standard Room',
-                'harga' => 250000,
-                'deskripsi' => 'Affordable room with basic facilities',
-                'gambar' => 'room3.jpg'
             ]
         ];
 
-        return view('pages.rooms', compact('rooms'));
+        $check_in = $request->check_in;
+        $check_out = $request->check_out;
+        $guests = $request->guests;
+
+        return view('pages.rooms', compact(
+            'rooms',
+            'check_in',
+            'check_out',
+            'guests'
+        ));
     }
 
     public function book(Request $request)
-{
-    $request->validate([
-        'check_in' => 'required|date',
-        'check_out' => 'required|date|after:check_in',
-    ]);
+    {
+        $request->validate([
+            'check_in' => 'required|date',
+            'check_out' => 'required|date|after:check_in',
+        ]);
 
-    Booking::create([
-        'user_id' => Auth::id(),
+        Booking::create([
+            'user_id' => Auth::id(),
 
-        'nama' => Auth::user()->name,
-        'kamar' => $request->room_name,
-        'tanggal' => now()->toDateString(),
+            'nama' => Auth::user()->name,
+            'kamar' => $request->room_name,
+            'tanggal' => now()->toDateString(),
 
-        'room_name' => $request->room_name,
-        'check_in' => $request->check_in,
-        'check_out' => $request->check_out,
-        'total_price' => $request->total_price,
-        'payment_method' => null,
-        'status' => 'pending'
-    ]);
+            'room_name' => $request->room_name,
+            'check_in' => $request->check_in,
+            'check_out' => $request->check_out,
+            'total_price' => $request->total_price,
 
-    return redirect()->route('payment');
-}
+            'payment_method' => null,
+            'status' => 'pending'
+        ]);
+
+        return redirect()->route('payment');
+    }
 }

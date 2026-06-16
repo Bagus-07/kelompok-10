@@ -38,12 +38,15 @@ body::before {
 .register-card {
     position: relative;
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     padding: 35px;
     border-radius: 15px;
     background: white;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     z-index: 1;
+
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 /* INPUT */
@@ -72,66 +75,85 @@ body::before {
     <p class="text-muted">Join us and start booking</p>
 
     <form method="POST" action="/register">
-        @csrf
+    @csrf
 
-        <!-- NAME -->
-        <div class="input-group mb-3">
-            <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                </div>
+    <!-- NAME -->
+    <div class="input-group mb-3">
+        <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-user"></span>
             </div>
         </div>
+    </div>
 
-        <!-- EMAIL -->
-        <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control" placeholder="Email" required>
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
-                </div>
+    <!-- EMAIL -->
+    <div class="input-group mb-3">
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
             </div>
         </div>
+    </div>
 
-        <!-- PASSWORD -->
-        <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Password" required>
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                </div>
+    <!-- PHONE -->
+    <div class="input-group mb-3">
+        <input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-phone"></span>
             </div>
         </div>
+    </div>
 
-        <!-- CONFIRM PASSWORD -->
-        <div class="input-group mb-3">
-            <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                </div>
+    <!-- ADDRESS -->
+    <div class="input-group mb-3">
+        <textarea name="address"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Address"
+                  required></textarea>
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="input-group mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
             </div>
         </div>
+    </div>
 
-        <!-- BUTTON -->
-        <button type="submit" class="btn btn-gold btn-block mb-3">
-            Register
-        </button>
+    <!-- CONFIRM PASSWORD -->
+    <div class="input-group mb-3">
+        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+    </div>
 
-        <p class="text-center">or</p>
+    <!-- BUTTON -->
+    <button type="submit" class="btn btn-gold btn-block mb-3">
+        Register
+    </button>
 
-        <!-- GOOGLE -->
-        <a href="/auth/google" class="btn btn-outline-danger btn-block mb-3">
-            Continue with Google
-        </a>
+    <p class="text-center">or</p>
 
-        <p class="text-center">
-            Already have an account?
-            <a href="/login" class="text-warning">Login</a>
-        </p>
+    <!-- GOOGLE -->
+    <a href="/auth/google" class="btn btn-outline-danger btn-block mb-3">
+        Continue with Google
+    </a>
 
-    </form>
+    <p class="text-center">
+        Already have an account?
+        <a href="/login" class="text-warning">Login</a>
+    </p>
+
+</form>
 
 </div>
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -183,15 +184,29 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         ->name('tipe-kamar.destroy');
 
     // CRUD KAMAR
-    Route::post('/kamar/store', [KamarController::class, 'store'])
-        ->name('kamar.store');
+Route::post('/kamar/store', [KamarController::class, 'store'])
+    ->name('kamar.store');
 
-    Route::put('/kamar/{id}', [KamarController::class, 'update'])
-        ->name('kamar.update');
+Route::put('/kamar/{id}', [KamarController::class, 'update'])
+    ->name('kamar.update');
 
-    Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])
-        ->name('kamar.destroy');
+Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])
+    ->name('kamar.destroy');
 
-    Route::view('/booking', 'pages.booking');
-    Route::view('/laporan', 'pages.laporan');
+// BOOKING
+Route::get('/booking',
+    [AdminBookingController::class, 'index'])
+    ->name('admin.booking');
+
+Route::put('/booking/{id}/approve',
+    [AdminBookingController::class, 'approve'])
+    ->name('booking.approve');
+
+Route::put('/booking/{id}/reject',
+    [AdminBookingController::class, 'reject'])
+    ->name('booking.reject');
+
+// LAPORAN
+Route::view('/laporan', 'pages.laporan');
 });
+

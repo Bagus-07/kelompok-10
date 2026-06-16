@@ -20,17 +20,27 @@ class PaymentController extends Controller
     }
 
     public function process(Request $request)
-    {
-        $request->validate([
-            'payment_method' => 'required',
-            'bank' => 'required_if:payment_method,Transfer Bank',
-        ]);
+{
+    $request->validate([
+        'payment_method' => 'required',
+        'bank' => 'required_if:payment_method,Transfer Bank',
+    ]);
 
-        return view('payment.confirmation', [
+    $booking = Booking::where('user_id', Auth::id())
+        ->latest()
+        ->first();
+
+    if ($booking) {
+        $booking->update([
             'payment_method' => $request->payment_method,
-            'bank' => $request->bank
         ]);
     }
+
+    return view('payment.confirmation', [
+        'payment_method' => $request->payment_method,
+        'bank' => $request->bank
+    ]);
+}
 
     public function uploadProof(Request $request)
 {

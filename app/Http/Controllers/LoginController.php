@@ -33,6 +33,8 @@ class LoginController extends Controller
         $request->validate([
             'name'      => 'required',
             'email'     => 'required|email|unique:users',
+            'phone'     => 'required',
+            'address'   => 'required',
             'password'  => 'required|min:6',
         ]);
 
@@ -41,6 +43,8 @@ class LoginController extends Controller
             'email'     => $request->email,
             'password'  => Hash::make($request->password),
             'role'      => 'user',
+            'phone'     => $request->phone,
+            'address'   => $request->address,
         ]);
 
         Auth::login($user);
