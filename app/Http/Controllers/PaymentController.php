@@ -62,7 +62,7 @@ class PaymentController extends Controller
             'status' => 'waiting_verification'
         ]);
     }
-
+    
     return redirect()->route('payment.success');
 }
 }

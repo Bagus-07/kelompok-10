@@ -53,9 +53,11 @@
     }
 
     .status {
-        padding: 5px 12px;
+       padding: 6px 14px;
         border-radius: 20px;
-        font-size: 12px;
+        font-size: 13px;
+        font-weight: 600;
+        display: inline-block;
     }
 
     .confirmed {
@@ -79,10 +81,13 @@
     }
 
     .btn {
-        padding: 6px 12px;
+        padding: 8px 14px;
         border: none;
         border-radius: 6px;
         cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 6px;
     }
 
     .edit {
@@ -94,6 +99,23 @@
         background: #ef4444;
         color: white;
     }
+
+    .action-buttons{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.action-buttons form{
+    margin: 0;
+}
+
+th:last-child,
+td:last-child{
+    min-width: 280px;
+}
+
 </style>
 
 <div class="content-box">
@@ -166,58 +188,50 @@
 
     <td>
 
+<div class="action-buttons">
+
     @if($booking->payment_proof)
 
         <a href="{{ asset('storage/'.$booking->payment_proof) }}"
            target="_blank"
            class="btn edit">
-
             Lihat Bukti
-
         </a>
 
     @endif
 
     @if($booking->status == 'waiting_verification')
 
-        <form
-            action="{{ route('booking.approve', $booking->id) }}"
-            method="POST"
-            style="display:inline;">
+        <form action="{{ route('booking.approve', $booking->id) }}"
+              method="POST">
 
             @csrf
             @method('PUT')
 
-            <button
-                type="submit"
-                class="btn"
-                style="background:#10b981;color:white;">
-
+            <button type="submit"
+                    class="btn"
+                    style="background:#10b981;color:white;">
                 Approve
-
             </button>
 
         </form>
 
-        <form
-            action="{{ route('booking.reject', $booking->id) }}"
-            method="POST"
-            style="display:inline;">
+        <form action="{{ route('booking.reject', $booking->id) }}"
+              method="POST">
 
             @csrf
             @method('PUT')
 
-            <button
-                type="submit"
-                class="btn delete">
-
+            <button type="submit"
+                    class="btn delete">
                 Reject
-
             </button>
 
         </form>
 
     @endif
+
+</div>
 
 </td>
 
