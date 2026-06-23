@@ -65,4 +65,23 @@ return [
     'profile' => 'Profile',
     'settings' => 'Settings',
 
+    // PROFILE VIEW
+    'name' => 'Name',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'edit_profile' => 'Edit Profile',
+    'change_password' => 'Change Password',
+    'current_password' => 'Current Password',
+    'new_password' => 'New Password',
+    'confirm_password' => 'Confirm Password',
+    'booking_history' => 'Booking History',
+    'no_bookings' => 'No Booking Yet',
+    'acc_action' => 'Account Actions',
+    'delete_account' => 'Delete Account and Reviews',
+    'delete_account_confirm' => 'Delete Account',
+
+    // ROOMS
+    'book_now' => 'BOOK NOW',
+    'per_night' => '/ NIGHT',
+    'login_to_book' => 'Login to Book',
 ];

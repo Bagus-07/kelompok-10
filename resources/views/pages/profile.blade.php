@@ -68,7 +68,7 @@
 
 .info-grid-top{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:30px;
     margin-bottom:40px;
 }
@@ -92,6 +92,23 @@
     font-size:22px;
     font-weight:bold;
     color:#111827;
+}
+
+.password-btn{
+    margin-top:12px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#f59e0b;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.password-btn:hover{
+    background:#d97706;
 }
 
 /* BOOKING */
@@ -197,6 +214,41 @@
     background:#64748b !important;
 }
 
+.dark-mode #editModal{
+    color:white;
+}
+
+.password-btn{
+    margin-top:10px;
+    background:#f59e0b;
+}
+
+.dark-mode .password-btn{
+    background:#d97706;
+}
+
+/* BOOKING HISTORY DARK MODE */
+
+.dark-mode .booking-history .bg-gray-100{
+    background:#334155 !important;
+}
+
+.dark-mode .booking-history p{
+    color:white;
+}
+
+.dark-mode .booking-history .text-gray-500{
+    color:#cbd5e1 !important;
+}
+
+.dark-mode .booking-history .text-green-600{
+    color:#4ade80 !important;
+}
+
+.dark-mode .booking-history .text-yellow-600{
+    color:#facc15 !important;
+}
+
 
 </style>
 
@@ -217,7 +269,6 @@
 
             <!-- LEFT -->
             <div class="profile-left">
-
                 <img 
                     src="{{ auth()->user()->profile_photo 
                         ? '/uploads/' . auth()->user()->profile_photo 
@@ -226,9 +277,16 @@
                 >
 
                 <button onclick="openModal()" class="edit-btn">
-                    Edit Profile
+                    {{ __('messages.edit_profile') }}
                 </button>
-
+            
+                <button
+                    type="button"
+                    onclick="openPasswordModal()"
+                    class="edit-btn password-btn">
+                    {{ __('messages.change_password') }}
+                </button>
+            
             </div>
 
             <!-- RIGHT -->
@@ -238,12 +296,12 @@
                 <div class="info-grid-top">
 
                     <div class="info-box">
-                        <h4>Name</h4>
+                        <h4>{{ __('messages.name') }}</h4>
                         <p>{{ auth()->user()->name }}</p>
                     </div>
 
                     <div class="info-box">
-                        <h4>Email</h4>
+                        <h4>{{ __('messages.email') }}</h4>
                         <p>{{ auth()->user()->email }}</p>
                     </div>
 
@@ -253,13 +311,8 @@
                 <div class="info-grid-bottom">
 
                     <div class="info-box">
-                        <h4>Phone</h4>
+                        <h4>{{ __('messages.phone') }}</h4>
                         <p>{{ auth()->user()->phone ?? '-' }}</p>
-                    </div>
-
-                    <div class="info-box">
-                        <h4>Address</h4>
-                        <p>{{ auth()->user()->address ?? '-' }}</p>
                     </div>
 
                 </div>
@@ -271,7 +324,7 @@
         <!-- BOOKING HISTORY -->
         <div class="booking-history">
 
-            <h3>Booking History</h3>
+            <h3>{{ __('messages.booking_history') }}</h3>
 
             @forelse($bookings as $booking)
 
@@ -298,7 +351,7 @@
 
             @empty
 
-                <p>No bookings yet.</p>
+                <p>{{ __('messages.no_bookings') }}</p>
 
             @endforelse
 
@@ -308,14 +361,10 @@
 
 </div>
 <!-- MODAL -->
-<div id="editModal" 
-     class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4 overflow-y-auto">
+<div id="editModal"
+     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[9999] p-4 overflow-y-auto">
 
-    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-6 relative">
-
-        <h2 class="text-2xl font-bold mb-5">
-            Edit Profile
-        </h2>
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-6 relative mt-20">
 
         <form method="POST" action="/profile/update" enctype="multipart/form-data">
             @csrf
@@ -339,7 +388,7 @@
 
             <!-- NAME -->
             <div class="mb-4">
-                <label class="block mb-1 font-medium">Name</label>
+                <label class="block mb-1 font-medium">{{ __('messages.name') }}</label>
 
                 <input 
                     type="text"
@@ -351,7 +400,7 @@
 
             <!-- EMAIL -->
             <div class="mb-4">
-                <label class="block mb-1 font-medium">Email</label>
+                <label class="block mb-1 font-medium">{{ __('messages.email') }}</label>
 
                 <input 
                     type="email"
@@ -363,24 +412,12 @@
 
             <!-- PHONE -->
             <div class="mb-4">
-                <label class="block mb-1 font-medium">Phone</label>
+                <label class="block mb-1 font-medium">{{ __('messages.phone') }}</label>
 
                 <input 
                     type="text"
                     name="phone"
                     value="{{ auth()->user()->phone }}"
-                    class="w-full border rounded-xl px-4 py-3"
-                >
-            </div>
-
-            <!-- ADDRESS -->
-            <div class="mb-6">
-                <label class="block mb-1 font-medium">Address</label>
-
-                <input 
-                    type="text"
-                    name="address"
-                    value="{{ auth()->user()->address }}"
                     class="w-full border rounded-xl px-4 py-3"
                 >
             </div>
@@ -415,11 +452,11 @@
         <div class="account-actions">
         
             <h3 class="text-red-600 font-bold text-lg mb-2">
-                Account Actions
+                {{ __('messages.acc_action') }}
             </h3>
         
             <p class="text-gray-500 text-sm mb-4">
-                Permanently delete your account and all reviews.
+                {{ __('messages.delete_account') }}
             </p>
         
             <form action="/profile/delete"
@@ -433,7 +470,7 @@
                     type="submit"
                     class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl"
                 >
-                    Delete Account
+                    {{ __('messages.delete_account_confirm') }}
                 </button>
             
             </form>
@@ -443,7 +480,81 @@
             </div>
         </div>
 
-<!-- CONTACT -->
+        <!-- CHANGE PASSWORD MODAL -->
+<div id="passwordModal"
+     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[9999] p-4">
+
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-6">
+
+        <h2 class="text-2xl font-bold mb-4">
+            {{ __('messages.change_password') }}
+        </h2>
+
+        @if ($errors->any())
+            <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
+        <form action="/profile/password" method="POST">
+            @csrf
+
+            <div class="mb-4">
+                <label>{{ __('messages.current_password') }}</label>
+                <input
+                    type="password"
+                    name="current_password"
+                    class="w-full border rounded-xl px-4 py-3"
+                    required
+                >
+            </div>
+
+            <div class="mb-4">
+                <label>{{ __('messages.new_password') }}</label>
+                <input
+                    type="password"
+                    name="password"
+                    class="w-full border rounded-xl px-4 py-3"
+                    required
+                >
+            </div>
+
+            <div class="mb-4">
+                <label>{{ __('messages.confirm_password') }}</label>
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    class="w-full border rounded-xl px-4 py-3"
+                    required
+                >
+            </div>
+
+            <div class="flex justify-end gap-3">
+
+                <button
+                    type="button"
+                    onclick="closePasswordModal()"
+                    class="px-5 py-2 rounded-xl bg-gray-300"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="px-5 py-2 rounded-xl bg-blue-500 text-white"
+                >
+                    Update Password
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
 
 
 <script>
@@ -464,6 +575,22 @@ window.addEventListener('load', function(){
     }
 
 });
+
+function openPasswordModal() {
+    document.getElementById('passwordModal')
+        .classList.remove('hidden');
+
+    document.getElementById('passwordModal')
+        .classList.add('flex');
+}
+
+function closePasswordModal() {
+    document.getElementById('passwordModal')
+        .classList.add('hidden');
+
+    document.getElementById('passwordModal')
+        .classList.remove('flex');
+}
 </script>
 
 @endsection

@@ -11,12 +11,21 @@ class RoomController extends Controller
 {
     public function index(Request $request)
     {
-        $rooms = TipeKamar::all();
-
+        $query = TipeKamar::query();
+    
+        if ($request->filled('room_type')) {
+            $query->where(
+                'nama_tipe',
+                $request->room_type
+            );
+        }
+    
+        $rooms = $query->get();
+    
         $check_in = $request->check_in;
         $check_out = $request->check_out;
         $guests = $request->guests;
-
+    
         return view('pages.rooms', compact(
             'rooms',
             'check_in',
