@@ -10,11 +10,15 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'nama',
+
+        'kamar_id',
         'kamar',
         'tanggal',
+
         'room_name',
         'check_in',
         'check_out',
+
         'total_price',
         'payment_method',
         'payment_proof',
@@ -29,5 +33,10 @@ class Booking extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function kamar()
+    {
+        return $this->belongsTo(Kamar::class);
     }
 }

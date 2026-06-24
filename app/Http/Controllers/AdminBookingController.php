@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Kamar;
 
 class AdminBookingController extends Controller
 {
@@ -24,6 +25,9 @@ class AdminBookingController extends Controller
             'status' => 'confirmed'
         ]);
 
+        Kamar::where('id', $booking->kamar_id)
+            ->update(['status' => 'Dipakai']);
+
         return redirect()
             ->route('admin.booking')
             ->with('success', 'Booking berhasil dikonfirmasi');
@@ -35,6 +39,10 @@ class AdminBookingController extends Controller
 
         $booking->update([
             'status' => 'rejected'
+        ]);
+
+        $booking->kamar->update([
+            'status' => 'Tersedia'
         ]);
 
         return redirect()
