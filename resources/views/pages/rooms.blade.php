@@ -281,22 +281,10 @@
 <!-- SEARCH -->
 <div class="search-summary">
 
-    <h2>Search Result</h2>
-
-    <p>
-        Check In:
-        {{ $check_in ?? '-' }}
-    </p>
-
-    <p>
-        Check Out:
-        {{ $check_out ?? '-' }}
-    </p>
-
-    <p>
-        Guests:
-        {{ $guests ?? '1' }}
-    </p>
+    <h2>
+        {{ __('messages.found') }} {{ $rooms->count() }}
+        {{ $rooms->count() == 1 ? __('messages.room_type') : __('messages.room_types') }}
+    </h2>
 
 </div>
 
@@ -481,6 +469,8 @@ const bookingRoomPrice =
 document.getElementById('bookingRoomPrice');
 
 const closeBtn = document.querySelector('.close');
+
+const roomCards = document.querySelectorAll('.room-card');
 
 roomCards.forEach(card => {
 

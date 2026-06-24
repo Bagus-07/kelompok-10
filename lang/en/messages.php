@@ -84,4 +84,7 @@ return [
     'book_now' => 'BOOK NOW',
     'per_night' => '/ NIGHT',
     'login_to_book' => 'Login to Book',
+    'found' => 'Found',
+    'room_type' => 'Room Type',
+    'room_types' => 'Room Types',
 ];

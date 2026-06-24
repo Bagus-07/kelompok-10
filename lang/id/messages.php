@@ -84,4 +84,7 @@ return [
     'book_now' => 'BOOK sekarang',
     'per_night' => '/ MALAM',
     'login_to_book' => 'Login untuk Booking',
+    'found' => 'Ditemukan',
+    'room_type' => 'Tipe Kamar',
+    'room_types' => 'Tipe Kamar',
 ];
