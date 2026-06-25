@@ -354,7 +354,8 @@
      data-name="{{ $room->nama_tipe }}"
      data-price="{{ $room->harga_per_malam }}"
      data-desc="{{ $room->deskripsi }}"
-     data-img="{{ $room->gambar ? asset('storage/'.$room->gambar) : 'https://via.placeholder.com/220x150' }}">
+     data-img="{{ $room->gambar ? asset('storage/'.$room->gambar) : 'https://via.placeholder.com/220x150' }}"
+     data-kamarid="{{ $room->kamars->first()->id ?? '' }}">
 
     <div class="room-image">
         <img src="{{ $room->gambar ? asset('storage/'.$room->gambar) : 'https://via.placeholder.com/220x150' }}">
@@ -414,7 +415,7 @@
 
                 @csrf
 
-                <input type="hidden" name="room_name" id="bookingRoomName">
+                <input type="hidden" name="room_name"   id="bookingRoomName">
                 <input type="hidden" name="total_price" id="bookingRoomPrice">
 
                 <input type="hidden" name="check_in" value="{{ $check_in }}">
