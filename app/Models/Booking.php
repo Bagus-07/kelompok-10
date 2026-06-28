@@ -36,8 +36,8 @@ class Booking extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function kamar()
+    public function kamarDetail()
     {
-        return $this->belongsTo(Kamar::class);
+        return $this->belongsTo(Kamar::class, 'kamar_id');
     }
 }

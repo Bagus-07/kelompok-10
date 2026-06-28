@@ -216,6 +216,11 @@ Route::put('/booking/{id}/reject',
     [AdminBookingController::class, 'reject'])
     ->name('booking.reject');
 
+Route::put(
+    '/booking/{id}/checkout',
+    [AdminBookingController::class, 'checkout'])   
+    ->name('booking.checkout');
+
 // LAPORAN
 Route::get('/laporan',
     [LaporanController::class, 'index']

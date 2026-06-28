@@ -41,8 +41,8 @@ class AdminBookingController extends Controller
             'status' => 'rejected'
         ]);
 
-        if ($booking->kamar) {
-            $booking->kamar->update([
+        if ($booking->kamarDetail) {
+            $booking->kamarDetail->update([
                 'status' => 'Tersedia'
             ]);
         }
@@ -50,5 +50,28 @@ class AdminBookingController extends Controller
         return redirect()
             ->route('admin.booking')
             ->with('success', 'Booking berhasil ditolak');
+    }
+
+    public function checkout($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        $booking->update([
+            'status' => 'completed'
+        ]);
+
+        if ($booking->kamarDetail) {
+
+            $booking->kamarDetail->update([
+                'status' => 'Tersedia'
+            ]);
+        }
+
+        return redirect()
+            ->route('admin.booking')
+            ->with(
+                'success',
+                'Checkout berhasil dilakukan'
+            );
     }
 }
