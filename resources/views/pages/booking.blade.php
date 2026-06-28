@@ -80,11 +80,6 @@
         color: #1e40af;
     }
 
-    .completed{
-        background:#e0e7ff;
-        color:#3730a3;
-    }
-
     .btn {
         padding: 8px 14px;
         border: none;
@@ -110,16 +105,16 @@
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
-    }
+}
 
-    .action-buttons form{
-        margin: 0;
-    }
+.action-buttons form{
+    margin: 0;
+}
 
-    th:last-child,
-    td:last-child{
-        min-width: 280px;
-    }
+th:last-child,
+td:last-child{
+    min-width: 280px;
+}
 
 </style>
 
@@ -127,13 +122,7 @@
 
     <div class="header">
         <h3>Data Booking</h3>
-        <button
-            class="btn-add"
-            onclick="openModal('modalBooking')">
-
-            + Tambah Booking
-
-        </button>
+        <button class="btn-add">+ Tambah Booking</button>
     </div>
 
     <div class="card">
@@ -190,12 +179,6 @@
         Rejected
     </span>
 
-@elseif($booking->status == 'completed')
-
-    <span class="status completed">
-        Completed
-    </span>
-
 @else
 
     <span class="status pending">
@@ -249,29 +232,8 @@
 
         </form>
 
-
-
     @endif
-    
-    @if($booking->status == 'confirmed')
 
-        <form action="{{ route('booking.checkout', $booking->id) }}"
-            method="POST">
-
-            @csrf
-            @method('PUT')
-
-            <button type="submit"
-                    class="btn"
-                    style="
-                        background:#6366f1;
-                        color:white;
-                    ">
-                Checkout
-            </button>
-
-        </form>
-    @endif
 </div>
 
 </td>

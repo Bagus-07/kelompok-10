@@ -220,7 +220,7 @@
 
                 <tr>
                     <td>{{ $booking->nama }}</td>
-                    <td>{{ $booking->kamar->nomor_kamar ?? '-'}}</td>
+                    <td>{{ $booking->room_name }}</td>
                     <td>{{ $booking->check_in }}</td>
                     <td>{{ $booking->check_out }}</td>
                     <td>

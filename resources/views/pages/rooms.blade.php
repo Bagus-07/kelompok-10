@@ -433,19 +433,10 @@
                     </p>
                 </div>
 
-                @if($check_in && $check_out)
-
                 <button type="submit" class="book-btn">
                     {{ __('messages.book_now') }}
                 </button>
 
-                @else
-
-                <p style="color:red;margin-top:15px;">
-                    Silakan pilih tanggal check in dan check out terlebih dahulu.</p>
-
-                @endif
-                
             </form>
 
             @else

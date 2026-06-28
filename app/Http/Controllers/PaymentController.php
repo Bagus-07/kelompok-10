@@ -30,8 +30,8 @@ class PaymentController extends Controller
         ->latest()
         ->first();
 
-    if ($booking->kamarDetail) {
-        $booking->kamarDetail->update([
+    if ($booking) {
+        $booking->update([
             'payment_method' => $request->payment_method,
         ]);
     }
@@ -55,9 +55,9 @@ class PaymentController extends Controller
                 ->latest()
                 ->first();
 
-    if ($booking->kamarDetail) {
+    if ($booking) {
 
-        $booking->kamarDetail->update([
+        $booking->update([
             'payment_proof' => $path,
             'status' => 'waiting_verification'
         ]);
