@@ -41,11 +41,9 @@ class AdminBookingController extends Controller
             'status' => 'rejected'
         ]);
 
-        if ($booking->kamar) {
-            $booking->kamar->update([
-                'status' => 'Tersedia'
-            ]);
-        }
+        $booking->kamar->update([
+            'status' => 'Tersedia'
+        ]);
 
         return redirect()
             ->route('admin.booking')

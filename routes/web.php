@@ -15,7 +15,6 @@ use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminBookingController;
-use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +27,6 @@ Route::get('/', [HomeController::class, 'index']);
 
 use App\Http\Controllers\ReviewController;
 Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
-Route::get('/review/{review}/edit', [ReviewController::class, 'edit']);
-Route::put('/review/{review}', [ReviewController::class, 'update']);
 
 Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
     ->middleware('auth');
@@ -78,11 +75,6 @@ Route::post('/booking/store',
     ->name('booking.store')
     ->middleware('auth');
 
-use App\Http\Controllers\BookingController;
-
-Route::post('/booking/{booking}/cancel', [BookingController::class, 'cancel'])
-    ->middleware('auth')
-    ->name('booking.cancel');
 /*
 |--------------------------------------------------------------------------
 | AUTH USER
@@ -224,9 +216,6 @@ Route::put('/booking/{id}/reject',
     ->name('booking.reject');
 
 // LAPORAN
-Route::get('/laporan',
-    [LaporanController::class, 'index']
-    )->name('laporan');
-
+Route::view('/laporan', 'pages.laporan');
 });
 

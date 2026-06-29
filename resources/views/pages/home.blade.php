@@ -146,16 +146,6 @@
         {{ __('messages.leave_review') }}
     </h3>
 
-    @if ($errors->any())
-        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <form action="/review" method="POST">
         @csrf
 
@@ -267,63 +257,35 @@
     </p>
 
     <!-- DATE -->
-<p class="text-gray-400 text-sm mt-4">
-    {{ $review->created_at->diffForHumans() }}
-</p>
+    <p class="text-gray-400 text-sm mt-4">
+        {{ $review->created_at->diffForHumans() }}
+    </p>
 
-<!-- ACTIONS -->
-<div class="flex justify-between items-center mt-4">
-
-    <!-- Like & Dislike -->
-    <div class="flex gap-5">
-
-        <button class="text-gray-500 hover:text-blue-600">
-            <i class="far fa-thumbs-up"></i>
-            {{ $review->likes ?? 0 }}
+        @if(auth()->check() && auth()->id() == $review->user_id)
+    
+    <form action="/review/{{ $review->id }}" method="POST"
+          onsubmit="return confirm('Delete this review?')">
+    
+        @csrf
+        @method('DELETE')
+    
+        <button
+            type="submit"
+            style="
+                margin-top:10px;
+                background:#ef4444;
+                color:white;
+                border:none;
+                padding:8px 14px;
+                border-radius:8px;
+                cursor:pointer;
+            ">
+            Delete Review
         </button>
-
-        <button class="text-gray-500 hover:text-red-600">
-            <i class="far fa-thumbs-down"></i>
-            {{ $review->dislikes ?? 0 }}
-        </button>
-
-    </div>
-
-    <!-- Edit & Delete -->
-    @if(auth()->check() && auth()->id() == $review->user_id)
-
-    <div class="flex gap-4">
-
-        <a href="/review/{{ $review->id }}/edit"
-           class="text-blue-500 hover:text-blue-700"
-           title="Edit Review">
-
-            <i class="fas fa-pen"></i>
-
-        </a>
-
-        <form action="/review/{{ $review->id }}"
-              method="POST"
-              onsubmit="return confirm('Delete this review?')">
-
-            @csrf
-            @method('DELETE')
-
-            <button type="submit"
-                    class="text-red-500 hover:text-red-700"
-                    title="Delete Review">
-
-                <i class="fas fa-trash"></i>
-
-            </button>
-
-        </form>
-
-    </div>
-
+    
+    </form>
+    
     @endif
-
-</div>
 
 </div>
 
