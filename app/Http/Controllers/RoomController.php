@@ -38,43 +38,48 @@ class RoomController extends Controller
     public function book(Request $request)
     {
         $request->validate([
-            'check_in' => 'required|date',
+            'check_in' => 'required|date|after_or_equal:today',
             'check_out' => 'required|date|after:check_in',
         ]);
 
-        // CEK APAKAH KAMAR SUDAH DIBOOKING
-        $existingBooking = Booking::where('room_name', $request->room_name)
-            ->whereIn('status', [
-                'pending',
-                'waiting_verification',
-                'confirmed'
-            ])
-            ->where(function ($q) use ($request) {
 
-                $q->where('check_in', '<', $request->check_out)
-                ->where('check_out', '>', $request->check_in);
-
-            })
-
-            ->exists();
-
-            if ($existingBooking) {
-                return back()->withErrors([
-                    'room_name' => 'Kamar sudah dibooking pada tanggal tersebut.'
-                ]);
-        }
 
         // Booking akan mengefek kamar
-        $kamar = Kamar::whereHas('tipeKamar', function ($q) use ($request) {
+        $kamar = Kamar::whereHas(
+                'tipeKamar',
+                function ($q) use ($request) {
 
-            $q->where(
-                'nama_tipe',
-                $request->room_name
-            );
+                    $q->where(
+                        'nama_tipe',
+                        $request->room_name
+                    );
+                }
+            )
+            ->whereDoesntHave(
+                'bookings',
+                function ($q) use ($request) {
 
-        })
-        ->where('status', 'Tersedia')
-        ->first();
+                    $q->whereIn(
+                        'status',
+                        [
+                            'pending',
+                            'waiting_verification',
+                            'confirmed'
+                        ]
+                    )
+                    ->where(
+                        'check_in',
+                        '<',
+                        $request->check_out
+                    )
+                    ->where(
+                        'check_out',
+                        '>',
+                        $request->check_in
+                    );
+                }
+            )
+            ->first();
 
         if (!$kamar) {
 
