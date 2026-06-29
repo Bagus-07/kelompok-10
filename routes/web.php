@@ -15,7 +15,6 @@ use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminBookingController;
-use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -217,9 +216,6 @@ Route::put('/booking/{id}/reject',
     ->name('booking.reject');
 
 // LAPORAN
-Route::get('/laporan',
-    [LaporanController::class, 'index']
-    )->name('laporan');
-
+Route::view('/laporan', 'pages.laporan');
 });
 

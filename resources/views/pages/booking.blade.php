@@ -148,10 +148,7 @@ td:last-child{
 
     <td>{{ $booking->nama }}</td>
 
-    <td>{{ $booking->kamar->nomor_kamar ?? '-' }}
-        -
-        {{ $booking->room_name }}
-    </td>
+    <td>{{ $booking->room_name }}</td>
 
     <td>
         {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}
