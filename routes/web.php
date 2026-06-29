@@ -135,6 +135,9 @@ Route::post('/profile/update', [ProfileController::class, 'update']);
 
 Route::delete('/profile/delete', [ProfileController::class, 'destroy'])
     ->middleware('auth');
+
+Route::post('/profile/password', [ProfileController::class, 'updatePassword'])
+    ->middleware('auth');
 /*
 |--------------------------------------------------------------------------
 | ROOMS

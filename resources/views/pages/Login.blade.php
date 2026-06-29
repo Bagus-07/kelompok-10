@@ -28,6 +28,15 @@
     .card {
         border-radius: 15px;
     }
+
+    .login {
+      padding: 8px 180px;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #F4A261, #E9C46A);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+    }
   </style>
 </head>
 
@@ -70,7 +79,7 @@
       </div>
 
       <!-- LOGIN BUTTON -->
-      <button type="submit" class="btn btn-warning btn-block mb-3">
+      <button type="submit" class="login">
         Log In
       </button>
 

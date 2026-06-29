@@ -27,12 +27,22 @@
 
     <div class="search-field">
         <label>{{ __('messages.check_in') }}</label>
-        <input type="date" name="check_in" required>
+        <input
+            type="date"
+            name="check_in"
+            min="{{ date('Y-m-d') }}"
+            required
+        >
     </div>
 
     <div class="search-field">
         <label>{{ __('messages.check_out') }}</label>
-        <input type="date" name="check_out" required>
+        <input
+            type="date"
+            name="check_out"
+            min="{{ date('Y-m-d') }}"
+            required
+        >
     </div>
 
     <div class="search-field">
@@ -46,12 +56,21 @@
     </div>
 
     <div class="search-field">
-        <label>{{ __('messages.room_type') }}</label>
+        <label>{{ __('messages.search_rooms') }}</label>
         <select name="room_type">
-            <option value="">{{ __('messages.all_rooms') }}</option>
-            <option>{{ __('messages.standard') }}</option>
-            <option>{{ __('messages.superior') }}</option>
-            <option>{{ __('messages.deluxe') }}</option>
+            
+            <option value="">
+                {{ __('messages.all_rooms') }}
+            </option>
+        
+            @foreach($roomTypes as $roomType)
+        
+                <option value="{{ $roomType->nama_tipe }}">
+                    {{ $roomType->nama_tipe }}
+                </option>
+            
+            @endforeach
+            
         </select>
     </div>
 
@@ -137,9 +156,30 @@
             required
         ></textarea>
 
+        <select
+            name="tipe_kamar_id"
+            class="w-full border rounded-lg p-3 mb-4"
+            required
+        >
+
+            <option value="">
+                Select Room You Stayed In
+            </option>
+        
+            @foreach($roomTypes as $room)
+        
+                <option value="{{ $room->id }}">
+                    {{ $room->nama_tipe }}
+                </option>
+            
+            @endforeach
+            
+        </select>
+
         <select 
             name="rating"
             class="w-full border rounded-lg p-3 mb-4"
+            required
         >
             <option value="5">⭐⭐⭐⭐⭐ (5)</option>
             <option value="4">⭐⭐⭐⭐ (4)</option>
@@ -190,6 +230,10 @@
             <h4 class="font-semibold text-lg text-gray-800">
                 {{ $review->name }}
             </h4>
+
+            <p class="text-blue-500 text-sm">
+                {{ $review->tipeKamar->nama_tipe ?? 'Unknown Room' }}
+            </p>
 
             <div class="flex items-center gap-1 text-yellow-400 text-sm">
 

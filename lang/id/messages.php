@@ -65,4 +65,26 @@ return [
     'profile' => 'Profil',
     'settings' => 'Pengaturan',
 
+    // PROFILE VIEW
+    'name' => 'Nama',
+    'email' => 'Email',
+    'phone' => 'Nomor Telepon',
+    'edit_profile' => 'Edit Profile',
+    'change_password' => 'Ganti Password',
+    'current_password' => 'Password saat ini',
+    'new_password' => 'Password baru',
+    'confirm_password' => 'Konfirmasi password',
+    'booking_history' => 'Booking History',
+    'no_bookings' => 'Belum ada booking',
+    'acc_action' => 'Aksi Akun',
+    'delete_account' => 'Hapus akun dan ulasan',
+    'delete_account_confirm' => 'Hapus Akun',
+
+    // Room
+    'book_now' => 'BOOK sekarang',
+    'per_night' => '/ MALAM',
+    'login_to_book' => 'Login untuk Booking',
+    'found' => 'Ditemukan',
+    'room_type' => 'Tipe Kamar',
+    'room_types' => 'Tipe Kamar',
 ];

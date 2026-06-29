@@ -395,6 +395,22 @@ body {
     color:#cbd5e1;
 }
 
+.dark-mode .nav-menu a{
+    color:white;
+}
+
+.dark-mode .nav-menu a:hover{
+    color:#fbbf24;
+}
+
+.dark-mode .box{
+    background:#1e293b;
+}
+
+.dark-mode .box p{
+    color:white;
+}
+
 /*new*/
 
 .hero-content{
@@ -1007,6 +1023,115 @@ body {
         cursor:pointer;
     }
 
+    /* MOBILE MENU DARK MODE */
+
+.dark-mode .mobile-menu{
+    background:#1e293b;
+}
+
+.dark-mode .mobile-menu a{
+    color:white;
+    border-bottom:1px solid #475569;
+}
+
+.dark-mode .mobile-logout{
+    color:white;
+    background:#1e293b;
+}
+
+/* SETTINGS MODAL DARK MODE */
+
+.dark-mode .settings-content{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode .settings-content h2,
+.dark-mode .settings-content h3{
+    color:white;
+}
+
+.dark-mode .settings-content select{
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+.dark-mode .settings-content option{
+    background:#334155;
+    color:white;
+}
+
+.dark-mode .settings-content hr{
+    border-color:#475569;
+}
+
+/* CONTACT MODAL DARK MODE */
+
+.dark-mode .contact-modal-content{
+    background:#1e293b;
+    color:white;
+}
+
+.dark-mode .contact-modal-content h2{
+    color:white;
+}
+
+.dark-mode .contact-modal-content p{
+    color:#e2e8f0;
+}
+
+.dark-mode .close-modal{
+    color:white;
+}
+
+/* MOBILE NAVBAR */
+
+.dark-mode .navbar{
+    background:rgba(15,23,42,0.9);
+}
+
+.dark-mode .navbar a{
+    color:white;
+}
+
+.dark-mode .menu-toggle{
+    color:white;
+    background:none;
+}
+
+/* FOOTER */
+
+.dark-mode .footer{
+    background:#0f172a;
+    color:white;
+    border-top:1px solid #334155;
+}
+
+/* FACILITIES DARK MODE */
+
+.dark-mode #facilities{
+    background:#0f172a;
+}
+
+.dark-mode #facilities h2{
+    color:white;
+}
+
+.dark-mode .box{
+    background:#1e293b;
+}
+
+.dark-mode .box p{
+    color:white;
+}
+
+.dark-mode #facilities h2,
+.dark-mode #about h2,
+.dark-mode #reviews h3{
+    color:white;
+}
+
 }
 /*
 *{
@@ -1102,6 +1227,11 @@ body {
 
     @auth
         <a href="/profile">Profile</a>
+
+        <a href="javascript:void(0)"
+           onclick="toggleMenu(); openSettingsModal();">
+            Settings
+        </a>
 
         <form action="/logout" method="POST">
             @csrf

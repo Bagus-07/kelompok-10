@@ -64,6 +64,16 @@ body::before {
 .btn-gold:hover {
     background: #e0a800;
 }
+
+/*register button new*/
+.register-btn{
+    padding: 8px 180px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #F4A261, #E9C46A);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
 </style>
 
 </head>
@@ -73,6 +83,16 @@ body::before {
 
     <h3><b>Create Account</b></h3>
     <p class="text-muted">Join us and start booking</p>
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul style="margin-bottom:0;">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <form method="POST" action="/register">
     @csrf
@@ -107,15 +127,6 @@ body::before {
         </div>
     </div>
 
-    <!-- ADDRESS -->
-    <div class="input-group mb-3">
-        <textarea name="address"
-                  class="form-control"
-                  rows="3"
-                  placeholder="Address"
-                  required></textarea>
-    </div>
-
     <!-- PASSWORD -->
     <div class="input-group mb-3">
         <input type="password" name="password" class="form-control" placeholder="Password" required>
@@ -137,7 +148,7 @@ body::before {
     </div>
 
     <!-- BUTTON -->
-    <button type="submit" class="btn btn-gold btn-block mb-3">
+    <button type="submit" class="register-btn">
         Register
     </button>
 

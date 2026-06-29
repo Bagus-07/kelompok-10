@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\TipeKamar;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $reviews = Review::with('user')
-            ->latest()
-            ->get();
+        $reviews = Review::latest()->get();
 
-        return view('pages.home', compact('reviews'));
+        // Show ALL room types
+        $roomTypes = TipeKamar::all();
+
+        return view('pages.home', compact(
+            'reviews',
+            'roomTypes'
+        ));
     }
 }

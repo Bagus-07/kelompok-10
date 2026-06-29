@@ -28,27 +28,25 @@ class LoginController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+   public function register(Request $request)
     {
         $request->validate([
             'name'      => 'required',
             'email'     => 'required|email|unique:users',
             'phone'     => 'required',
-            'address'   => 'required',
             'password'  => 'required|min:6',
         ]);
-
+    
         $user = User::create([
             'name'      => $request->name,
             'email'     => $request->email,
             'password'  => Hash::make($request->password),
             'role'      => 'user',
             'phone'     => $request->phone,
-            'address'   => $request->address,
         ]);
-
+    
         Auth::login($user);
-
+    
         return redirect('/home');
     }
 }
