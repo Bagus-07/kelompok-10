@@ -27,6 +27,8 @@ Route::get('/', [HomeController::class, 'index']);
 
 use App\Http\Controllers\ReviewController;
 Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
+Route::get('/review/{review}/edit', [ReviewController::class, 'edit']);
+Route::put('/review/{review}', [ReviewController::class, 'update']);
 
 Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
     ->middleware('auth');
@@ -75,6 +77,11 @@ Route::post('/booking/store',
     ->name('booking.store')
     ->middleware('auth');
 
+use App\Http\Controllers\BookingController;
+
+Route::post('/booking/{booking}/cancel', [BookingController::class, 'cancel'])
+    ->middleware('auth')
+    ->name('booking.cancel');
 /*
 |--------------------------------------------------------------------------
 | AUTH USER

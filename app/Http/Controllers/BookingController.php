@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
-    public function store(Request $request)
+    public function cancel(Booking $booking)
     {
-        Booking::create([
-            'user_id' => Auth::id(),
-            'room_name' => $request->room_name,
-            'check_in' => now(),
-            'check_out' => now()->addDay(),
-            'total_price' => $request->total_price,
-            'status' => 'pending',
+        // Make sure the booking belongs to the logged-in user
+        if ($booking->user_id != Auth::id()) {
+            abort(403);
+        }
+
+        // Only pending bookings can be cancelled
+        if ($booking->status != 'pending') {
+            return back()->with('error', 'Booking cannot be cancelled.');
+        }
+        if (!in_array($booking->status, ['pending', 'confirmed'])) {
+            return back()->with('error', 'Booking cannot be cancelled.');
+        }
+
+        $booking->update([
+            'status' => 'Cancelled'
         ]);
 
-        return redirect()->route('payment');
+        return back()->with('success', 'Booking cancelled successfully.');
     }
 }

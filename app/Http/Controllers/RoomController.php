@@ -84,21 +84,23 @@ class RoomController extends Controller
         }
         // SIMPAN BOOKING
         Booking::create([
-
             'user_id' => Auth::id(),
             'nama' => Auth::user()->name,
-
             'kamar' => $kamar->nomor_kamar,
-            'kamar_id' => $kamar->id,
             'tanggal' => now()->toDateString(),
-
             'room_name' => $request->room_name,
             'check_in' => $request->check_in,
             'check_out' => $request->check_out,
-
             'total_price' => $request->total_price,
             'status' => 'pending'
         ]);
+        
+        $kamar->update([
+            'status' => 'Terisi'
+        ]);
+        
+        dd('Reached here');
+
 
         return redirect()->route('payment');
     }

@@ -325,30 +325,53 @@
         <div class="booking-history">
 
             <h3>{{ __('messages.booking_history') }}</h3>
-
+        
             @forelse($bookings as $booking)
-
-                <div class="bg-gray-100 p-4 rounded-lg mb-3">
-
-                    <p class="font-semibold">
-                        {{ $booking->room_name }}
-                    </p>
-
-                    <p class="text-sm text-gray-500">
-                        Check-in: {{ $booking->check_in }}
-                    </p>
-
-                    <p class="text-sm text-gray-500">
-                        Check-out: {{ $booking->check_out }}
-                    </p>
-
-                    <p class="text-sm mt-2 
-                        {{ $booking->status == 'Completed' ? 'text-green-600' : 'text-yellow-600' }}">
-                        {{ $booking->status }}
-                    </p>
-
-                </div>
-
+        
+            <div class="bg-gray-100 p-4 rounded-lg mb-3">
+                            
+                <p class="font-semibold">
+                    {{ $booking->room_name }}
+                </p>
+            
+                <p class="text-sm text-gray-500">
+                    Check-in: {{ $booking->check_in }}
+                </p>
+            
+                <p class="text-sm text-gray-500">
+                    Check-out: {{ $booking->check_out }}
+                </p>
+            
+                <p class="mt-2
+                    @if($booking->status == 'Completed')
+                        text-green-600
+                    @elseif($booking->status == 'Cancelled')
+                        text-red-600
+                    @else
+                        text-yellow-600
+                    @endif">
+                    {{ $booking->status }}
+                </p>
+            
+                @if(in_array($booking->status, ['pending', 'confirmed']))
+                    <form action="{{ route('booking.cancel', $booking) }}"
+                          method="POST"
+                          class="mt-3"
+                          onsubmit="return confirm('Cancel this booking?')">
+            
+                        @csrf
+            
+                        <button
+                            type="submit"
+                            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                            Cancel Booking
+                        </button>
+                    
+                    </form>
+                @endif
+                
+            </div>
+        
             @empty
 
                 <p>{{ __('messages.no_bookings') }}</p>
