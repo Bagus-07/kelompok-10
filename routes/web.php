@@ -213,6 +213,9 @@ Route::put('/booking/{id}/reject',
     ->name('booking.reject');
 
 // LAPORAN
-Route::view('/laporan', 'pages.laporan');
-});
+Route::get('/laporan', [DashboardController::class, 'laporan'])
+        ->name('laporan');
 
+    Route::get('/laporan/export-pdf', [DashboardController::class, 'exportPdf'])
+        ->name('laporan.exportPdf');
+});

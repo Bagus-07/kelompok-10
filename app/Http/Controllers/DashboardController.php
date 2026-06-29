@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Booking;
 use App\Models\Room;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    // ==========================
+    // DASHBOARD
+    // ==========================
     public function tampilkan()
     {
         $users = User::count();
@@ -25,22 +30,65 @@ class DashboardController extends Controller
         ));
     }
 
+    // ==========================
     // LAPORAN
+    // ==========================
     public function laporan()
     {
         $totalBooking = Booking::count();
 
-        $totalPendapatan = Booking::sum('harga');
+        $totalPendapatan = Booking::where('status', 'confirmed')
+            ->sum('total_price');
 
-        $kamarTerisi = Room::where('status', 'Penuh')->count();
+        $kamarTerisi = Booking::where('status', 'confirmed')
+            ->count();
 
         $bookings = Booking::latest()->get();
+
+        // ==========================
+        // DATA GRAFIK PENDAPATAN
+        // ==========================
+        $grafik = Booking::select(
+                DB::raw('MONTH(check_in) as bulan'),
+                DB::raw('SUM(total_price) as total')
+            )
+            ->where('status', 'confirmed')
+            ->groupBy(DB::raw('MONTH(check_in)'))
+            ->orderBy('bulan')
+            ->get();
+
+        $labels = [];
+        $data = [];
+
+        foreach ($grafik as $item) {
+            $labels[] = date('M', mktime(0, 0, 0, $item->bulan, 1));
+            $data[] = $item->total;
+        }
 
         return view('pages.laporan', compact(
             'totalBooking',
             'totalPendapatan',
             'kamarTerisi',
-            'bookings'
+            'bookings',
+            'labels',
+            'data'
         ));
+    }
+
+    // ==========================
+    // EXPORT PDF
+    // ==========================
+    public function exportPdf()
+    {
+        $bookings = Booking::latest()->get();
+
+        $tanggalCetak = now();
+
+        $pdf = Pdf::loadView(
+            'pages.laporan_pdf',
+            compact('bookings', 'tanggalCetak')
+        );
+
+        return $pdf->download('laporan-booking.pdf');
     }
 }
