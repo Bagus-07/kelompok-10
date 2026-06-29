@@ -55,6 +55,25 @@ class ReviewController extends Controller
         return redirect('/home');
     }
 
+    public function update(Request $request, Review $review)
+    {
+        if ($review->user_id != auth()->id()) {
+            abort(403);
+        }
+    
+        $request->validate([
+            'review' => 'required',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+    
+        $review->update([
+            'review' => $request->review,
+            'rating' => $request->rating,
+        ]);
+    
+        return back()->with('success', 'Review updated successfully.');
+    }
+
     public function destroy(Review $review)
     {
         if ($review->user_id != auth()->id()) {

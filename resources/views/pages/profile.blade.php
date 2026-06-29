@@ -249,7 +249,135 @@
     color:#facc15 !important;
 }
 
+/* ========================= */
+/* MOBILE RESPONSIVE PROFILE */
+/* ========================= */
 
+@media (max-width:768px){
+
+    .profile-wrapper{
+        padding:25px 15px;
+    }
+
+    .profile-card{
+        padding:25px 18px;
+        border-radius:20px;
+    }
+
+    .profile-left{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .profile-image{
+        width:120px;
+        height:120px;
+        border-radius:50%;
+        object-fit:cover;
+        display:block;
+        margin:0 auto;
+    }
+
+    .profile-title{
+        font-size:28px;
+        margin-bottom:30px;
+    }
+
+    /* Stack profile image & info */
+    .profile-top{
+        flex-direction:column;
+        align-items:center;
+        gap:25px;
+    }
+
+    .profile-left{
+        width:100%;
+        text-align:center;
+    }
+
+    .profile-image{
+        width:120px;
+        height:120px;
+    }
+
+    .profile-right{
+        width:100%;
+    }
+
+    .info-grid-top{
+        gap:20px;
+        text-align:center;
+    }
+
+    .info-grid-bottom{
+        grid-template-columns:1fr;
+        gap:20px;
+        text-align:center;
+    }
+
+    .info-box h4{
+        font-size:15px;
+    }
+
+    .info-box p{
+        font-size:18px;
+        word-break:break-word;
+    }
+
+    /* Buttons */
+    .edit-btn,
+.password-btn{
+        width:220px;
+        max-width:100%;
+    }
+
+    /* Booking */
+    .booking-history{
+        margin-top:35px;
+    }
+
+    .booking-history h3{
+        font-size:22px;
+        text-align:center;
+    }
+
+    .booking-history .bg-gray-100{
+        padding:16px;
+    }
+
+    .booking-history p{
+        font-size:15px;
+    }
+
+    /* Edit Modal */
+    #editModal > div,
+    #passwordModal > div{
+        width:100%;
+        max-width:95%;
+        margin:20px auto;
+        padding:20px;
+        border-radius:18px;
+    }
+
+    #editModal input,
+    #passwordModal input{
+        font-size:16px;
+    }
+
+    #editModal .flex,
+    #passwordModal .flex{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    #editModal button,
+    #passwordModal button{
+        width:100%;
+    }
+
+}
 </style>
 
 

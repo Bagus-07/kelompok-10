@@ -3,6 +3,94 @@
 @section('title', 'Home')
 
 @section('content')
+<style>
+    .review-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:15px;
+}
+
+.review-date{
+    color:#9ca3af;
+    font-size:14px;
+}
+
+.review-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.review-actions form{
+    margin:0;
+}
+
+.icon-btn{
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:18px;
+    transition:0.25s;
+    padding:6px;
+}
+
+.edit-btn{
+    color:#3b82f6;
+}
+
+.edit-btn:hover{
+    color:#2563eb;
+    transform:scale(1.15);
+}
+
+.delete-btn{
+    color:#ef4444;
+}
+
+.delete-btn:hover{
+    color:#dc2626;
+    transform:scale(1.15);
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-box{
+    width:500px;
+    max-width:90%;
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    position:relative;
+}
+
+#closeModal{
+    position:absolute;
+    right:20px;
+    top:15px;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.save-btn{
+    width:100%;
+    background:#3b82f6;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+</style>
+
 
 <!-- HERO -->
 <div class="hero" id="home">
@@ -256,34 +344,46 @@
         {{ $review->review }}
     </p>
 
-    <!-- DATE -->
-    <p class="text-gray-400 text-sm mt-4">
-        {{ $review->created_at->diffForHumans() }}
-    </p>
+    <div class="review-footer">
+
+        <!-- DATE -->
+        <p class="review-date">
+            {{ $review->created_at->diffForHumans() }}
+        </p>
 
         @if(auth()->check() && auth()->id() == $review->user_id)
-    
-    <form action="/review/{{ $review->id }}" method="POST"
-          onsubmit="return confirm('Delete this review?')">
-    
-        @csrf
-        @method('DELETE')
-    
-        <button
-            type="submit"
-            style="
-                margin-top:10px;
-                background:#ef4444;
-                color:white;
-                border:none;
-                padding:8px 14px;
-                border-radius:8px;
-                cursor:pointer;
-            ">
-            Delete Review
-        </button>
-    
-    </form>
+
+            <div class="review-actions">
+
+                <!-- Edit -->
+                <button
+                    class="icon-btn edit-btn editReviewBtn"
+                    data-id="{{ $review->id }}"
+                    data-review="{{ $review->review }}"
+                    data-rating="{{ $review->rating }}"
+                >
+                    <i class="fas fa-pen-to-square"></i>
+                </button>
+
+                <!-- Delete -->
+                <form action="/review/{{ $review->id }}"
+                      method="POST"
+                      onsubmit="return confirm('Delete this review?')">
+
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="icon-btn delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </form>
+
+            </div>
+
+
+
+    </div>
     
     @endif
 
@@ -299,7 +399,47 @@
 
 </div>
 
+<div id="editModal" class="modal">
 
+    <div class="modal-box">
+
+        <span id="closeModal">&times;</span>
+
+        <h3>Edit Review</h3>
+
+        <form id="editForm" method="POST">
+
+            @csrf
+            @method('PUT')
+
+            <textarea
+                id="editReview"
+                name="review"
+                class="w-full border rounded-lg p-3 mb-3"
+                required
+            ></textarea>
+
+            <select
+                id="editRating"
+                name="rating"
+                class="w-full border rounded-lg p-3 mb-4"
+            >
+                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                <option value="4">⭐⭐⭐⭐ (4)</option>
+                <option value="3">⭐⭐⭐ (3)</option>
+                <option value="2">⭐⭐ (2)</option>
+                <option value="1">⭐ (1)</option>
+            </select>
+
+            <button class="save-btn">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 <script>
 let slides = document.querySelectorAll(".slide");
 let index = 0;
@@ -310,5 +450,42 @@ function showSlide() {
     index = (index + 1) % slides.length;
 }
 setInterval(showSlide, 3000);
+
+const modal = document.getElementById("editModal");
+const closeModal = document.getElementById("closeModal");
+const editForm = document.getElementById("editForm");
+
+document.querySelectorAll(".editReviewBtn").forEach(btn => {
+
+    btn.onclick = function(){
+
+        modal.style.display = "flex";
+
+        document.getElementById("editReview").value =
+            this.dataset.review;
+
+        document.getElementById("editRating").value =
+            this.dataset.rating;
+
+        editForm.action =
+            "/review/" + this.dataset.id;
+
+    }
+
+});
+
+closeModal.onclick = function(){
+    modal.style.display = "none";
+}
+
+window.onclick = function(e){
+
+    if(e.target == modal){
+
+        modal.style.display = "none";
+
+    }
+
+}
 </script>
 @endsection

@@ -27,6 +27,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 use App\Http\Controllers\ReviewController;
 Route::post('/review', [ReviewController::class, 'store'])->middleware('auth');
+Route::put('/review/{review}', [ReviewController::class, 'update']);
 
 Route::delete('/review/{review}', [ReviewController::class, 'destroy'])
     ->middleware('auth');

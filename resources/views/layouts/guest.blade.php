@@ -4,6 +4,7 @@
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <style>
@@ -604,6 +605,35 @@ body {
 
     justify-content:center;
     align-items:center;
+}
+
+.contact-buttons{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:35px;
+}
+
+.contact-buttons a{
+    font-size:40px;     /* Increase this to 45px or 50px if needed */
+    color:#000;
+    transition:0.3s;
+}
+
+.contact-buttons a:hover{
+    transform:scale(1.2);
+}
+
+.whatsapp{
+    color:#25D366;
+}
+
+.instagram{
+    color:#E1306C;
+}
+
+.facebook{
+    color:#1877F2;
 }
 
 .contact-modal-content{
@@ -1269,15 +1299,18 @@ body {
         <p>📍 Batam, Indonesia</p>
 
         <div class="contact-buttons">
-
-            <a href="https://wa.me/6281234567890"
-               target="_blank"
-               class="wa-btn">
-                WhatsApp
+            <a href="https://wa.me/6281234567890" target="_blank" class="whatsapp">
+                <i class="fab fa-whatsapp"></i>
             </a>
-
+        
+            <a href="https://instagram.com/yourhotel" target="_blank" class="instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        
+            <a href="https://facebook.com/yourhotel" target="_blank" class="facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
         </div>
-
     </div>
 
 </div>

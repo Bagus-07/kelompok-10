@@ -276,6 +276,118 @@
     background:#334155;
     color:white;
 }
+
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px){
+
+    .search-summary{
+        width:95%;
+        padding:15px;
+    }
+
+    .search-summary h2{
+        font-size:22px;
+        text-align:center;
+    }
+
+    .hero-search{
+        width:95%;
+        grid-template-columns:1fr;
+        padding:18px;
+        gap:12px;
+    }
+
+    .hero-search button{
+        width:100%;
+        padding:15px;
+        font-size:16px;
+    }
+
+    .search-field label{
+        font-size:14px;
+    }
+
+    .search-field input,
+    .search-field select{
+        width:100%;
+        box-sizing:border-box;
+        font-size:15px;
+    }
+
+    .rooms-container{
+        width:95%;
+        gap:20px;
+    }
+
+    .room-card{
+        flex-direction:column;
+        align-items:stretch;
+        padding:16px;
+    }
+
+    .room-image{
+        width:100%;
+    }
+
+    .room-image img{
+        width:100%;
+        height:220px;
+        border-radius:15px;
+    }
+
+    .room-details{
+        margin:18px 0 0;
+    }
+
+    .room-details h2{
+        font-size:22px;
+        margin-bottom:8px;
+    }
+
+    .room-details p{
+        font-size:14px;
+    }
+
+    .stars{
+        font-size:18px;
+    }
+
+    .room-price{
+        margin-top:18px;
+        text-align:left;
+    }
+
+    .room-price h3{
+        font-size:20px;
+        margin-bottom:15px;
+    }
+
+    .room-price button{
+        width:100%;
+        padding:14px;
+        font-size:16px;
+    }
+
+    .modal-content{
+        width:95%;
+        margin:20px;
+    }
+
+    .modal-content img{
+        height:200px;
+    }
+
+    .modal-body{
+        padding:20px;
+    }
+
+    .book-btn{
+        width:100%;
+        margin-top:15px;
+    }
+
+}
 </style>
 
 <!-- SEARCH -->
@@ -345,6 +457,15 @@
 
 </form>
 
+@if ($errors->any())
+    <div style="background:#fee2e2;color:#991b1b;padding:15px;margin:20px;border-radius:10px;">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <!-- ROOM LIST -->
 <div class="rooms-container">
 
