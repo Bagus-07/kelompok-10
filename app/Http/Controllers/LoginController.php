@@ -30,11 +30,13 @@ class LoginController extends Controller
 
    public function register(Request $request)
     {
-        $request->validate([
+       $request->validate([
             'name'      => 'required',
             'email'     => 'required|email|unique:users',
             'phone'     => 'required',
-            'password'  => 'required|min:6',
+            'password'  => 'required|min:6|confirmed',
+        ], [
+            'password.confirmed' => 'The password confirmation does not match.',
         ]);
     
         $user = User::create([

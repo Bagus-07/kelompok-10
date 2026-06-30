@@ -26,6 +26,19 @@
     margin:0;
 }
 
+.review-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    max-width:1200px;
+    margin:0 auto;
+}
+
+#reviews{
+    padding-bottom:80px;
+}
+
 .icon-btn{
     border:none;
     background:none;
@@ -288,11 +301,11 @@
         {{ __('messages.reviews') }}
     </h3>
 
-    <div class="grid">
+    <div class="review-grid">
 
 @forelse($reviews as $review)
 
-<div class="bg-white rounded-2xl shadow-md p-6 w-[380px] text-left hover:shadow-xl transition duration-300">
+<div class="bg-white rounded-2xl shadow-md p-6 w-full max-w-md">
 
     <!-- TOP -->
     <div class="flex items-center gap-4 mb-4">
@@ -339,7 +352,7 @@
 
     </div>
 
-    <!-- REVIEW -->
+        <!-- REVIEW -->
     <p class="text-gray-600 leading-relaxed">
         {{ $review->review }}
     </p>
@@ -381,11 +394,9 @@
 
             </div>
 
-
+        @endif
 
     </div>
-    
-    @endif
 
 </div>
 

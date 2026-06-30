@@ -82,6 +82,16 @@ class RoomController extends Controller
                 'room_name' => 'Tidak ada kamar tersedia.'
             ]);
         }
+
+                // Calculate the number of nights
+        $nights = \Carbon\Carbon::parse($request->check_in)
+            ->diffInDays(\Carbon\Carbon::parse($request->check_out));
+
+        // Get the room price from the room type
+        $pricePerNight = $kamar->tipeKamar->harga_per_malam;
+
+        // Calculate total price
+        $totalPrice = $pricePerNight * $nights;
         // SIMPAN BOOKING
         Booking::create([
 
@@ -96,7 +106,7 @@ class RoomController extends Controller
             'check_in' => $request->check_in,
             'check_out' => $request->check_out,
 
-            'total_price' => $request->total_price,
+            'total_price' => $totalPrice,
             'status' => 'pending'
         ]);
 

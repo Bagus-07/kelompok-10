@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Kamar;
 
 class ProfileController extends Controller
 {
@@ -82,5 +83,33 @@ public function updatePassword(Request $request)
     $user->save();
 
     return back()->with('success', 'Password updated successfully!');
+}
+
+public function cancelBooking(Booking $booking)
+{
+    // Make sure the booking belongs to the logged-in user
+    if ($booking->user_id != Auth::id()) {
+        abort(403);
+    }
+
+    // Only allow cancellation before confirmation
+    if (!in_array($booking->status, ['pending', 'waiting_verification'])) {
+        return back()->with('error', 'This booking cannot be cancelled.');
+    }
+
+    // Update booking status
+    $booking->update([
+        'status' => 'cancelled',
+    ]);
+
+    // Make the room available again
+    if ($booking->kamar_id) {
+        Kamar::where('id', $booking->kamar_id)
+            ->update([
+                'status' => 'Tersedia',
+            ]);
+    }
+
+    return back()->with('success', 'Booking cancelled successfully.');
 }
 }

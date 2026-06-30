@@ -87,4 +87,45 @@ return [
     'found' => 'Ditemukan',
     'room_type' => 'Tipe Kamar',
     'room_types' => 'Tipe Kamar',
+
+    // PAYMENT
+    'payment' => 'Pembayaran',
+    'booking_summary' => 'Ringkasan Pemesanan',
+    'guest_name' => 'Nama Tamu',
+    'phone_number' => 'No Telepon',
+    'room_type' => 'Tipe Kamar',
+    'check_in' => 'Check In',
+    'check_out' => 'Check Out',
+    'total_payment' => 'Total Pembayaran',
+
+    'payment_method' => 'Metode Pembayaran',
+    'choose_bank' => 'Pilih Bank',
+    'continue_payment' => 'Lanjutkan Pembayaran',
+
+    // Confirmation
+    'payment_instruction' => 'Instruksi Pembayaran',
+    'qris_payment' => 'Pembayaran QRIS',
+    'scan_qr' => 'Scan QR Code menggunakan aplikasi pembayaran Anda.',
+
+    'bank_transfer' => 'Transfer Bank',
+    'account_number' => 'Nomor Rekening',
+    'account_name' => 'Atas Nama',
+
+    'important' => 'Penting',
+    'transfer_note_1' => 'Transfer sesuai nominal pembayaran.',
+    'transfer_note_2' => 'Simpan bukti transfer Anda.',
+    'transfer_note_3' => 'Pembayaran akan diverifikasi maksimal 1x24 jam.',
+
+    'upload_proof' => 'Upload Bukti Transfer',
+    'add_note' => 'Tambahkan catatan jika diperlukan...',
+    'already_paid' => 'Saya Sudah Transfer',
+
+    // Success
+    'payment_success' => 'Pembayaran Berhasil',
+    'payment_waiting' => 'Bukti pembayaran Anda berhasil dikirim dan sedang menunggu verifikasi admin.',
+    'back_home' => 'Kembali ke Beranda',
+    'view_booking' => 'Lihat Riwayat Booking',
+
+    'no_booking' => 'Belum ada data booking.',
+    'email' => 'Email',
 ];

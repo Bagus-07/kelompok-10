@@ -475,6 +475,28 @@
                         {{ $booking->status }}
                     </p>
 
+                    @if(in_array($booking->status, ['pending', 'waiting_verification']))
+                        <form action="{{ route('booking.cancel', $booking->id) }}"
+                              method="POST"
+                              class="mt-3">
+                            @csrf
+                            @method('PUT')
+                        
+                            <button
+                                type="submit"
+                                onclick="return confirm('Are you sure you want to cancel this booking?')"
+                                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+                                Cancel Booking
+                            </button>
+                        </form>
+                    @endif
+                    
+                    @if(session('error'))
+                        <div class="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                 </div>
 
             @empty

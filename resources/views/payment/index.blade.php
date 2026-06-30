@@ -1,133 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Hotel</title>
+
+    <title>{{ __('messages.payment') }}</title>
+
     @vite(['resources/css/app.css'])
+
+    <style>
+
+    body{
+        transition:.3s;
+    }
+
+    /* =========================
+       DARK MODE
+    ========================= */
+
+    .dark-mode{
+        background:#0f172a;
+    }
+
+    .dark-mode .bg-gray-100{
+        background:#0f172a !important;
+    }
+
+    .dark-mode .bg-white{
+        background:#1e293b !important;
+        color:white;
+    }
+
+    .dark-mode h1,
+    .dark-mode h2,
+    .dark-mode h3,
+    .dark-mode strong{
+        color:white;
+    }
+
+    .dark-mode .text-gray-700,
+    .dark-mode .text-gray-600,
+    .dark-mode .text-gray-500{
+        color:#cbd5e1 !important;
+    }
+
+    .dark-mode input{
+        background:#334155;
+        color:white;
+        border:1px solid #475569;
+    }
+
+    .dark-mode label{
+        color:white;
+    }
+
+    .dark-mode label.border{
+        background:#334155;
+        border-color:#475569;
+        transition:.25s;
+    }
+
+    .dark-mode label.border:hover{
+        border-color:#3b82f6;
+    }
+
+    .dark-mode hr{
+        border-color:#475569;
+    }
+
+    .dark-mode .bg-red-100{
+        background:#7f1d1d !important;
+        color:white !important;
+    }
+
+    button{
+        transition:.25s;
+    }
+
+    </style>
+
 </head>
+
 <body class="bg-gray-100">
 
 <div class="max-w-7xl mx-auto py-10 px-4">
 
     <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- Booking Summary -->
-        <div class="bg-white rounded-xl shadow p-6">
+        <!-- BOOKING SUMMARY -->
+        <div class="bg-white rounded-2xl shadow-lg p-6">
 
-            <h2 class="text-xl font-bold mb-6">
-                Ringkasan Pemesanan
+            <h2 class="text-2xl font-bold mb-6">
+                {{ __('messages.booking_summary') }}
             </h2>
 
             <div class="space-y-3 text-gray-700">
 
-    <p><strong>Nama Tamu :</strong> {{ $user->name }}</p>
+                <p>
+                    <strong>{{ __('messages.guest_name') }} :</strong>
+                    {{ $user->name }}
+                </p>
 
-    <p><strong>Email :</strong> {{ $user->email }}</p>
+                <p>
+                    <strong>{{ __('messages.email') }} :</strong>
+                    {{ $user->email }}
+                </p>
 
-    <p><strong>No Telepon :</strong>
-        {{ $user->phone ?? '-' }}
-    </p>
+                <p>
+                    <strong>{{ __('messages.phone_number') }} :</strong>
+                    {{ $user->phone ?? '-' }}
+                </p>
 
-    <hr>
+                <hr>
 
-    @if($booking)
+                @if($booking)
 
-        <p>
-            <strong>Tipe Kamar :</strong>
-            {{ $booking->room_name }}
-        </p>
+                    <p>
+                        <strong>{{ __('messages.room_type') }} :</strong>
+                        {{ $booking->room_name }}
+                    </p>
 
-        <p>
-            <strong>Check In :</strong>
-            {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}
-        </p>
+                    <p>
+                        <strong>{{ __('messages.check_in') }} :</strong>
+                        {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}
+                    </p>
 
-        <p>
-            <strong>Check Out :</strong>
-            {{ \Carbon\Carbon::parse($booking->check_out)->format('d M Y') }}
-        </p>
+                    <p>
+                        <strong>{{ __('messages.check_out') }} :</strong>
+                        {{ \Carbon\Carbon::parse($booking->check_out)->format('d M Y') }}
+                    </p>
 
-    @else
+                @else
 
-        <p class="text-red-500">
-            Belum ada data booking.
-        </p>
+                    <p class="text-red-500">
+                        {{ __('messages.no_booking') }}
+                    </p>
 
-    @endif
+                @endif
 
-</div>
+            </div>
 
             <div class="mt-8 border-t pt-4">
-    <div class="flex justify-between">
-        <span>Total Pembayaran</span>
 
-        <span class="font-bold text-yellow-600 text-lg">
+                <div class="flex justify-between items-center">
 
-            @if($booking)
-                Rp{{ number_format($booking->total_price,0,',','.') }}
-            @else
-                Rp0
-            @endif
+                    <span class="font-medium">
+                        {{ __('messages.total_payment') }}
+                    </span>
 
-        </span>
-    </div>
-</div>
+                    <span class="font-bold text-yellow-500 text-2xl">
+
+                        @if($booking)
+
+                            Rp{{ number_format($booking->total_price,0,',','.') }}
+
+                        @else
+
+                            Rp0
+
+                        @endif
+
+                    </span>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <!-- Payment -->
-        <div class="md:col-span-2 bg-white rounded-xl shadow p-6">
+        <!-- PAYMENT METHOD -->
+        <div class="md:col-span-2 bg-white rounded-2xl shadow-lg p-6">
 
-            <h2 class="text-xl font-bold mb-6">
-                Metode Pembayaran
+            <h2 class="text-2xl font-bold mb-6">
+                {{ __('messages.payment_method') }}
             </h2>
-            
+
             @if ($errors->any())
-        <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
-        {{ $errors->first() }}
-    </div>
-    @endif
+
+                <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-5">
+
+                    {{ $errors->first() }}
+
+                </div>
+
+            @endif
 
             <form action="{{ route('payment.process') }}"
-      method="POST"
-      enctype="multipart/form-data">
-                @csrf
+                  method="POST"
+                  enctype="multipart/form-data">
 
-                <!-- Payment Method -->
+                @csrf
+                                <!-- PAYMENT METHOD -->
 
                 <div class="grid md:grid-cols-2 gap-4">
 
-                    <label
-                        class="border rounded-xl p-6 cursor-pointer hover:border-blue-500">
+                    <label class="border rounded-xl p-6 cursor-pointer hover:border-blue-500">
 
-                        <input type="radio"
-                               name="payment_method"
-                               value="QRIS"
-                               class="mr-2">
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="QRIS"
+                            class="mr-2">
 
                         QRIS
+
                     </label>
 
-                    <label
-                        class="border rounded-xl p-6 cursor-pointer hover:border-blue-500">
+                    <label class="border rounded-xl p-6 cursor-pointer hover:border-blue-500">
 
-                        <input type="radio"
-                               name="payment_method"
-                               value="Transfer Bank"
-                               class="mr-2">
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="Transfer Bank"
+                            class="mr-2">
 
-                        Transfer Bank
+                        {{ __('messages.bank_transfer') }}
+
                     </label>
 
                 </div>
 
-                <!-- Bank -->
+                <!-- BANK -->
 
                 <div class="mt-8">
 
                     <h3 class="font-semibold mb-4">
-                        Pilih Bank
+                        {{ __('messages.choose_bank') }}
                     </h3>
 
                     <div class="grid md:grid-cols-3 gap-4">
@@ -163,9 +261,9 @@
 
                 <button
                     type="submit"
-                    class="mt-8 bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-lg">
+                    class="mt-8 bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 rounded-xl font-semibold">
 
-                    Lanjutkan Pembayaran
+                    {{ __('messages.continue_payment') }}
 
                 </button>
 
@@ -176,6 +274,20 @@
     </div>
 
 </div>
+
+<script>
+
+window.addEventListener('load', function () {
+
+    if(localStorage.getItem('theme') === 'dark'){
+
+        document.body.classList.add('dark-mode');
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>

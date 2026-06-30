@@ -87,4 +87,44 @@ return [
     'found' => 'Found',
     'room_type' => 'Room Type',
     'room_types' => 'Room Types',
+    // PAYMENT
+    'payment' => 'Payment',
+    'booking_summary' => 'Booking Summary',
+    'guest_name' => 'Guest Name',
+    'phone_number' => 'Phone Number',
+    'room_type' => 'Room Type',
+    'check_in' => 'Check In',
+    'check_out' => 'Check Out',
+    'total_payment' => 'Total Payment',
+
+    'payment_method' => 'Payment Method',
+    'choose_bank' => 'Choose Bank',
+    'continue_payment' => 'Continue Payment',
+
+    // Confirmation
+    'payment_instruction' => 'Payment Instructions',
+    'qris_payment' => 'QRIS Payment',
+    'scan_qr' => 'Scan the QR code using your preferred payment application.',
+
+    'bank_transfer' => 'Bank Transfer',
+    'account_number' => 'Account Number',
+    'account_name' => 'Account Name',
+
+    'important' => 'Important',
+    'transfer_note_1' => 'Transfer the exact payment amount.',
+    'transfer_note_2' => 'Keep your payment receipt.',
+    'transfer_note_3' => 'Payments will be verified within 24 hours.',
+
+    'upload_proof' => 'Upload Payment Proof',
+    'add_note' => 'Add a note if necessary...',
+    'already_paid' => 'I Have Paid',
+
+    // Success
+    'payment_success' => 'Payment Successful',
+    'payment_waiting' => 'Your payment proof has been submitted and is waiting for admin verification.',
+    'back_home' => 'Back to Home',
+    'view_booking' => 'View Booking History',
+
+    'no_booking' => 'No booking data available.',
+    'email' => 'Email',
 ];

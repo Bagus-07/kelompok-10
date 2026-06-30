@@ -216,6 +216,9 @@ Route::put('/booking/{id}/reject',
     [AdminBookingController::class, 'reject'])
     ->name('booking.reject');
 
+Route::put('/booking/{booking}/cancel', [ProfileController::class, 'cancelBooking'])
+    ->middleware('auth')
+    ->name('booking.cancel');
 // LAPORAN
 Route::get('/laporan', [DashboardController::class, 'laporan'])
         ->name('laporan');

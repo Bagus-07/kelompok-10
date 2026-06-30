@@ -615,7 +615,7 @@ body {
 }
 
 .contact-buttons a{
-    font-size:40px;     /* Increase this to 45px or 50px if needed */
+    font-size:40px;     
     color:#000;
     transition:0.3s;
 }
@@ -624,16 +624,16 @@ body {
     transform:scale(1.2);
 }
 
-.whatsapp{
-    color:#25D366;
+.contact-buttons .whatsapp i{
+    color:#25D366 !important;
 }
 
-.instagram{
-    color:#E1306C;
+.contact-buttons .instagram i{
+    color:#E1306C !important;
 }
 
-.facebook{
-    color:#1877F2;
+.contact-buttons .facebook i{
+    color:#1877F2 !important;
 }
 
 .contact-modal-content{
