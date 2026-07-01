@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Booking;
-use App\Models\Room;
+use App\Models\Kamar;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +18,7 @@ class DashboardController extends Controller
     {
         $users = User::count();
         $bookings = Booking::count();
-        $rooms = Room::count();
+        $rooms = Kamar::where('status', 'Tersedia')->count();
 
         $bookingTerbaru = Booking::latest()->take(5)->get();
 
