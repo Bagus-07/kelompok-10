@@ -31,6 +31,17 @@
             position:fixed;
             left:0;
             top:0;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .sidebar-menu{
+            display:flex;
+            flex-direction:column;
+        }
+        
+        .logout-form{
+            margin-top:auto;
         }
 
         .logo{
@@ -91,6 +102,31 @@
             background:#334155;
         }
 
+        .logout-btn{
+            width:100%;
+            display:flex;
+            align-items:center;
+            gap:14px;
+
+            padding:16px 18px;
+
+            border:none;
+            border-radius:18px;
+
+            background:#dc2626;
+            color:white;
+
+            font-size:16px;
+            font-weight:500;
+
+            cursor:pointer;
+            transition:.3s;
+        }       
+
+            .logout-btn:hover{
+                background:#b91c1c;
+                  transform:translateX(5px);
+        }
         /* MAIN */
 
         .main{
