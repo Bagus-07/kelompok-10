@@ -28,7 +28,7 @@
         @csrf
 
         <button type="submit" class="logout-btn">
-            🚪 Logout
+            Logout
         </button>
     </form>
 
