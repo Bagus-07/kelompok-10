@@ -151,9 +151,11 @@ td:last-child{
     <td>{{ $booking->room_name }}</td>
 
     <td>
-        {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}
-        -
-        {{ \Carbon\Carbon::parse($booking->check_out)->format('d M Y') }}
+         <strong>Check-in:</strong><br>
+        {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y H:i') }} WIB
+        <br>
+        <strong>Check-out:</strong><br>
+        {{ \Carbon\Carbon::parse($booking->check_out)->format('d M Y H:i') }} WIB
     </td>
 
     <td>

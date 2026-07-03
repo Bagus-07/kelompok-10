@@ -25,7 +25,7 @@ class AdminBookingController extends Controller
             'status' => 'confirmed'
         ]);
 
-        Kamar::where('id', $booking->kamar_id)
+        Kamar::where('nomor_kamar', $booking->kamar)
             ->update(['status' => 'Dipakai']);
 
         return redirect()
@@ -41,9 +41,10 @@ class AdminBookingController extends Controller
             'status' => 'rejected'
         ]);
 
-        $booking->kamar->update([
-            'status' => 'Tersedia'
-        ]);
+         Kamar::where('nomor_kamar', $booking->kamar)
+            ->update([
+                'status' => 'Tersedia'
+            ]);
 
         return redirect()
             ->route('admin.booking')

@@ -7,6 +7,7 @@ use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TipeKamar;
 use App\Models\Kamar;
+use Carbon\Carbon;
 
 class RoomController extends Controller
 {
@@ -38,21 +39,32 @@ class RoomController extends Controller
     public function book(Request $request)
     {
         $request->validate([
+            'room_name' => 'required',
             'check_in' => 'required|date',
             'check_out' => 'required|date|after:check_in',
         ]);
 
+        // Jam opresional hotel
+        $hotelCheckInHour = 14;
+        $hotelCheckOutHour = 12;
+        
+        // Menggabungkan tanggal yang dipilih tamu dengan jam hotel
+        $checkIn = Carbon::parse($request->check_in)
+        ->setTime($hotelCheckInHour, 0);
+        
+        $checkOut = Carbon::parse($request->check_out)
+        ->setTime($hotelCheckOutHour, 0);
+
         // CEK APAKAH KAMAR SUDAH DIBOOKING
         $existingBooking = Booking::where('room_name', $request->room_name)
             ->whereIn('status', [
-                'pending',
                 'waiting_verification',
                 'confirmed'
             ])
-            ->where(function ($q) use ($request) {
+            ->where(function ($q) use ($checkIn, $checkOut) {
 
-                $q->where('check_in', '<', $request->check_out)
-                ->where('check_out', '>', $request->check_in);
+                $q->where('check_in', '<', $checkOut)
+                ->where('check_out', '>', $checkIn);
 
             })
 
@@ -84,8 +96,7 @@ class RoomController extends Controller
         }
 
                 // Calculate the number of nights
-        $nights = \Carbon\Carbon::parse($request->check_in)
-            ->diffInDays(\Carbon\Carbon::parse($request->check_out));
+        $nights = $checkIn->copy()->diffInDays($checkOut);
 
         // Get the room price from the room type
         $pricePerNight = $kamar->tipeKamar->harga_per_malam;
@@ -99,12 +110,11 @@ class RoomController extends Controller
             'nama' => Auth::user()->name,
 
             'kamar' => $kamar->nomor_kamar,
-            'kamar_id' => $kamar->id,
             'tanggal' => now()->toDateString(),
 
             'room_name' => $request->room_name,
-            'check_in' => $request->check_in,
-            'check_out' => $request->check_out,
+            'check_in' => $checkIn,
+            'check_out' => $checkOut,
 
             'total_price' => $totalPrice,
             'status' => 'pending'

@@ -403,57 +403,60 @@
 <form action="/rooms" method="GET" class="hero-search">
 
     <div class="search-field">
-        <label>{{ __('messages.check_in') }}</label>
-        <input
-            type="date"
-            name="check_in"
-            value="{{ $check_in }}"
-        >
-    </div>
+    <label>{{ __('messages.check_in') }}</label>
+    <input
+        type="date"
+        name="check_in"
+        value="{{ $check_in ? \Carbon\Carbon::parse($check_in)->format('Y-m-d') : '' }}"
+        min="{{ now()->toDateString() }}"
+        required
+    >
+    <small style="color:#ccc;">Check-in dimulai pukul 14:00 WIB</small>
+</div>
 
-    <div class="search-field">
-        <label>{{ __('messages.check_out') }}</label>
-        <input
-            type="date"
-            name="check_out"
-            value="{{ $check_out }}"
-        >
-    </div>
+<div class="search-field">
+    <label>{{ __('messages.check_out') }}</label>
+    <input
+        type="date"
+        name="check_out"
+        value="{{ $check_out ? \Carbon\Carbon::parse($check_out)->format('Y-m-d') : '' }}"
+        min="{{ now()->toDateString() }}"
+        required
+    >
+    <small style="color:#ccc;">Check-out maksimal pukul 12:00 WIB</small>
+</div>
 
-    <div class="search-field">
-        <label>{{ __('messages.guests') }}</label>
-        <input
-            type="number"
-            name="guests"
-            value="{{ $guests ?? 1 }}"
-            min="1"
-        >
-    </div>
+<div class="search-field">
+    <label>{{ __('messages.guests') }}</label>
+    <input
+        type="number"
+        name="guests"
+        value="{{ $guests ?? 1 }}"
+        min="1"
+    >
+</div>
 
-    <div class="search-field">
-        <label>{{ __('messages.room_type') }}</label>
+<div class="search-field">
+    <label>{{ __('messages.room_type') }}</label>
 
-        <select name="room_type">
+    <select name="room_type">
+        <option value="">
+            {{ __('messages.all_rooms') }}
+        </option>
 
-            <option value="">
-               {{ __('messages.all_rooms') }}
+        @foreach($rooms as $room)
+            <option value="{{ $room->nama_tipe }}">
+                {{ $room->nama_tipe }}
             </option>
+        @endforeach
 
-            @foreach($rooms as $room)
+    </select>
 
-                <option value="{{ $room->nama_tipe }}">
-                    {{ $room->nama_tipe }}
-                </option>
+</div>
 
-            @endforeach
-
-        </select>
-
-    </div>
-
-    <button type="submit">
-       {{ __('messages.search_rooms') }}
-    </button>
+<button type="submit">
+    {{ __('messages.search_rooms') }}
+</button>
 
 </form>
 
@@ -544,12 +547,12 @@
                 <div class="mt-4 p-3 border rounded bg-gray-50">
                     <p>
                         <strong>Check In :</strong>
-                        {{ $check_in }}
+                         {{ \Carbon\Carbon::parse($check_in)->format('d M Y, H:i') }}
                     </p>
 
                     <p>
                         <strong>Check Out :</strong>
-                        {{ $check_out }}
+                        {{ \Carbon\Carbon::parse($check_out)->format('d M Y, H:i') }}
                     </p>
                 </div>
 

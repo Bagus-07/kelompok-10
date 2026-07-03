@@ -463,11 +463,11 @@
                     </p>
 
                     <p class="text-sm text-gray-500">
-                        Check-in: {{ $booking->check_in }}
+                        Check-in: {{ $booking->check_in->format('d M Y, H:i') }}
                     </p>
 
                     <p class="text-sm text-gray-500">
-                        Check-out: {{ $booking->check_out }}
+                        Check-out: {{ $booking->check_out->format('d M Y, H:i') }}
                     </p>
 
                     <p class="text-sm mt-2 
