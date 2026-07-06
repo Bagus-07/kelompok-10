@@ -15,18 +15,28 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-
-            return redirect('/home');
+        {
+            // Validate that the fields are not empty
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+        
+            // Attempt login
+            if (Auth::attempt($request->only('email', 'password'))) {
+        
+                $request->session()->regenerate();
+        
+                return redirect('/home');
+            }
+        
+            // Login failed
+            return back()
+                ->withErrors([
+                    'email' => __('messages.login_failed'),
+                ])
+                ->withInput();
         }
-
-        return back()->withErrors([
-            'email' => 'Email atau password salah',
-        ]);
-    }
 
    public function register(Request $request)
     {

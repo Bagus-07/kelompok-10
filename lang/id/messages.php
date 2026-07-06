@@ -128,4 +128,5 @@ return [
 
     'no_booking' => 'Belum ada data booking.',
     'email' => 'Email',
+    'login_failed' => 'Email atau password salah.',
 ];

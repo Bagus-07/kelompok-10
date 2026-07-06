@@ -218,6 +218,11 @@
     color:white;
 }
 
+.dark-mode #passwordModal > div{
+    background : #1e293b;
+    color : white;
+}
+
 .password-btn{
     margin-top:10px;
     background:#f59e0b;
@@ -477,8 +482,8 @@
 
                     @if(in_array($booking->status, ['pending', 'waiting_verification']))
                         <form action="{{ route('booking.cancel', $booking->id) }}"
-                              method="POST"
-                              class="mt-3">
+                            method="POST"
+                            class="mt-3">
                             @csrf
                             @method('PUT')
                         
@@ -512,11 +517,20 @@
 </div>
 <!-- MODAL -->
 <div id="editModal"
-     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[9999] p-4 overflow-y-auto">
+    class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[9999] p-4 overflow-y-auto">
 
-    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-6 relative mt-20">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-6 relative max-h-[90vh] overflow-y-auto">
 
         <form method="POST" action="/profile/update" enctype="multipart/form-data">
+            @if ($errors->any())
+                <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @csrf
 
             <!-- IMAGE -->
@@ -610,8 +624,8 @@
             </p>
         
             <form action="/profile/delete"
-                  method="POST"
-                  onsubmit="return confirm('Delete your account permanently? This action cannot be undone.')">
+                method="POST"
+                onsubmit="return confirm('Delete your account permanently? This action cannot be undone.')">
         
                 @csrf
                 @method('DELETE')
@@ -632,7 +646,7 @@
 
         <!-- CHANGE PASSWORD MODAL -->
 <div id="passwordModal"
-     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[9999] p-4">
+    class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[9999] p-4">
 
     <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-6">
 
@@ -718,29 +732,35 @@ function closeModal() {
     document.getElementById('editModal').classList.remove('flex');
 }
 
-window.addEventListener('load', function(){
-
-    if(localStorage.getItem('theme') === 'dark'){
+window.addEventListener('load', function () {
+    if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
     }
-
 });
 
 function openPasswordModal() {
-    document.getElementById('passwordModal')
-        .classList.remove('hidden');
-
-    document.getElementById('passwordModal')
-        .classList.add('flex');
+    document.getElementById('passwordModal').classList.remove('hidden');
+    document.getElementById('passwordModal').classList.add('flex');
 }
 
 function closePasswordModal() {
-    document.getElementById('passwordModal')
-        .classList.add('hidden');
-
-    document.getElementById('passwordModal')
-        .classList.remove('flex');
+    document.getElementById('passwordModal').classList.add('hidden');
+    document.getElementById('passwordModal').classList.remove('flex');
 }
 </script>
+
+@if ($errors->any())
+<script>
+window.addEventListener('load', function () {
+
+    @if(old('current_password'))
+        openPasswordModal();
+    @else
+        openModal();
+    @endif
+
+});
+</script>
+@endif
 
 @endsection

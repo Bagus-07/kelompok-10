@@ -127,4 +127,5 @@ return [
 
     'no_booking' => 'No booking data available.',
     'email' => 'Email',
+    'login_failed' => 'Invalid email or password.',
 ];

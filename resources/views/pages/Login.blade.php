@@ -49,6 +49,12 @@
     <h3 class="mb-2"><b>Booking</b></h3>
     <p class="text-muted">Welcome back, glad to see you</p>
 
+    @if ($errors->has('email'))
+    <div class="mb-4 rounded-lg bg-red-100 border border-red-300 text-red-700 p-3">
+        {{ $errors->first('email') }}
+    </div>
+@endif
+
     <!-- FORM LOGIN -->
     <form method="POST" action="/login">
       @csrf
@@ -56,7 +62,14 @@
       <!-- EMAIL -->
       <div class="form-group mb-3">
         <label>Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Type your email" required>
+        <input
+            type="email"
+            name="email"
+            class="form-control @error('email') is-invalid @enderror"
+            placeholder="Type your email"
+            value="{{ old('email') }}"
+            required
+        >      
       </div>
 
       <!-- PASSWORD -->
