@@ -8,6 +8,8 @@ use App\Models\Booking;
 use App\Models\Kamar;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BookingExport;
 
 class DashboardController extends Controller
 {
@@ -76,7 +78,7 @@ class DashboardController extends Controller
     }
 
     // ==========================
-    // EXPORT PDF
+    // EXPORT PDF &7 EXCEL
     // ==========================
     public function exportPdf()
     {
@@ -90,5 +92,10 @@ class DashboardController extends Controller
         );
 
         return $pdf->download('laporan-booking.pdf');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new BookingExport, 'laporan-booking.xlsx');
     }
 }

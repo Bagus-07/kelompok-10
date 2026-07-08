@@ -225,4 +225,7 @@ Route::get('/laporan', [DashboardController::class, 'laporan'])
 
     Route::get('/laporan/export-pdf', [DashboardController::class, 'exportPdf'])
         ->name('laporan.exportPdf');
+    
+    Route::get('/admin/reports/export-excel', [DashboardController::class, 'exportExcel'])
+    ->name('reports.export.excel');
 });

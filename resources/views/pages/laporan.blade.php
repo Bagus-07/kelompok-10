@@ -72,9 +72,14 @@
             <p>Daftar booking terbaru hotel</p>
         </div>
 
-        <a href="{{ route('laporan.exportPdf') }}" class="btn btn-green">
-            Export PDF
-        </a>
+        <div style="display:flex; gap:10px;">
+            <a href="{{ route('laporan.exportPdf') }}" class="btn btn-green">
+                Export PDF
+            </a>
+            <a href="{{ route('reports.export.excel') }}" class="btn btn-blue">
+                Export Excel
+            </a>
+        </div>
 
     </div>
 
