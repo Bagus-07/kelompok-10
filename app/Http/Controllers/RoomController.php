@@ -56,25 +56,30 @@ class RoomController extends Controller
         ->setTime($hotelCheckOutHour, 0);
 
         // CEK APAKAH KAMAR SUDAH DIBOOKING
-        $existingBooking = Booking::where('room_name', $request->room_name)
-            ->whereIn('status', [
-                'waiting_verification',
-                'confirmed'
-            ])
-            ->where(function ($q) use ($checkIn, $checkOut) {
+        $kamar = Kamar::whereHas('tipeKamar', function ($q) use ($request) {
 
-                $q->where('check_in', '<', $checkOut)
+                $q->where('nama_tipe', $request->room_name);
+
+            })
+            ->where('status', 'Tersedia')
+            ->whereDoesntHave('bookings', function ($q) use ($checkIn, $checkOut) {
+
+                $q->whereIn('status', [
+                    'waiting_verification',
+                    'confirmed'
+                ])
+                ->where('check_in', '<', $checkOut)
                 ->where('check_out', '>', $checkIn);
 
             })
+            ->first();
 
-            ->exists();
+            if (!$kamar) {
 
-            if ($existingBooking) {
                 return back()->withErrors([
-                    'room_name' => 'Kamar sudah dibooking pada tanggal tersebut.'
+                    'room_name' => 'Semua kamar tipe tersebut sudah penuh pada tanggal yang dipilih.'
                 ]);
-        }
+            }
 
         // Booking akan mengefek kamar
         $kamar = Kamar::whereHas('tipeKamar', function ($q) use ($request) {
@@ -95,13 +100,22 @@ class RoomController extends Controller
             ]);
         }
 
-                // Calculate the number of nights
-        $nights = $checkIn->copy()->diffInDays($checkOut);
+        // Hitung jumlah malam
+        $nights = Carbon::parse($request->check_in)
+            ->diffInDays(
+                Carbon::parse($request->check_out)
+            );
 
-        // Get the room price from the room type
+        // Baru tambahkan jam hotel
+        $checkIn = Carbon::parse($request->check_in)
+            ->setTime(14,0);
+
+        $checkOut = Carbon::parse($request->check_out)
+            ->setTime(12,0);
+
+        // Harga
         $pricePerNight = $kamar->tipeKamar->harga_per_malam;
 
-        // Calculate total price
         $totalPrice = $pricePerNight * $nights;
         // SIMPAN BOOKING
         Booking::create([
@@ -110,6 +124,7 @@ class RoomController extends Controller
             'nama' => Auth::user()->name,
 
             'kamar' => $kamar->nomor_kamar,
+            'kamar_id' => $kamar->id,
             'tanggal' => now()->toDateString(),
 
             'room_name' => $request->room_name,

@@ -49,6 +49,9 @@
             </td>
 
             <td>
+                <strong>Tipe:</strong>
+                {{ $booking->room_name }}<br>
+                <strong>No:</strong>
                 {{ $booking->room->nama ?? $booking->kamar ?? '-' }}
             </td>
 

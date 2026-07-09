@@ -69,6 +69,11 @@
         background: #fef3c7;
         color: #92400e;
     }
+
+    .cancelled {
+        background: #fee2e2;
+        color: #991b1b;
+    }
     
     .rejected {
         background: #fee2e2;
@@ -148,13 +153,18 @@ td:last-child{
 
     <td>{{ $booking->nama }}</td>
 
-    <td>{{ $booking->room_name }}</td>
+    <td>        
+        <strong>Tipe:</strong>
+        {{ $booking->room_name }}<br>
+        <strong>No:</strong>
+        {{ $booking->room->nama ?? $booking->kamar ?? '-' }}
+    </td>
 
     <td>
-         <strong>Check-in:</strong><br>
+         <strong>Check-in:</strong>
         {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y H:i') }} WIB
         <br>
-        <strong>Check-out:</strong><br>
+        <strong>Check-out:</strong>
         {{ \Carbon\Carbon::parse($booking->check_out)->format('d M Y H:i') }} WIB
     </td>
 
@@ -170,6 +180,11 @@ td:last-child{
 
     <span class="status waiting">
         Waiting Verification
+    </span>
+
+@elseif($booking->status == 'cancelled')
+    <span class="status cancelled">
+        Cancelled
     </span>
 
 @elseif($booking->status == 'rejected')

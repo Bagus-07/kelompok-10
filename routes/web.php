@@ -55,7 +55,7 @@ Route::get('/language/{locale}', function ($locale) {
 
 // PAYMENT
 Route::get('/payment', [PaymentController::class, 'index'])
-    // ->middleware('auth')
+    ->middleware('auth')
     ->name('payment');
 
 Route::post('/payment/process', [PaymentController::class, 'process'])

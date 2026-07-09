@@ -31,19 +31,16 @@
     <div class="card blue">
         <h4>Total Booking</h4>
         <h1>{{ $totalBooking }}</h1>
-        <p>↑ 12% dari bulan lalu</p>
     </div>
 
     <div class="card green">
         <h4>Pendapatan</h4>
         <h1>Rp {{ number_format($totalPendapatan, 0, ',', '.') }}</h1>
-        <p>↑ 18% minggu ini</p>
     </div>
 
     <div class="card orange">
         <h4>Kamar Terisi</h4>
         <h1>{{ $kamarTerisi }}</h1>
-        <p>80% okupansi</p>
     </div>
 
 </div>
@@ -105,7 +102,12 @@
 
     <td>{{ $booking->nama }}</td>
 
-    <td>{{ $booking->room_name ?? $booking->kamar }}</td>
+    <td>
+        <strong>Tipe:</strong>
+        {{ $booking->room_name }}<br>
+        <strong>No:</strong>
+        {{ $booking->room->nama ?? $booking->kamar ?? '-' }}
+    </td>
 
     <td>
         {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}

@@ -41,7 +41,7 @@ class AdminBookingController extends Controller
             'status' => 'rejected'
         ]);
 
-         Kamar::where('nomor_kamar', $booking->kamar)
+        Kamar::where('id', $booking->kamar_id)
             ->update([
                 'status' => 'Tersedia'
             ]);
