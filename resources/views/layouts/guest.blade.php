@@ -480,10 +480,6 @@ body {
     box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
-.hero-search{
-    box-sizing:border-box;
-    width:100%;
-}
 
 .hero-search *{
     box-sizing:border-box;
@@ -501,25 +497,8 @@ body {
     color: #555;
 }
 
-.search-field input,
-.search-field select{
-    width: 100%;
-    height: 48px;
-    padding: 0 15px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-sizing: border-box;
-}
 
-.hero-search input,
-.hero-search select{
-    height:50px;
-    border:1px solid #ddd;
-    background:white;
-    color:#333;
-    border-radius:10px;
-    padding:0 12px;
-}
+
 
 /*new*/
 .dark-mode .hero-search input,
@@ -529,23 +508,44 @@ body {
     border:1px solid #475569;
 }
 
+.dark-mode .hero-search{
+    background:#1e293b;
+}
+
+.dark-mode .search-field label{
+    color:#f8fafc;
+}
+
+.dark-mode .search-field small{
+    color:#cbd5e1;
+}
+
 .hero-search button{
-    height: 55px;
-    align-self: end;
+    width:100%;
+    height:55px;
 
-    border: none;
-    border-radius: 12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    background: linear-gradient(
-        45deg,
-        #F4A261,
-        #E9C46A
-    );
+    margin:0;
 
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(45deg,#F4A261,#E9C46A);
+
+    color:white;
+    font-size:18px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.hero-search button:hover{
+    transform:translateY(-2px);
 }
 
 
@@ -579,17 +579,14 @@ body {
 
 .search-field input,
 .search-field select{
-    width: 100%;
-    height: 55px;
-    padding: 0 15px;
-
-    border: 1px solid #ddd;
-    border-radius: 12px;
-
-    box-sizing: border-box;
-
-    color: #333;          
-    background: white;    
+    width:100%;
+    height:55px;
+    padding:0 16px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    background:#fff;
+    color:#333;
+    font-size:16px;
 }
 
 /*new contact */
@@ -820,8 +817,11 @@ body {
     border:1px solid #475569;
 }
 
-.dark-mode input{
+.dark-mode input:not([type="date"]),
+.dark-mode textarea,
+.dark-mode select{
     background:#334155;
+    color:white;
 }
 
 .dark-mode .settings-content{
@@ -1352,11 +1352,6 @@ window.addEventListener('load', function(){
 
 });
 
-function toggleMenu() {
-    document
-        .getElementById('mobileMenu')
-        .classList.toggle('show');
-}
 
 function changeLanguage(url){
     window.location.href = url;
@@ -1380,18 +1375,7 @@ window.addEventListener('click', function(event) {
 
 });
 
-function toggleMenu(){
 
-    const menu =
-        document.getElementById('mobileMenu');
-
-    if(menu.style.display === 'flex'){
-        menu.style.display = 'none';
-    }else{
-        menu.style.display = 'flex';
-    }
-
-}
 
 function toggleMenu() {
     document
