@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Kamar;
+use App\Models\User;
+use App\Models\TipeKamar;
+use Carbon\Carbon;
 
 class AdminBookingController extends Controller
 {
     public function index()
     {
         $bookings = Booking::latest()->get();
+        $users = User::where('role', 'user')
+            ->orderBy('name')
+            ->get();
+        $tipeKamars = TipeKamar::orderBy('nama_tipe')->get();
 
         return view(
             'pages.booking',
-            compact('bookings')
+            compact(
+                'bookings',
+                'users',
+                'tipeKamars'
+            )
         );
     }
 
@@ -49,5 +61,119 @@ class AdminBookingController extends Controller
         return redirect()
             ->route('admin.booking')
             ->with('success', 'Booking berhasil ditolak');
+    }
+    public function checkout($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        $booking->update([
+            'status' => 'completed'
+        ]);
+
+        Kamar::where('nomor_kamar', $booking->kamar)
+            ->update([
+                'status' => 'Cleaning'
+            ]);
+
+        return redirect()
+            ->route('admin.booking')
+            ->with('success', 'Guest berhasil checkout.');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'room_name' => 'required',
+            'check_in' => 'required|date',
+            'check_out' => 'required|date|after:check_in',
+            'payment_method' => 'required'
+        ]);
+
+        $hotelCheckInHour = 14;
+        $hotelCheckOutHour = 12;
+
+        $checkIn = \Carbon\Carbon::parse($request->check_in)
+            ->setTime($hotelCheckInHour,0);
+
+        $checkOut = \Carbon\Carbon::parse($request->check_out)
+            ->setTime($hotelCheckOutHour,0);
+
+        $kamar = Kamar::whereHas('tipeKamar', function($q) use ($request){
+
+            $q->where(
+                'nama_tipe',
+                $request->room_name
+            );
+
+        })
+
+        ->where('status','Tersedia')
+
+        ->whereDoesntHave('bookings', function($q) use($checkIn,$checkOut){
+
+            $q->whereIn('status',[
+                'confirmed',
+                'waiting_verification'
+            ])
+
+            ->where(function($query) use($checkIn,$checkOut){
+
+                $query
+                    ->where('check_in','<',$checkOut)
+                    ->where('check_out','>',$checkIn);
+
+            });
+
+        })
+
+        ->first();
+
+        if(!$kamar){
+
+            return back()->withErrors([
+                'room_name'=>'Tidak ada kamar tersedia pada tanggal tersebut.'
+            ]);
+
+        }
+
+        $malam = $checkIn->diffInDays($checkOut);
+
+        $harga = $kamar
+            ->tipeKamar
+            ->harga_per_malam;
+
+        $total = $malam * $harga;
+
+        $user = \App\Models\User::findOrFail(
+            $request->user_id
+        );
+
+        Booking::create([
+
+            'user_id'=>$user->id,
+            'nama'=>$user->name,
+            'kamar'=>$kamar->nomor_kamar,
+            'room_name'=>$request->room_name,
+            'tanggal'=>now(),
+            'check_in'=>$checkIn,
+            'check_out'=>$checkOut,
+            'payment_method'=>$request->payment_method,
+            'total_price'=>$total,
+            'status'=>'confirmed',
+            'booking_source'=>'walk_in'
+
+        ]);
+
+        $kamar->update([
+            'status'=>'Dipakai'
+        ]);
+
+        return redirect()
+            ->route('admin.booking')
+            ->with(
+                'success',
+                'Booking walk-in berhasil dibuat.'
+            );
     }
 }

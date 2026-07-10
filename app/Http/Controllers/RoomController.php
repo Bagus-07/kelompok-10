@@ -132,7 +132,8 @@ class RoomController extends Controller
             'check_out' => $checkOut,
 
             'total_price' => $totalPrice,
-            'status' => 'pending'
+            'status' => 'pending',
+            'booking_source' => 'online'
         ]);
 
         return redirect()->route('payment');

@@ -160,6 +160,13 @@
     text-align:center;
 }
 
+.status{
+    padding:6px 12px;
+    border-radius:20px;
+    font-weight:600;
+    font-size:13px;
+}
+
 .status-available{
     color:green;
     font-weight:600;
@@ -170,6 +177,25 @@
     font-weight:600;
 }
 
+.tersedia{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.dipakai{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.cleaning{
+    background:#cffafe;
+    color:#155e75;
+}
+
+.maintenance{
+    background:#36815a;
+    color:#cddfd6;
+}
 /* MODAL */
 
 .modal{
@@ -355,9 +381,42 @@
 
                     <tr>
                         <td>{{ $kamar->nomor_kamar }}</td>
-                        <td>{{ $kamar->status }}</td>
+                        <td>
+
+                            @if($kamar->status == 'Tersedia')
+
+                            <span class="status tersedia">
+                                Tersedia
+                            </span>
+
+                            @elseif($kamar->status == 'Dipakai')
+
+                            <span class="status dipakai">
+                                Dipakai
+                            </span>
+
+                            @elseif($kamar->status == 'Cleaning')
+
+                            <span class="status cleaning">
+                                Cleaning
+                            </span>
+
+                            @elseif($kamar->status == 'Maintenance')
+
+                            <span class="status maintenance">
+                                Maintenance
+                            </span>
+                                
+                            @else
+
+                            {{ $kamar->status }}
+
+                            @endif
+
+                        </td>
 
                         <td>
+
                             <button
                                 class="btn-edit"
                                 onclick="openModal('editKamar{{ $kamar->id }}')">
@@ -377,7 +436,29 @@
                                     onclick="return confirm('Hapus kamar ini?')">
                                     Hapus
                                 </button>
+
                             </form>
+
+                            @if($kamar->status == 'Cleaning')
+
+                                <form
+                                    action="{{ route('kamar.cleaning', $kamar->id) }}"
+                                    method="POST"
+                                    style="display:inline;">
+
+                                    @csrf
+                                    @method('PUT')
+
+                                    <button
+                                        class="btn-edit"
+                                        style="background:#06b6d4;">
+                                        Cleaning Selesai
+                                    </button>
+
+                                </form>
+
+                            @endif
+
                         </td>
                     </tr>
 

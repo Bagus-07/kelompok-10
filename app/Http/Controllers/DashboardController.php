@@ -39,10 +39,10 @@ class DashboardController extends Controller
     {
         $totalBooking = Booking::count();
 
-        $totalPendapatan = Booking::where('status', 'confirmed')
+        $totalPendapatan = Booking::whereIn('status', ['confirmed','completed'])
             ->sum('total_price');
 
-        $kamarTerisi = Booking::where('status', 'confirmed')
+        $kamarTerisi = Booking::whereIn('status', ['confirmed','completed'])
             ->count();
 
         $bookings = Booking::latest()->get();
@@ -54,7 +54,7 @@ class DashboardController extends Controller
                 DB::raw('MONTH(check_in) as bulan'),
                 DB::raw('SUM(total_price) as total')
             )
-            ->where('status', 'confirmed')
+            ->whereIn('status', ['confirmed','completed'])
             ->groupBy(DB::raw('MONTH(check_in)'))
             ->orderBy('bulan')
             ->get();

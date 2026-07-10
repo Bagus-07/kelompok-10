@@ -5,6 +5,57 @@
 @section('content')
 
 <style>
+
+    .modal{
+        display:none;
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.45);
+        justify-content:center;
+        align-items:center;
+        z-index:9999;
+    }
+
+    .modal-content{
+        background:white;
+        width:500px;
+        border-radius:14px;
+        padding:25px;
+    }
+
+    .modal-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+    }
+
+    .close{
+        cursor:pointer;
+        font-size:28px;
+    }
+
+    .form-group{
+        margin-bottom:18px;
+    }
+
+    .form-group label{
+        display:block;
+        margin-bottom:8px;
+        color:#111827;
+        font-weight:600;
+    }
+
+    .form-group input,
+    .form-group select{
+        width:100%;
+        padding:10px;
+        border:1px solid #ccc;
+        border-radius:8px;
+        color:#111827;
+        background:#fff;
+    }
+
     .content-box {
         background: #f1f5f9;
         padding: 25px;
@@ -74,6 +125,11 @@
         background: #fee2e2;
         color: #991b1b;
     }
+
+    .completed{
+        background:#e5e7eb;
+        color:#374151;
+    }
     
     .rejected {
         background: #fee2e2;
@@ -106,20 +162,20 @@
     }
 
     .action-buttons{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
 
-.action-buttons form{
-    margin: 0;
-}
+    .action-buttons form{
+        margin: 0;
+    }
 
-th:last-child,
-td:last-child{
-    min-width: 280px;
-}
+    th:last-child,
+    td:last-child{
+        min-width: 280px;
+    }
 
 </style>
 
@@ -127,7 +183,13 @@ td:last-child{
 
     <div class="header">
         <h3>Data Booking</h3>
-        <button class="btn-add">+ Tambah Booking</button>
+        <button
+            class="btn-add"
+            onclick="openBookingModal()">
+
+            + Tambah Booking
+
+        </button>
     </div>
 
     <div class="card">
@@ -193,6 +255,12 @@ td:last-child{
         Rejected
     </span>
 
+@elseif($booking->status == 'completed')
+
+    <span class="status completed">
+        Completed
+    </span>
+
 @else
 
     <span class="status pending">
@@ -248,6 +316,27 @@ td:last-child{
 
     @endif
 
+    @if($booking->status == 'confirmed')
+
+    <form action="{{ route('booking.checkout', $booking->id) }}"
+        method="POST">
+
+        @csrf
+        @method('PUT')
+
+        <button
+            type="submit"
+            class="btn"
+            style="background:#f59e0b;color:white;">
+
+            Checkout
+
+        </button>
+
+    </form>
+
+    @endif
+
 </div>
 
 </td>
@@ -264,10 +353,136 @@ td:last-child{
 
 @endforelse
 
-</tbody>
-        </table>
-    </div>
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Tambah Booking</h2>
 
+            <span
+                class="close"
+                onclick="closeBookingModal()">
+
+                &times;
+
+            </span>
+        </div>
+
+        <form
+            action="{{ route('booking.admin.store') }}"
+            method="POST">
+
+            @csrf
+
+            <div class="form-group">
+
+                <label>Pilih Tamu</label>
+
+                <select name="user_id" required>
+
+                    <option value="">
+                        -- Pilih Tamu --
+                    </option>
+
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">
+                            {{ $user->name }} ({{ $user->email }})
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tipe Kamar</label>
+
+                <select
+                    name="room_name"
+                    required>
+
+                    @foreach($tipeKamars as $tipe)
+
+                        <option
+                            value="{{ $tipe->nama_tipe }}">
+
+                            {{ $tipe->nama_tipe }}
+
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Check In</label>
+
+                <input
+                    type="date"
+                    name="check_in"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Check Out</label>
+
+                <input
+                    type="date"
+                    name="check_out"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Metode Pembayaran</label>
+                <select name="payment_method" required>
+
+                    <option value="Tunai">Tunai</option>
+                    <option value="QRIS">QRIS</option>
+                    <option value="Debit">Debit</option>
+                    <option value="Transfer Bank">Transfer Bank</option>
+                </select>
+            </div>
+
+            <button
+                class="btn btn-green">
+
+                Simpan Booking
+
+            </button>
+        </form>
+    </div>
 </div>
 
+<script>
+
+function openBookingModal(){
+
+    document
+        .getElementById('bookingModal')
+        .style.display='flex';
+
+}
+
+function closeBookingModal(){
+
+    document
+        .getElementById('bookingModal')
+        .style.display='none';
+
+}
+
+window.onclick=function(e){
+
+    const modal=
+    document.getElementById('bookingModal');
+
+    if(e.target===modal){
+
+        modal.style.display='none';
+
+    }
+
+}
+
+</script>
 @endsection

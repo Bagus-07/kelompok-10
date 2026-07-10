@@ -23,6 +23,7 @@ class Booking extends Model
         'payment_method',
         'payment_proof',
         'status',
+        'booking_source'
     ];
 
     protected $casts = [
