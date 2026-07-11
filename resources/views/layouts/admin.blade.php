@@ -292,6 +292,7 @@
             font-weight:600;
         }
 
+        /* status booking*/
         .sukses{
             background:#dcfce7;
             color:#15803d;
@@ -330,6 +331,37 @@
         .waiting {
             background: #dbeafe;
             color: #1e40af;
+        }
+
+        /* status kamar*/
+        .status-available{
+            color:green;
+            font-weight:600;
+        }
+
+        .status-used{
+            color:red;
+            font-weight:600;
+        }
+
+        .tersedia{
+            background:#dcfce7;
+            color:#166534;
+        }
+
+        .dipakai{
+            background:#fee2e2;
+            color:#991b1b;
+        }
+
+        .cleaning{
+            background:#cffafe;
+            color:#155e75;
+        }
+
+        .maintenance{
+            background:#36815a;
+            color:#cddfd6;
         }
 
         /* FORM */

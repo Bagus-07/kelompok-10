@@ -103,44 +103,6 @@
         color: #1e293b;
     }
 
-    .status {
-       padding: 6px 14px;
-        border-radius: 20px;
-        font-size: 13px;
-        font-weight: 600;
-        display: inline-block;
-    }
-
-    .confirmed {
-        background: #d1fae5;
-        color: #065f46;
-    }
-
-    .tertunda {
-        background: #fef3c7;
-        color: #92400e;
-    }
-
-    .dibatalkan {
-        background: #fee2e2;
-        color: #991b1b;
-    }
-
-    .completed{
-        background:#e5e7eb;
-        color:#374151;
-    }
-    
-    .rejected {
-        background: #fee2e2;
-        color: #991b1b;
-    }
-
-    .waiting {
-        background: #dbeafe;
-        color: #1e40af;
-    }
-
     .btn {
         padding: 8px 14px;
         border: none;
