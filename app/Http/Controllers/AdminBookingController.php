@@ -8,6 +8,7 @@ use App\Models\Kamar;
 use App\Models\User;
 use App\Models\TipeKamar;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminBookingController extends Controller
 {
@@ -137,7 +138,12 @@ class AdminBookingController extends Controller
 
         }
 
-        $malam = $checkIn->diffInDays($checkOut);
+        $malam = Carbon::parse($request->check_in)
+            ->startOfDay()
+            ->diffInDays(
+                Carbon::parse($request->check_out)
+                    ->startOfDay()
+            );
 
         $harga = $kamar
             ->tipeKamar
@@ -161,7 +167,8 @@ class AdminBookingController extends Controller
             'payment_method'=>$request->payment_method,
             'total_price'=>$total,
             'status'=>'confirmed',
-            'booking_source'=>'walk_in'
+            'booking_source'=>'walk_in',
+            'created_by' => auth()->id()
 
         ]);
 
@@ -175,5 +182,30 @@ class AdminBookingController extends Controller
                 'success',
                 'Booking walk-in berhasil dibuat.'
             );
+    }
+
+    public function receipt(Booking $booking)
+    {
+        $prefix = $booking->booking_source == 'walk_in'
+        ? 'WIN'
+        : 'ONL';
+
+        $receiptNumber =
+            $prefix . '-' .
+            $booking->created_at->format('Ymd') .
+            '-' .
+            str_pad($booking->id,5,'0',STR_PAD_LEFT);
+
+        $pdf = Pdf::loadView(
+            'pages.receipt_pdf',
+            compact(
+                'booking',
+                'receiptNumber'
+            )
+        );
+
+        return $pdf->stream(
+            'reservation-'.$booking->id.'.pdf'
+        );
     }
 }

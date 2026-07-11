@@ -232,6 +232,11 @@ Route::put(
 Route::put('/booking/{booking}/cancel', [ProfileController::class, 'cancelBooking'])
     ->middleware('auth')
     ->name('booking.cancel');
+
+Route::get(
+    '/booking/{booking}/receipt',
+    [AdminBookingController::class, 'receipt'])
+    ->name('booking.receipt');
 // LAPORAN
 Route::get('/laporan', [DashboardController::class, 'laporan'])
         ->name('laporan');

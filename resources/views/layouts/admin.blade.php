@@ -292,19 +292,44 @@
             font-weight:600;
         }
 
-        .success{
+        .sukses{
             background:#dcfce7;
             color:#15803d;
         }
 
-        .pending{
+        .Tertunda{
             background:#fef3c7;
             color:#b45309;
         }
 
-        .danger{
+        .Bahaya{
             background:#fee2e2;
             color:#dc2626;
+        }
+
+        .tertunda {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .dibatalkan {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .completed{
+            background:#e5e7eb;
+            color:#374151;
+        }
+        
+        .rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .waiting {
+            background: #dbeafe;
+            color: #1e40af;
         }
 
         /* FORM */

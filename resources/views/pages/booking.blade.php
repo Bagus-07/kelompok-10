@@ -116,12 +116,12 @@
         color: #065f46;
     }
 
-    .pending {
+    .tertunda {
         background: #fef3c7;
         color: #92400e;
     }
 
-    .cancelled {
+    .dibatalkan {
         background: #fee2e2;
         color: #991b1b;
     }
@@ -232,42 +232,11 @@
 
     <td>
 
-        @if($booking->status == 'confirmed')
+<span class="status {{ $booking->statusClass() }}">
 
-    <span class="status confirmed">
-        Confirmed
-    </span>
+    {{ $booking->statusLabel() }}
 
-@elseif($booking->status == 'waiting_verification')
-
-    <span class="status waiting">
-        Waiting Verification
-    </span>
-
-@elseif($booking->status == 'cancelled')
-    <span class="status cancelled">
-        Cancelled
-    </span>
-
-@elseif($booking->status == 'rejected')
-
-    <span class="status rejected">
-        Rejected
-    </span>
-
-@elseif($booking->status == 'completed')
-
-    <span class="status completed">
-        Completed
-    </span>
-
-@else
-
-    <span class="status pending">
-        Pending
-    </span>
-
-@endif
+</span>
 
     </td>
 
@@ -275,13 +244,27 @@
 
 <div class="action-buttons">
 
-    @if($booking->payment_proof)
+    @if($booking->booking_source == 'walk_in')
 
-        <a href="{{ asset('storage/'.$booking->payment_proof) }}"
-           target="_blank"
-           class="btn edit">
-            Lihat Bukti
-        </a>
+    <a
+        href="{{ route('booking.receipt',$booking->id) }}"
+        target="_blank"
+        class="btn edit">
+
+        Lihat Receipt
+
+    </a>
+
+    @elseif($booking->payment_proof)
+
+    <a
+        href="{{ asset('storage/'.$booking->payment_proof) }}"
+        target="_blank"
+        class="btn edit">
+
+        Lihat Bukti Transfer
+
+    </a>
 
     @endif
 

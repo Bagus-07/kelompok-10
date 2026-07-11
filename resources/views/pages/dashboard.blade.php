@@ -61,28 +61,10 @@
 
             <td>
 
-                @if($booking->status == 'confirmed')
-
-                    <span class="status confirmed">
-                        Confirmed
-                    </span>
-
-                @elseif($booking->status == 'pending')
-
-                    <span class="status pending">
-                        Pending
-                    </span>
-
-                @else
-
-                    <span class="status">
-                        {{ $booking->status }}
-                    </span>
-
-                @endif
-
+                <span class="status {{ $booking->statusClass() }}">
+                    {{ $booking->statusLabel() }}
+                </span>
             </td>
-
         </tr>
 
         @empty

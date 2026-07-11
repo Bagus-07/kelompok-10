@@ -267,7 +267,7 @@
             color:#15803d;
         }
 
-        .pending{
+        .tertunda{
             background:#fef3c7;
             color:#b45309;
         }

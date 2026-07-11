@@ -18,7 +18,7 @@ class DashboardController extends Controller
     // ==========================
     public function tampilkan()
     {
-        $users = User::count();
+        $users = User::where('role', 'user')->count();
         $bookings = Booking::count();
         $rooms = Kamar::where('status', 'Tersedia')->count();
 
