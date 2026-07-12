@@ -178,7 +178,7 @@
                     </td>
 
                     <td class="text-center">
-                        {{ ucwords(str_replace('_', ' ', $booking->status)) }}
+                        {{ $booking->statusLabel() }}
                     </td>
 
                     <td class="text-right">

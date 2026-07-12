@@ -114,8 +114,8 @@
     </td>
 
     <td>
-        <span class="status {{ $booking->status }}">
-            {{ ucfirst($booking->status) }}
+        <span class="status {{ $booking->statusClass() }}">
+            {{ $booking->statusLabel() }}
         </span>
     </td>
 

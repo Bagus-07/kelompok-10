@@ -203,10 +203,18 @@ Route::put('/kamar/{id}', [KamarController::class, 'update'])
 Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])
     ->name('kamar.destroy');
 
+Route::put('/kamar/{id}/cleaning',[KamarController::class, 'selesaiCleaning'])
+    ->name('kamar.cleaning');
+
 // BOOKING
 Route::get('/booking',
     [AdminBookingController::class, 'index'])
     ->name('admin.booking');
+
+Route::post(
+    '/booking/admin/store',
+    [AdminBookingController::class, 'store'])
+    ->name('booking.admin.store');
 
 Route::put('/booking/{id}/approve',
     [AdminBookingController::class, 'approve'])
@@ -216,9 +224,19 @@ Route::put('/booking/{id}/reject',
     [AdminBookingController::class, 'reject'])
     ->name('booking.reject');
 
+Route::put(
+    '/booking/{id}/checkout',
+    [AdminBookingController::class, 'checkout'])   
+    ->name('booking.checkout');
+
 Route::put('/booking/{booking}/cancel', [ProfileController::class, 'cancelBooking'])
     ->middleware('auth')
     ->name('booking.cancel');
+
+Route::get(
+    '/booking/{booking}/receipt',
+    [AdminBookingController::class, 'receipt'])
+    ->name('booking.receipt');
 // LAPORAN
 Route::get('/laporan', [DashboardController::class, 'laporan'])
         ->name('laporan');

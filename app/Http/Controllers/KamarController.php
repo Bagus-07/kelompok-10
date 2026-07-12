@@ -52,4 +52,21 @@ class KamarController extends Controller
         return redirect()->back()
             ->with('success', 'Kamar berhasil diupdate');
     }
+
+    public function selesaiCleaning($id)
+    {
+        $kamar = Kamar::findOrFail($id);
+
+        if ($kamar->status != 'Cleaning') {
+            return redirect()->back()
+                ->with('error', 'Kamar tidak sedang dalam proses cleaning.');
+        }
+
+        $kamar->update([
+            'status' => 'Tersedia'
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Cleaning selesai. Kamar siap digunakan.');
+    }
 }
