@@ -151,13 +151,71 @@
 .room-table{
     width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
 }
 
-.room-table th,
-.room-table td{
-    border-bottom:1px solid #eee;
-    padding:12px;
+.room-table th{
+    background:#f1f5f9;
+    color:#475569;
+    padding:14px;
+    font-weight:600;
     text-align:center;
+}
+
+.room-table td{
+    padding:14px;
+    text-align:center;
+    vertical-align:middle;
+}
+
+
+/* header detail kamar */
+
+.room-detail-header{
+    display:grid;
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        1fr
+        180px;
+
+    background:#f8fafc;
+    padding:14px;
+    font-weight:600;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+
+/* isi detail kamar */
+
+.room-detail-row{
+    display:grid;
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        1fr
+        180px;
+
+    align-items:center;
+    padding:14px;
+    border-bottom:1px solid #eee;
+
+}
+
+
+.room-detail-row:last-child{
+    border-bottom:none;
+}
+
+
+.room-detail-action{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+
 }
 
 .status{
@@ -338,113 +396,189 @@
 
     <div class="room-list" id="room{{ $tipe->id }}">
 
-        <table class="room-table">
 
-            <thead>
-                <tr>
-                    <th>No Kamar</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="room-detail-header">
 
-                @forelse($tipe->kamars as $kamar)
+        <div>
+            No. Kamar
+        </div>
 
-                    <tr>
-                        <td>{{ $kamar->nomor_kamar }}</td>
-                        <td>
+        <div>
+            Status
+        </div>
 
-                            @if($kamar->status == 'Tersedia')
+        <div>
+            
+        </div>
 
-                            <span class="status tersedia">
-                                Tersedia
-                            </span>
+        <div>
 
-                            @elseif($kamar->status == 'Dipakai')
+        </div>
 
-                            <span class="status dipakai">
-                                Dipakai
-                            </span>
+        <div>
+            Aksi
+        </div>
 
-                            @elseif($kamar->status == 'Cleaning')
+    </div>
 
-                            <span class="status cleaning">
-                                Cleaning
-                            </span>
 
-                            @elseif($kamar->status == 'Maintenance')
 
-                            <span class="status maintenance">
-                                Maintenance
-                            </span>
-                                
-                            @else
+    @forelse($tipe->kamars as $kamar)
 
-                            {{ $kamar->status }}
 
-                            @endif
+    <div class="room-detail-row">
 
-                        </td>
 
-                        <td>
+        <div>
+            <strong>
+                {{ $kamar->nomor_kamar }}
+            </strong>
+        </div>
 
-                            <button
-                                class="btn-edit"
-                                onclick="openModal('editKamar{{ $kamar->id }}')">
-                                Edit
-                            </button>
 
-                            <form
-                                action="{{ route('kamar.destroy', $kamar->id) }}"
-                                method="POST"
-                                style="display:inline;">
+        <div>
 
-                                @csrf
-                                @method('DELETE')
+            @if($kamar->status == 'Tersedia')
 
-                                <button
-                                    class="btn-delete"
-                                    onclick="return confirm('Hapus kamar ini?')">
-                                    Hapus
-                                </button>
+                <span class="status tersedia">
+                    Tersedia
+                </span>
 
-                            </form>
 
-                            @if($kamar->status == 'Cleaning')
+            @elseif($kamar->status == 'Dipakai')
 
-                                <form
-                                    action="{{ route('kamar.cleaning', $kamar->id) }}"
-                                    method="POST"
-                                    style="display:inline;">
+                <span class="status dipakai">
+                    Dipakai
+                </span>
 
-                                    @csrf
-                                    @method('PUT')
 
-                                    <button
-                                        class="btn-edit"
-                                        style="background:#06b6d4;">
-                                        Cleaning Selesai
-                                    </button>
+            @elseif($kamar->status == 'Cleaning')
 
-                                </form>
+                <span class="status cleaning">
+                    Cleaning
+                </span>
 
-                            @endif
 
-                        </td>
-                    </tr>
+            @elseif($kamar->status == 'Maintenance')
 
-                @empty
+                <span class="status maintenance">
+                    Maintenance
+                </span>
 
-                    <tr>
-                        <td colspan="2">
-                            Belum ada kamar
-                        </td>
-                    </tr>
+            @endif
 
-                @endforelse
-            </tbody>
-        </table>
+        </div>
+
+
+        <div>
+            
+        </div>
+
+
+        <div>
+
+            @if($kamar->status == 'Dipakai')
+
+                @php
+                    $booking = $kamar->bookings()
+                        ->where('status','confirmed')
+                        ->latest()
+                        ->first();
+                @endphp
+
+
+
+
+
+            @else
+
+                
+
+            @endif
+
+        </div>
+
+
+
+        <div class="room-detail-action">
+
+
+            <button
+                class="btn-edit"
+                onclick="openModal('editKamar{{ $kamar->id }}')">
+
+                Edit
+
+            </button>
+
+
+
+            <form
+                action="{{ route('kamar.destroy',$kamar->id) }}"
+                method="POST">
+
+
+                @csrf
+                @method('DELETE')
+
+
+                <button
+                    class="btn-delete"
+                    onclick="return confirm('Hapus kamar ini?')">
+
+                    Hapus
+
+                </button>
+
+
+            </form>
+
+
+
+            @if($kamar->status == 'Cleaning')
+
+
+            <form
+                action="{{ route('kamar.cleaning',$kamar->id) }}"
+                method="POST">
+
+                @csrf
+                @method('PUT')
+
+
+                <button
+                    class="btn-edit"
+                    style="background:#06b6d4">
+
+                    Cleaning Selesai
+
+                </button>
+
+
+            </form>
+
+
+            @endif
+
+
+        </div>
+
+
+
+    </div>
+
+
+    @empty
+
+
+    <p style="text-align:center;padding:20px">
+        Belum ada kamar
+    </p>
+
+
+    @endforelse
+
+
     </div>
 </div>
 @endforeach

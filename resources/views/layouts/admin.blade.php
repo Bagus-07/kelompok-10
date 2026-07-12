@@ -23,7 +23,7 @@
         /* SIDEBAR */
 
         .sidebar{
-            width:270px;
+            width:290px;
             height:100vh;
             background:linear-gradient(180deg,#0f172a,#1e293b);
             color:white;
@@ -50,8 +50,8 @@
         }
 
         .sidebar h2{
-            margin-bottom:40px;
-            font-size:34px;
+            margin:0;
+            font-size:28px;
         }
 
         .menu-title{
@@ -121,6 +121,8 @@
 
             cursor:pointer;
             transition:.3s;
+
+            justify-content:center;
         }       
 
             .logout-btn:hover{
@@ -130,8 +132,8 @@
         /* MAIN */
 
         .main{
-            margin-left:270px;
-            width:calc(100% - 270px);
+            margin-left:290px;
+            width:calc(100% - 290px);
             padding:35px;
         }
 
@@ -388,21 +390,64 @@
 
    <div class="main">
 
-    <div style="display:flex;justify-content:flex-end;margin-bottom:20px;">
-        <select onchange="window.location.href=this.value"
-                style="padding:8px;border-radius:8px;">
+    <div
+    style="display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;">
 
-            <option value="{{ url('/language/id') }}"
-                {{ app()->getLocale() == 'id' ? 'selected' : '' }}>
+        <div>
+
+            <h2
+            style="font-size:34px;
+                color:#0f172a;
+                font-weight:700;">
+
+                @yield('title')
+
+            </h2>
+
+            <p
+            style="color:#64748b;
+                margin-top:4px;">
+
+                Selamat datang,
+                <strong>{{ auth()->user()->name }}</strong>
+
+                <br>
+
+                {{ auth()->user()->email }}
+
+            </p>
+
+        </div>
+
+        <select
+            onchange="window.location.href=this.value"
+            style="
+                padding:10px 15px;
+                border-radius:10px;
+                border:1px solid #dbeafe;
+                background:white;">
+
+            <option
+                value="{{ url('/language/id') }}"
+                {{ app()->getLocale()=='id' ? 'selected':'' }}>
+
                 🇮🇩 Indonesia
+
             </option>
 
-            <option value="{{ url('/language/en') }}"
-                {{ app()->getLocale() == 'en' ? 'selected' : '' }}>
+            <option
+                value="{{ url('/language/en') }}"
+                {{ app()->getLocale()=='en' ? 'selected':'' }}>
+
                 🇬🇧 English
+
             </option>
 
         </select>
+
     </div>
 
     @yield('content')
