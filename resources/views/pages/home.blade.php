@@ -142,6 +142,7 @@
             <div class="search-field">
                 <label>{{ __('messages.guests') }}</label>
                 <input type="number" name="guests" min="1" value="1">
+                <small style="visibility:hidden;">Placeholder</small>
             </div>
 
             <div class="search-field">
@@ -161,11 +162,20 @@
                     @endforeach
 
                 </select>
+                <small style="visibility:hidden;">Placeholder</small>
             </div>
 
-            <button type="submit">
-                {{ __('messages.search_rooms') }}
-            </button>
+            <div class="search-field search-btn">
+                <label>&nbsp;</label>
+
+                <button type="submit">
+                    {{ __('messages.search_rooms') }}
+                </button>
+            
+            
+            </div>
+            
+            
 
         </form>
 

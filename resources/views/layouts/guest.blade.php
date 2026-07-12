@@ -458,10 +458,9 @@ body {
 
 .hero-search{
     background:rgba(255,255,255,.95);
-
     border-radius:18px;
-
     padding:18px;
+    
 
     display:grid;
     grid-template-columns:
@@ -474,10 +473,11 @@ body {
     gap:12px;
 
     max-width:1150px;
-
     margin:auto;
 
     box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+    align-items:end; /* <-- ADD THIS */
 }
 
 
@@ -524,11 +524,11 @@ body {
     width:100%;
     height:55px;
 
+    margin:0 0 22px 0; /* pushes it down to line up with the inputs */
+
     display:flex;
     justify-content:center;
     align-items:center;
-
-    margin:0;
 
     border:none;
     border-radius:14px;
@@ -540,7 +540,6 @@ body {
     font-weight:700;
 
     cursor:pointer;
-
     transition:.25s;
 }
 

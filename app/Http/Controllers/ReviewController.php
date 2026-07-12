@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Booking;
 use App\Models\TipeKamar;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
@@ -19,69 +20,74 @@ class ReviewController extends Controller
         ]);
 
         $room = TipeKamar::findOrFail(
-    $request->tipe_kamar_id
-);
+            $request->tipe_kamar_id
+        );
 
-    $hasBooking = Booking::where(
-            'user_id',
-            auth()->id()
-        )
-        ->where(
-            'room_name',
-            $room->nama_tipe
-        )
-        ->where(
-            'status',
-            'Completed'
-        )
-        ->exists();
+        // Check if user has stayed in this room
+        // User can review only after checkout date has passed
+        $hasBooking = Booking::where(
+                'user_id',
+                auth()->id()
+            )
+            ->where(
+                'room_name',
+                $room->nama_tipe
+            )
+            ->whereDate(
+                'check_out',
+                '<=',
+                Carbon::today()
+            )
+            ->exists();
 
-    if (!$hasBooking) {
+        if (!$hasBooking) {
 
-        return back()->withErrors([
-            'review' => 'You can only review rooms you have stayed in.'
+            return back()->withErrors([
+                'review' => 'You can only review rooms you have stayed in.'
+            ]);
+
+        }
+
+        Review::create([
+            'user_id' => auth()->id(),
+            'name' => auth()->user()->name,
+            'review' => $request->review,
+            'rating' => $request->rating,
+            'tipe_kamar_id' => $request->tipe_kamar_id,
         ]);
-
-    }
-
-    Review::create([
-        'user_id' => auth()->id(),
-        'name' => auth()->user()->name,
-        'review' => $request->review,
-        'rating' => $request->rating,
-        'tipe_kamar_id' => $request->tipe_kamar_id,
-    ]);
 
         return redirect('/home');
     }
+
 
     public function update(Request $request, Review $review)
     {
         if ($review->user_id != auth()->id()) {
             abort(403);
         }
-    
+
         $request->validate([
             'review' => 'required',
             'rating' => 'required|integer|min:1|max:5',
         ]);
-    
+
         $review->update([
             'review' => $request->review,
             'rating' => $request->rating,
         ]);
-    
+
         return back()->with('success', 'Review updated successfully.');
     }
+
 
     public function destroy(Review $review)
     {
         if ($review->user_id != auth()->id()) {
             abort(403);
         }
-    
+
         $review->delete();
-    
+
         return back()->with('success', 'Review deleted successfully.');
     }
 }

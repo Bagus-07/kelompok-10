@@ -412,6 +412,7 @@
         required
     >
     <small style="color:#ccc;">Check-in dimulai pukul 14:00 WIB</small>
+    <small>&nbsp;</small>
 </div>
 
 <div class="search-field">
@@ -424,6 +425,7 @@
         required
     >
     <small style="color:#ccc;">Check-out maksimal pukul 12:00 WIB</small>
+    
 </div>
 
 <div class="search-field">
@@ -434,6 +436,8 @@
         value="{{ $guests ?? 1 }}"
         min="1"
     >
+    <small>&nbsp;</small>
+    <small style="visibility:hidden;">Placeholder</small>
 </div>
 
 <div class="search-field">
@@ -451,12 +455,18 @@
         @endforeach
 
     </select>
+    <small>&nbsp;</small>
+    <small style="visibility:hidden;">Placeholder</small>
 
 </div>
 
-<button type="submit">
+<div class="search-field">
+    <button type="submit">
     {{ __('messages.search_rooms') }}
-</button>
+    </button>
+    <small style="visibility:hidden;">Placeholder</small>
+</div>
+
 
 </form>
 
@@ -475,10 +485,10 @@
 @foreach($rooms as $room)
 
 <div class="room-card"
-     data-name="{{ $room->nama_tipe }}"
-     data-price="{{ $room->harga_per_malam }}"
-     data-desc="{{ $room->deskripsi }}"
-     data-img="{{ $room->gambar ? asset('storage/'.$room->gambar) : 'https://via.placeholder.com/220x150' }}">
+    data-name="{{ $room->nama_tipe }}"
+    data-price="{{ $room->harga_per_malam }}"
+    data-desc="{{ $room->deskripsi }}"
+    data-img="{{ $room->gambar ? asset('storage/'.$room->gambar) : 'https://via.placeholder.com/220x150' }}">
 
     <div class="room-image">
         <img src="{{ $room->gambar ? asset('storage/'.$room->gambar) : 'https://via.placeholder.com/220x150' }}">
@@ -547,7 +557,7 @@
                 <div class="mt-4 p-3 border rounded bg-gray-50">
                     <p>
                         <strong>Check In :</strong>
-                         {{ \Carbon\Carbon::parse($check_in)->format('d M Y, H:i') }}
+                        {{ \Carbon\Carbon::parse($check_in)->format('d M Y, H:i') }}
                     </p>
 
                     <p>
