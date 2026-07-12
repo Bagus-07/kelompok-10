@@ -1,18 +1,21 @@
 <div class="sidebar">
 
     <!-- Logo -->
-    <div style="text-align:center;margin-bottom:30px;">
+    <div style="text-align:center;margin-bottom:20px;">
 
         <img
             src="{{ asset('photo/new logo.jpeg') }}"
-            width="90"
-            style="border-radius:16px;">
+            width="95"
+            style="
+            border-radius:18px;
+             box-shadow:0 8px 20px rgba(0,0,0,.25);">
 
         <h2
             style="
-            margin-top:15px;
-            margin-bottom:5px;
-            font-size:26px;">
+                margin-top:18px;
+                margin-bottom:6px;
+                font-size:28px;
+                font-weight:700;">
 
             StayEase
 
@@ -20,8 +23,9 @@
 
         <p
             style="
-            color:#94a3b8;
-            font-size:14px;">
+                color:#94a3b8;
+                font-size:15px;
+                letter-spacing:.5px;">
 
             Administrator
 
@@ -29,56 +33,56 @@
 
     </div>
 
+    <p class="menu-title">MENU</p>
+
     <div class="sidebar-menu">
-
         <a href="{{ url('/admin/dashboard') }}"
-        class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
+   class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
 
-            📊 Dashboard
+    📊 Dashboard
 
-        </a>
+</a>
 
-        <a href="{{ url('/admin/user') }}"
-        class="{{ request()->is('admin/user*') ? 'active' : '' }}">
+<a href="{{ url('/admin/user') }}"
+   class="{{ request()->is('admin/user*') ? 'active' : '' }}">
 
-            👤 Data Pengguna
+    👤 Data Pengguna
 
-        </a>
+</a>
 
-        <a href="{{ url('/admin/kamar') }}"
-        class="{{ request()->is('admin/kamar*') ? 'active' : '' }}">
+<a href="{{ url('/admin/kamar') }}"
+   class="{{ request()->is('admin/kamar*') ? 'active' : '' }}">
 
-            🛏 Data Kamar
+    🛏 Data Kamar
 
-        </a>
+</a>
 
-        <a href="{{ url('/admin/booking') }}"
-        class="{{ request()->is('admin/booking*') ? 'active' : '' }}">
+<a href="{{ url('/admin/booking') }}"
+   class="{{ request()->is('admin/booking*') ? 'active' : '' }}">
 
-            📅 Booking
+    📅 Booking
 
-        </a>
+</a>
 
-        <a href="{{ url('/admin/laporan') }}"
-        class="{{ request()->is('admin/laporan*') ? 'active' : '' }}">
+<a href="{{ url('/admin/laporan') }}"
+   class="{{ request()->is('admin/laporan*') ? 'active' : '' }}">
 
-            📄 Laporan
+    📄 Laporan
 
-        </a>
-
+</a>
     </div>
 
     <div
         style="
-        margin-top:auto;
-        margin-bottom:18px;
-        padding:16px;
+        margin-top:25px;
+        padding:20px;
         border-top:1px solid rgba(255,255,255,.15);">
 
         <div
             style="
-            color:white;
-            font-weight:600;">
+                color:white;
+                font-weight:700;
+                font-size:18px;">
 
             {{ auth()->user()->name }}
 
@@ -87,8 +91,8 @@
         <div
             style="
             color:#94a3b8;
-            font-size:13px;
-            margin-top:4px;">
+            font-size:15px;
+            margin-top:5px;">
 
             {{ auth()->user()->email }}
 
@@ -96,11 +100,11 @@
 
         <div
             style="
-            margin-top:10px;
+            margin-top:12px;
             display:inline-block;
             background:#16a34a;
             color:white;
-            padding:6px 12px;
+            padding:7px 12px;
             border-radius:20px;
             font-size:12px;
             font-weight:600;">

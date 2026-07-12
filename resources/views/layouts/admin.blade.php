@@ -23,16 +23,17 @@
         /* SIDEBAR */
 
         .sidebar{
-            width:290px;
+            width: 300px;
             height:100vh;
             background:linear-gradient(180deg,#0f172a,#1e293b);
             color:white;
-            padding:30px 20px;
+            padding:35px 24px;
             position:fixed;
             left:0;
             top:0;
             display:flex;
             flex-direction:column;
+            overflow-y:auto;
         }
 
         .sidebar-menu{
@@ -41,7 +42,7 @@
         }
         
         .logout-form{
-            margin-top:auto;
+            margin-top:30px;
         }
 
         .logo{
@@ -63,26 +64,30 @@
         .sidebar a{
             display:flex;
             align-items:center;
-            gap:14px;
+            justify-content:flex-start;
+            height:58px;
+            gap: 15px;
             text-decoration:none;
             color:#cbd5e1;
-            padding:16px 18px;
+            padding:0px 20px;
             border-radius:18px;
-            margin-bottom:12px;
-            transition:0.3s;
-            font-size:16px;
+            margin-bottom:8px;
+            transition:.3s;
+            font-size:17px;
             font-weight:500;
+            transition:.3s;
         }
 
         .sidebar a:hover{
             background:#334155;
-            transform:translateX(5px);
+            transform:translateX(3px);
         }
 
         .sidebar a.active{
             background:linear-gradient(90deg,#2563eb,#3b82f6);
             color:white;
             box-shadow:0 10px 25px rgba(37,99,235,0.4);
+            border-left:4px solid white;
         }
 
         .menu-link{
@@ -104,9 +109,10 @@
 
         .logout-btn{
             width:100%;
+            height:60px;
             display:flex;
             align-items:center;
-            gap:14px;
+            gap:12px;
 
             padding:16px 18px;
 
@@ -116,24 +122,22 @@
             background:#dc2626;
             color:white;
 
-            font-size:16px;
-            font-weight:500;
+            font-size:17px;
+            font-weight:600;
 
             cursor:pointer;
             transition:.3s;
-
-            justify-content:center;
         }       
 
             .logout-btn:hover{
                 background:#b91c1c;
-                  transform:translateX(5px);
+                  transform:translateY(-2px);
         }
         /* MAIN */
 
         .main{
-            margin-left:290px;
-            width:calc(100% - 290px);
+            margin-left:300px;
+            width:calc(100% - 300px);
             padding:35px;
         }
 
