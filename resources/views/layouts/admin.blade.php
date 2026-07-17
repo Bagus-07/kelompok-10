@@ -392,7 +392,7 @@
 
     <x-admin-sidebar />
 
-   <div class="main">
+    <div class="main">
 
     <div
     style="display:flex;
@@ -415,7 +415,7 @@
             style="color:#64748b;
                 margin-top:4px;">
 
-                Selamat datang,
+                {{ __('messages.welcome_admin') }}
                 <strong>{{ auth()->user()->name }}</strong>
 
                 <br>

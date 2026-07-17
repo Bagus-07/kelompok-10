@@ -148,12 +148,12 @@ tr:hover {
 <div class="content-box">
 
     <div class="header">
-        <h3>Data User</h3>
+        <h3>{{ __('messages.user_data') }}</h3>
 
         <button
             class="btn-add"
             onclick="openModal('modalUser')">
-            + Tambah Tamu
+            {{ __('messages.add_guest') }}
         </button>
     </div>
 
@@ -162,10 +162,10 @@ tr:hover {
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>No HP</th>
-                    <th>Aksi</th>
+                    <th>{{ __('messages.name') }}</th>
+                    <th>{{ __('messages.email') }}</th>
+                    <th>{{ __('messages.phone') }}</th>
+                    <th>{{ __('messages.action') }}</th>
                 </tr>
             </thead>
 
@@ -198,7 +198,7 @@ tr:hover {
                                 class="btn delete"
                                 onclick="return confirm('Hapus user ini?')"
                             >
-                                Hapus
+                                {{ __('messages.delete') }}
                             </button>
                         </form>
                     </td>
@@ -206,7 +206,7 @@ tr:hover {
                 @empty
                 <tr>
                     <td colspan="5" style="text-align:center;">
-                        Belum ada data user
+                        {{ __('messages.no_users_data') }}
                     </td>
                 </tr>
                 @endforelse
@@ -256,7 +256,7 @@ tr:hover {
                     class="btn-close"
                     onclick="closeModal('editUser{{ $user->id }}')"
                 >
-                    Batal
+                    {{ __('messages.cancel') }}
                 </button>
 
                 <button
@@ -277,7 +277,7 @@ tr:hover {
 @endforeach
 <div id="modalUser" class="modal">
     <div class="modal-content">
-        <h3>Tambah Tamu</h3>
+        <h3>{{ __('messages.add_guest') }}</h3>
 
         <form
             method="POST"
@@ -318,7 +318,7 @@ tr:hover {
                 <button
                     type="submit"
                     class="btn-add">
-                    Simpan
+                    {{ __('messages.save') }}
                 </button>
 
             </div>

@@ -46,14 +46,14 @@
 <a href="{{ url('/admin/user') }}"
    class="{{ request()->is('admin/user*') ? 'active' : '' }}">
 
-    👤 Data Pengguna
+    👤 {{ __('messages.user_data') }}
 
 </a>
 
 <a href="{{ url('/admin/kamar') }}"
    class="{{ request()->is('admin/kamar*') ? 'active' : '' }}">
 
-    🛏 Data Kamar
+    🛏 {{ __('messages.room_data') }}
 
 </a>
 
@@ -67,7 +67,7 @@
 <a href="{{ url('/admin/laporan') }}"
    class="{{ request()->is('admin/laporan*') ? 'active' : '' }}">
 
-    📄 Laporan
+    📄 {{ __('messages.report') }}
 
 </a>
     </div>
@@ -109,7 +109,7 @@
             font-size:12px;
             font-weight:600;">
 
-            🟢 Administrator Aktif
+            🟢 Administrator {{ __('messages.active') }}
 
         </div>
 
@@ -126,7 +126,7 @@
             type="submit"
             class="logout-btn">
 
-            🚪 Keluar
+            🚪 {{ __('messages.logout') }}
 
         </button>
 

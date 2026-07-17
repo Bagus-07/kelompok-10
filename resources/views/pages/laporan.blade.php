@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Laporan')
+@section('title', __('messages.report'))
 
 @section('content')
 
@@ -9,8 +9,8 @@
 
     <div class="box-header">
         <div>
-            <h3>Laporan Hotel</h3>
-            <p>Monitoring pendapatan dan booking hotel</p>
+            <h3>{{ __('messages.hotel_report') }}</h3>
+            <p>{{ __('messages.monitoring') }}</p>
         </div>
 
         <div class="filter-box">
@@ -29,17 +29,17 @@
 <div class="cards">
 
     <div class="card blue">
-        <h4>Total Booking</h4>
+        <h4>{{ __('messages.total_bookings') }}</h4>
         <h1>{{ $totalBooking }}</h1>
     </div>
 
     <div class="card green">
-        <h4>Pendapatan</h4>
+        <h4>{{ __('messages.income') }}</h4>
         <h1>Rp {{ number_format($totalPendapatan, 0, ',', '.') }}</h1>
     </div>
 
     <div class="card orange">
-        <h4>Kamar Terisi</h4>
+        <h4>{{ __('messages.occupied_room') }}</h4>
         <h1>{{ $kamarTerisi }}</h1>
     </div>
 
@@ -50,8 +50,8 @@
 
     <div class="box-header">
         <div>
-            <h3>Grafik Pendapatan</h3>
-            <p>Statistik pendapatan hotel per bulan</p>
+            <h3>{{ __('messages.revenue_chart') }}</h3>
+            <p>{{ __('messages.statistics') }}</p>
         </div>
     </div>
 
@@ -65,8 +65,8 @@
     <div class="box-header">
 
         <div>
-            <h3>Laporan Booking</h3>
-            <p>Daftar booking terbaru hotel</p>
+            <h3>{{ __('messages.booking_report') }}</h3>
+            <p>{{ __('messages.new_booking_list') }}</p>
         </div>
 
         <div style="display:flex; gap:10px;">
@@ -85,11 +85,11 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>Kamar</th>
-                <th>Tanggal</th>
-                <th>Status</th>
-                <th>Harga</th>
+                <th>{{ __('messages.name') }}</th>
+                <th>{{ __('messages.rooms') }}</th>
+                <th>{{ __('messages.date') }}</th>
+                <th>{{ __('messages.status') }}</th>
+                <th>{{ __('messages.price') }}</th>
             </tr>
         </thead>
 
@@ -128,7 +128,7 @@
 
 <tr>
     <td colspan="6" style="text-align:center">
-        Belum ada data booking
+        {{ __('messages.admin_no_bookings') }}
     </td>
 </tr>
 

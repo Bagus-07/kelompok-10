@@ -8,17 +8,17 @@
 <div class="cards">
 
     <div class="card blue">
-        Total User
+        {{ __('messages.total_users') }}
         <h1>{{ $users }}</h1>
     </div>
 
     <div class="card green">
-        Total Booking
+        {{ __('messages.total_bookings') }}
         <h1>{{ $bookings }}</h1>
     </div>
 
     <div class="card orange">
-        Kamar Tersedia
+        {{ __('messages.room_available') }}
         <h1>{{ $rooms }}</h1>
     </div>
 
@@ -28,15 +28,15 @@
 <!-- TABLE -->
 <div class="table-box">
 
-    <h3>Booking Terbaru</h3>
+    <h3>{{ __('messages.new_bookings') }}</h3>
 
     <table>
 
         <tr>
-            <th>Nama</th>
-            <th>Kamar</th>
-            <th>Tanggal</th>
-            <th>Status</th>
+            <th>{{ __('messages.name') }}</th>
+            <th>{{ __('messages.rooms') }}</th>
+            <th>{{ __('messages.date') }}</th>
+            <th>{{ __('messages.status') }}</th>
         </tr>
 
 
@@ -71,7 +71,7 @@
 
         <tr>
             <td colspan="4" style="text-align:center">
-                Belum ada booking
+                {{ __('messages.no_new_bookings') }}
             </td>
         </tr>
 

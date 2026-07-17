@@ -302,28 +302,28 @@
 
 <div class="room-container">
     <div class="room-header">
-        <h3>Data Kamar</h3>
+        <h3>{{ __('messages.room_data') }}</h3>
 
         <div class="room-actions">
             <button class="btn-room"
                     onclick="openModal('modalTipe')">
-                Tambah Tipe Kamar
+                {{ __('messages.add_room_type') }}
             </button>
 
             <button class="btn-room secondary"
                     onclick="openModal('modalKamar')">
-                Tambah Kamar
+                {{ __('messages.add_room') }}
             </button>
         </div>
     </div>
 
     <!-- TAMBAHKAN DI SINI -->
     <div class="room-guide">
-        <div>Tipe Kamar</div>
-        <div>Harga/Malam</div>
-        <div>Kamar Terpakai</div>
-        <div>Kamar Tersedia</div>
-        <div>Aksi</div>
+        <div>{{ __('messages.room_type') }}</div>
+        <div>{{ __('messages.price_night') }}</div>
+        <div>{{ __('messages.room_occupied') }}</div>
+        <div>{{ __('messages.room_available') }}</div>
+        <div>{{ __('messages.action') }}</div>
     </div>
     
    @foreach($tipeKamars as $tipe)
@@ -385,7 +385,7 @@
                     type="submit"
                     class="btn-delete"
                     onclick="return confirm('Hapus tipe kamar ini?')">
-                    Hapus
+                    {{ __('messages.delete') }}
                 </button>
 
             </form>
@@ -400,11 +400,11 @@
     <div class="room-detail-header">
 
         <div>
-            No. Kamar
+            {{ __('messages.room_number') }}
         </div>
 
         <div>
-            Status
+            {{ __('messages.status') }}
         </div>
 
         <div>
@@ -416,7 +416,7 @@
         </div>
 
         <div>
-            Aksi
+            {{ __('messages.action') }}
         </div>
 
     </div>
@@ -441,28 +441,28 @@
             @if($kamar->status == 'Tersedia')
 
                 <span class="status tersedia">
-                    Tersedia
+                    {{ __('messages.available') }}
                 </span>
 
 
             @elseif($kamar->status == 'Dipakai')
 
                 <span class="status dipakai">
-                    Dipakai
+                    {{ __('messages.occupied') }}
                 </span>
 
 
             @elseif($kamar->status == 'Cleaning')
 
                 <span class="status cleaning">
-                    Cleaning
+                    {{ __('messages.cleaning') }}
                 </span>
 
 
             @elseif($kamar->status == 'Maintenance')
 
                 <span class="status maintenance">
-                    Maintenance
+                    {{ __('messages.maintenance') }}
                 </span>
 
             @endif
@@ -526,7 +526,7 @@
                     class="btn-delete"
                     onclick="return confirm('Hapus kamar ini?')">
 
-                    Hapus
+                    {{ __('messages.delete') }}
 
                 </button>
 
@@ -550,7 +550,7 @@
                     class="btn-edit"
                     style="background:#06b6d4">
 
-                    Cleaning Selesai
+                    {{ __('messages.clean_done') }}
 
                 </button>
 
@@ -572,7 +572,7 @@
 
 
     <p style="text-align:center;padding:20px">
-        Belum ada kamar
+        {{ __('messages.no_rooms') }}
     </p>
 
 
@@ -587,7 +587,7 @@
 
 <div id="editModal{{ $tipe->id }}" class="modal">
     <div class="modal-content">
-        <h3>Edit Tipe Kamar</h3>
+        <h3>{{ __('messages.edit_room_type') }}r</h3>
 
         <form
             method="POST"
@@ -624,7 +624,7 @@
                     type="button"
                     class="btn-close"
                     onclick="closeModal('editModal{{ $tipe->id }}')">
-                    Batal
+                    {{ __('messages.cancel') }}
                 </button>
 
                 <button
@@ -642,7 +642,7 @@
     @foreach($tipe->kamars as $kamar)
     <div id="editKamar{{ $kamar->id }}" class="modal">
         <div class="modal-content">
-            <h3>Edit Kamar</h3>
+            <h3>{{ __('messages.edit_room') }}</h3>
             <form
                 method="POST"
                 action="{{ route('kamar.update', $kamar->id) }}"
@@ -677,22 +677,22 @@
 
                     <option value="Tersedia"
                         {{ $kamar->status == 'Tersedia' ? 'selected' : '' }}>
-                        Tersedia
+                        {{ __('messages.available') }}
                     </option>
 
                     <option value="Dipakai"
                         {{ $kamar->status == 'Dipakai' ? 'selected' : '' }}>
-                        Dipakai
+                        {{ __('messages.occupied') }}
                     </option>
 
                     <option value="Cleaning"
                         {{ $kamar->status == 'Cleaning' ? 'selected' : '' }}>
-                        Cleaning
+                        {{ __('messages.cleaning') }}
                     </option>
 
                     <option value="Maintenance"
                         {{ $kamar->status == 'Maintenance' ? 'selected' : '' }}>
-                        Maintenance
+                        {{ __('messages.maintenance') }}
                     </option>
 
                 </select>
@@ -704,7 +704,7 @@
                         class="btn-close"
                         onclick="closeModal('editKamar{{ $kamar->id }}')"
                     >
-                        Batal
+                        {{ __('messages.cancel') }}
                     </button>
 
                     <button
@@ -723,7 +723,7 @@
 
 <div id="modalTipe" class="modal">
     <div class="modal-content">
-        <h3>Tambah Tipe Kamar</h3>
+        <h3>{{ __('messages.add_room_type') }}</h3>
 
         <form
             class="modal-form"
@@ -762,13 +762,13 @@
                     type="button"
                     class="btn-close"
                     onclick="closeModal('modalTipe')">
-                    Batal
+                    {{ __('messages.cancel') }}
                 </button>
 
                 <button
                     type="submit"
                     class="btn-room">
-                    Simpan
+                    {{ __('messages.save') }}
                 </button>
             </div>
         </form>
@@ -779,7 +779,7 @@
 
 <div id="modalKamar" class="modal">
     <div class="modal-content">
-        <h3>Tambah Kamar</h3>
+        <h3>{{ __('messages.add_room') }}</h3>
 
         <form
             class="modal-form"
@@ -796,7 +796,7 @@
             <select name="tipe_kamar_id">
 
                 <option value="">
-                    Pilih Tipe Kamar
+                    {{ __('messages.select_room_type') }}
                 </option>
 
                 @foreach($tipeKamars as $tipe)
@@ -811,10 +811,10 @@
 
             <select name="status">
 
-                <option value="Tersedia">Tersedia</option>
-                <option value="Dipakai">Dipakai</option>
-                <option value="Cleaning">Cleaning</option>
-                <option value="Maintenance">Maintenance</option>
+                <option value="Tersedia">{{ __('messages.available') }}</option>
+                <option value="Dipakai">{{ __('messages.occupied') }}</option>
+                <option value="Cleaning">{{ __('messages.cleaning') }}</option>
+                <option value="Maintenance">{{ __('messages.maintenance') }}</option>
 
             </select>
 
@@ -824,13 +824,13 @@
                 type="button"
                 class="btn-close"
                 onclick="closeModal('modalKamar')">
-                Batal
+                {{ __('messages.cancel') }}
             </button>
 
             <button 
                 type="submit"
                 class="btn-room secondary">
-                Simpan
+                {{ __('messages.save') }}
             </button>
         </div>
     </form>

@@ -10,7 +10,7 @@ return [
     'user_data' => 'User Data',
     'rooms' => 'Rooms',
     'booking' => 'Bookings',
-    'report' => 'Reports',
+
     'logout' => 'Logout',
 
     // USER WEBSITE
@@ -128,4 +128,71 @@ return [
     'no_booking' => 'No booking data available.',
     'email' => 'Email',
     'login_failed' => 'Invalid email or password.',
+
+    //Admin Dashboard
+    'welcome_admin' => 'Welcome,',
+    'total_users' => 'Total Users',
+    'total_bookings' => 'Total Bookings',
+    'room_available' => 'Room available',
+    'new_bookings' => 'New Bookings',
+    'date' => 'Date',
+    'status' => 'Status',
+    'no_new_bookings' => 'No new Bookings',
+
+    //admin user
+    'user_data' => 'User Data',
+    'add_user' => '+ Add Guest',
+    'action' => 'Action',
+    'delete' => 'Delete',
+    'no_users_data' => 'NO User Data Yet',
+    'cancel' => 'Cancel',
+    'add_guest' => 'Add Guest',
+    'save' => 'Save',
+
+    //admin room
+    'room_data' => 'Room Data',
+    'add_room_type' => '+ Add Room Type',
+    'add_room' => '+ Add Room',
+    'room_type' => 'Room Type',
+    'price_night' => 'Price/Night',
+    'room_occupied' => 'Room Occupied',
+    'room_available' => 'Room Available',
+    'room_number' => 'Room Number',
+    'available' => 'Available',
+    'occupied'=> 'Occupies',
+    'cleaning' => 'Cleaning',
+    'maintenance' => 'Maintenance',
+    'clean_done' => 'Cleaning Done',
+    'no_rooms' => 'No Room Data Yet',
+    'edit_room_type' => 'Edit Room Type',
+    'edit_room'=> 'Edit Room',
+    'select_room_type' => 'Select Room Type',
+
+    //admin booking
+    'booking_data' => 'Booking Data',
+    'add_booking' => '+ Add Booking',
+    'look_receipt' => 'View Receipt',
+    'look_transfer' => 'View Transfer Proof',
+    'approve' => 'Approve',
+    'reject' => 'Reject',
+    'choose_guest' => 'Choose Guest',
+    'pay_method' => 'Payment Method',
+    'save_booking' => 'Save Booking',
+    'waiting_verification' => 'Waiting Verification',
+
+    //admin report
+    'report' => 'Report',
+    'hotel_report' => 'Hotel Report',
+    'monitoring' => 'Monitoring hotel revenue and bookings',
+    'income' => 'Income',
+    'occupied_room' => 'Occupied Room',
+    'revenue_chart' => 'Revenue Chart',
+    'statistics' => 'Monthly hotel revenue statistics',
+    'booking_report' => 'Booking Report',
+    'new_booking_list' => 'Latest hotel booking list',
+    'price' => 'Price',
+    'admin_no_bookings' => 'No booking data yet.',
+
+    //admin sidebar
+    'active' => 'Active',
 ];

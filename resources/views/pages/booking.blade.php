@@ -144,13 +144,12 @@
 <div class="content-box">
 
     <div class="header">
-        <h3>Data Booking</h3>
+        <h3>{{ __('messages.booking_data') }}</h3>
         <button
             class="btn-add"
             onclick="openBookingModal()">
 
-            + Tambah Booking
-
+            {{ __('messages.add_booking') }}
         </button>
     </div>
 
@@ -159,11 +158,11 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama</th>
-                    <th>Kamar</th>
-                    <th>Tanggal</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
+                    <th>{{ __('messages.name') }}</th>
+                    <th>{{ __('messages.room') }}</th>
+                    <th>{{ __('messages.date') }}</th>
+                    <th>{{ __('messages.status') }}</th>
+                    <th>{{ __('messages.action') }}</th>
                 </tr>
             </thead>
 
@@ -185,7 +184,7 @@
     </td>
 
     <td>
-         <strong>Check-in:</strong>
+        <strong>Check-in:</strong>
         {{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y H:i') }} WIB
         <br>
         <strong>Check-out:</strong>
@@ -213,7 +212,7 @@
         target="_blank"
         class="btn edit">
 
-        Lihat Receipt
+        {{ __('messages.look_receipt') }}
 
     </a>
 
@@ -224,7 +223,7 @@
         target="_blank"
         class="btn edit">
 
-        Lihat Bukti Transfer
+        {{ __('messages.look_transfer') }}
 
     </a>
 
@@ -233,7 +232,7 @@
     @if($booking->status == 'waiting_verification')
 
         <form action="{{ route('booking.approve', $booking->id) }}"
-              method="POST">
+            method="POST">
 
             @csrf
             @method('PUT')
@@ -241,20 +240,20 @@
             <button type="submit"
                     class="btn"
                     style="background:#10b981;color:white;">
-                Approve
+                {{ __('messages.approve') }}
             </button>
 
         </form>
 
         <form action="{{ route('booking.reject', $booking->id) }}"
-              method="POST">
+            method="POST">
 
             @csrf
             @method('PUT')
 
             <button type="submit"
                     class="btn delete">
-                Reject
+                {{ __('messages.reject') }}
             </button>
 
         </form>
@@ -292,7 +291,7 @@
 
 <tr>
     <td colspan="6" style="text-align:center;">
-        Belum ada data booking
+        {{ __('messages.no_bookings') }}
     </td>
 </tr>
 
@@ -301,7 +300,7 @@
 <div id="bookingModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Tambah Booking</h2>
+            <h2>{{ __('messages.add_booking') }}</h2>
 
             <span
                 class="close"
@@ -320,12 +319,12 @@
 
             <div class="form-group">
 
-                <label>Pilih Tamu</label>
+                <label>{{ __('messages.choose_guest') }}</label>
 
                 <select name="user_id" required>
 
                     <option value="">
-                        -- Pilih Tamu --
+                        -- {{ __('messages.choose_guest') }} --
                     </option>
 
                     @foreach($users as $user)
@@ -337,7 +336,7 @@
             </div>
 
             <div class="form-group">
-                <label>Tipe Kamar</label>
+                <label>{{ __('messages.room_type') }}</label>
 
                 <select
                     name="room_name"
@@ -378,7 +377,7 @@
 
             <div class="form-group">
 
-                <label>Metode Pembayaran</label>
+                <label>{{ __('messages.pay_method') }}</label>
                 <select name="payment_method" required>
 
                     <option value="Tunai">Tunai</option>
@@ -391,7 +390,7 @@
             <button
                 class="btn btn-green">
 
-                Simpan Booking
+                {{ __('messages.save_booking') }}
 
             </button>
         </form>

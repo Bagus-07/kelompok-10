@@ -129,4 +129,72 @@ return [
     'no_booking' => 'Belum ada data booking.',
     'email' => 'Email',
     'login_failed' => 'Email atau password salah.',
+    
+    //Admin Dashboard
+    'welcome_admin' => 'Selamat Datang,',
+    'total_users' => 'Total User',
+    'total_bookings' => 'Total Booking',
+    'room_available' => 'Kamar Tersedia',
+    'new_bookings' => 'Booking Terbaru',
+    'date' => 'Tanggal',
+    'status' => 'Status',
+    'no_new_bookings' => 'Belum ada booking',
+
+    //admin user
+    'user_data' => 'Data User',
+    'add_user' => '+ Tambah Tamu',
+    'action' => 'Aksi',
+    'delete' => 'Hapus',
+    'no_users_data' => 'Belum ada data user',
+    'cancel' => 'Batal',
+    'add_guest' => 'Tambah Tamu',
+    'save' => 'simpan',
+
+    //admin room
+    'room_data' => 'Data Kamar',
+    'add_room_type' => '+ Tambah Tipe Kamar',
+    'add_room' => '+ Tambah Kamar',
+    'room_type' => 'Tipe Kamar',
+    'price_night' => 'Harga/Malam',
+    'room_occupied' => 'Kamar Terisi',
+    'room_available' => 'Kamar Tersedia',
+    'room_number' => 'Nomor Kamar',
+    'available' => 'Tersedia',
+    'occupied'=> 'Terisi',
+    'cleaning' => 'Dibersihkan',
+    'maintenance' => 'Pernbaikan',
+    'clean_done' => 'Siap Dibersihkan',
+    'no_rooms' => 'Belum ada data kamar',
+    'edit_room_type' => 'Edit Tipe Kamar',
+    'edit_room'=> 'Edit Kamar',
+    'select_room_type' => 'Pilih Tipe Kamar',
+
+    //admin booking
+    'booking_data' => 'Data Booking',
+    'add_booking' => '+ Tambah Booking',
+    'look_receipt' => 'Lihat Receipt',
+    'look_transfer' => 'Lihat Bukti Transfer',
+    'approve' => 'Setujui',
+    'reject' => 'Tolak',
+    'choose_guest' => 'pilih Tamu',
+    'pay_method' => 'Metode Pembayaran',
+    'save_booking' => 'Simpan Booking',
+    'waiting_verification' => 'Menunggu Verifikasi',
+
+    //admin report
+    'report' => 'Laporan',
+    'hotel_report' => 'Laporan Hotel',
+    'monitoring' => 'Monitoring pendapatan dan booking hotel',
+    'income' => 'Pendapatan',
+    'occupied_room' => 'Kamar Terisi',
+    'revenue_chart' => 'Grafik Pendapatan',
+    'statistics' => 'Statistik pendapatan hotel per bulan',
+    'booking_report' => 'Laporan Booking',
+    'new_booking_list' => 'Daftar booking terbaru hotel',
+    'price' => 'Harga',
+    'admin_no_bookings' => 'Belum ada data booking.',
+
+    //admin sidebar
+    'active' => 'Aktif',
+
 ];
