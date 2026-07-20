@@ -35,50 +35,90 @@ class DashboardController extends Controller
     // ==========================
     // LAPORAN
     // ==========================
-    public function laporan()
-    {
-        $totalBooking = Booking::count();
-
-        $totalPendapatan = Booking::whereIn('status', ['confirmed','completed'])
-            ->sum('total_price');
-
-        $kamarTerisi = Booking::whereIn('status', ['confirmed','completed'])
-            ->count();
-
-        $bookings = Booking::latest()->get();
-
-        // ==========================
-        // DATA GRAFIK PENDAPATAN
-        // ==========================
-        $grafik = Booking::select(
-                DB::raw('MONTH(check_in) as bulan'),
-                DB::raw('SUM(total_price) as total')
-            )
-            ->whereIn('status', ['confirmed','completed'])
-            ->groupBy(DB::raw('MONTH(check_in)'))
-            ->orderBy('bulan')
-            ->get();
-
-        $labels = [];
-        $data = [];
-
-        foreach ($grafik as $item) {
-            $labels[] = date('M', mktime(0, 0, 0, $item->bulan, 1));
-            $data[] = $item->total;
-        }
-
-        return view('pages.laporan', compact(
-            'totalBooking',
-            'totalPendapatan',
-            'kamarTerisi',
-            'bookings',
-            'labels',
-            'data'
-        ));
-    }
+  public function laporan(Request $request)
+{
+    $start = $request->start_date;
+    $end = $request->end_date;
 
     // ==========================
-    // EXPORT PDF &7 EXCEL
+    // TOTAL BOOKING
+    // ==========================
+    $bookingQuery = Booking::query();
+
+    if ($start && $end) {
+        $bookingQuery->whereBetween('check_in', [$start, $end]);
+    }
+
+    $totalBooking = $bookingQuery->count();
+
+    // ==========================
+    // TOTAL PENDAPATAN
+    // ==========================
+    $pendapatanQuery = Booking::whereIn('status', ['confirmed', 'completed']);
+
+    if ($start && $end) {
+        $pendapatanQuery->whereBetween('check_in', [$start, $end]);
+    }
+
+    $totalPendapatan = $pendapatanQuery->sum('total_price');
+
+    // ==========================
+    // KAMAR TERISI
+    // ==========================
+    $kamarQuery = Booking::whereIn('status', ['confirmed', 'completed']);
+
+    if ($start && $end) {
+        $kamarQuery->whereBetween('check_in', [$start, $end]);
+    }
+
+    $kamarTerisi = $kamarQuery->count();
+
+    // ==========================
+    // DATA BOOKING
+    // ==========================
+    $bookings = Booking::when($start && $end, function ($query) use ($start, $end) {
+            $query->whereBetween('check_in', [$start, $end]);
+        })
+        ->latest()
+        ->get();
+
+    // ==========================
+    // DATA GRAFIK PENDAPATAN
+    // ==========================
+    $grafik = Booking::select(
+            DB::raw('MONTH(check_in) as bulan'),
+            DB::raw('SUM(total_price) as total')
+        )
+        ->whereIn('status', ['confirmed', 'completed']);
+
+    if ($start && $end) {
+        $grafik->whereBetween('check_in', [$start, $end]);
+    }
+
+    $grafik = $grafik->groupBy(DB::raw('MONTH(check_in)'))
+        ->orderBy('bulan')
+        ->get();
+
+    $labels = [];
+    $data = [];
+
+    foreach ($grafik as $item) {
+        $labels[] = date('M', mktime(0, 0, 0, $item->bulan, 1));
+        $data[] = $item->total;
+    }
+
+    return view('pages.laporan', compact(
+        'totalBooking',
+        'totalPendapatan',
+        'kamarTerisi',
+        'bookings',
+        'labels',
+        'data'
+    ));
+}
+
+    // ==========================
+    // EXPORT PDF & EXCEL
     // ==========================
     public function exportPdf()
     {

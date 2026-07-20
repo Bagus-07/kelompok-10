@@ -13,14 +13,26 @@
             <p>{{ __('messages.monitoring') }}</p>
         </div>
 
-        <div class="filter-box">
-            <input type="date">
-            <input type="date">
+        <form action="{{ route('laporan') }}" method="GET" class="filter-box">
 
-            <button class="btn btn-blue">
+            <input
+                type="date"
+                name="start_date"
+                value="{{ request('start_date') }}"
+            >
+
+            <input
+                type="date"
+                name="end_date"
+                value="{{ request('end_date') }}"
+            >
+
+            <button type="submit" class="btn btn-blue">
                 Filter
             </button>
-        </div>
+
+        </form>
+
     </div>
 
 </div>
