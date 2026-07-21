@@ -84,29 +84,11 @@ class AdminBookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'user_id' => 'required|exists:users,id',
             'room_name' => 'required',
             'check_in' => 'required|date',
             'check_out' => 'required|date|after:check_in',
-            'payment_method' => 'required',
-
-        ],[
-
-            'user_id.required' => 'Silakan pilih tamu.',
-            'user_id.exists' => 'Data tamu tidak ditemukan.',
-
-            'room_name.required' => 'Silakan pilih tipe kamar.',
-
-            'check_in.required' => 'Tanggal check-in wajib diisi.',
-            'check_in.date' => 'Tanggal check-in tidak valid.',
-
-            'check_out.required' => 'Tanggal check-out wajib diisi.',
-            'check_out.date' => 'Tanggal check-out tidak valid.',
-            'check_out.after' => 'Tanggal check-out harus setelah check-in.',
-
-            'payment_method.required' => 'Metode pembayaran wajib dipilih.',
-
+            'payment_method' => 'required'
         ]);
 
         $hotelCheckInHour = 14;
@@ -150,12 +132,9 @@ class AdminBookingController extends Controller
 
         if(!$kamar){
 
-            return back()
-                ->withErrors([
-                    'room_name' => 'Tidak ada kamar tersedia pada tanggal tersebut.'
-                ])
-                ->withInput()
-                ->with('form_type','create_booking');
+            return back()->withErrors([
+                'room_name'=>'Tidak ada kamar tersedia pada tanggal tersebut.'
+            ]);
 
         }
 

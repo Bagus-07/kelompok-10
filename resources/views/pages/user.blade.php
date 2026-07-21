@@ -73,14 +73,6 @@
     margin-bottom:15px;
 }
 
-.alert-error{
-    background:#fee2e2;
-    color:#991b1b;
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:15px;
-}
-
 /* TABLE */
 table {
     width: 100%;
@@ -118,13 +110,7 @@ td {
     color: white;
 }
 
-.input-error{
 
-border:2px solid #dc2626;
-
-background:#fef2f2;
-
-}
 
 .btn-add{
     background:#3b82f6;
@@ -150,14 +136,6 @@ tr:hover {
     background: #f9fafb;
 }
 </style>
-
-@if($errors->any())
-
-<div class="alert-error">
-    {{ $errors->first() }}
-</div>
-
-@endif
 
 @if(session('success'))
 
@@ -253,26 +231,22 @@ tr:hover {
             @csrf
             @method('PUT')
 
-            <input type="hidden"
-                name="edit_id"
-                value="{{ $user->id }}">
-
             <input
                 type="text"
                 name="name"
-                value="{{ old('edit_id') == $user->id ? old('name') : $user->name }}"
+                value="{{ $user->name }}"
             >
 
             <input
                 type="email"
                 name="email"
-                value="{{ old('edit_id') == $user->id ? old('email') : $user->email }}"
+                value="{{ $user->email }}"
             >
 
             <input
                 type="text"
                 name="phone"
-                value="{{ old('edit_id') == $user->id ? old('phone') : $user->phone }}"
+                value="{{ $user->phone }}"
             >
 
             <div class="modal-footer">
@@ -312,26 +286,19 @@ tr:hover {
 
             @csrf
 
-            <input type="hidden"
-                name="form_type"
-                value="create">
-
             <input
                 type="text"
                 name="name"
-                value="{{ old('name') }}"
                 placeholder="Nama">
 
             <input
                 type="email"
                 name="email"
-                value="{{ old('email') }}"
                 placeholder="Email">
 
             <input
                 type="text"
                 name="phone"
-                value="{{ old('phone') }}"
                 placeholder="No HP">
 
             <input
@@ -377,28 +344,4 @@ function closeModal(id)
 }
 
 </script>
-
-@if($errors->any())
-
-<script>
-
-window.addEventListener('DOMContentLoaded', function () {
-
-    const formType = "{{ old('form_type') }}";
-    const editId = "{{ old('edit_id') }}";
-
-    if(formType === "create"){
-        openModal('modalUser');
-    }
-
-    if(editId){
-        openModal('editUser' + editId);
-    }
-
-});
-
-
-</script>
-
-@endif
 @endsection

@@ -225,14 +225,6 @@
     font-size:13px;
 }
 
-.alert-danger{
-    background:#fee2e2;
-    color:#991b1b;
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:15px;
-}
-
 
 /* MODAL */
 
@@ -305,16 +297,6 @@
 @if(session('success'))
     <div class="alert-success">
         {{ session('success') }}
-    </div>
-@endif
-
-@if ($errors->any())
-    <div class="alert-danger">
-        <ul style="margin:0;padding-left:20px;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
     </div>
 @endif
 
