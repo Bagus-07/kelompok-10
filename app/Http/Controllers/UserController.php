@@ -20,19 +20,26 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name'      => 'required',
-            'email'     => 'required|email|unique:users',
-            'phone'     => 'nullable',
-            'password'  => 'required|min:6'
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'nullable|max:20',
+            'password' => 'required|min:6'
+        ],[
+            'name.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 6 karakter.'
         ]);
 
         User::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'phone'     => $request->phone,
-            'password'  => Hash::make($request->password),
-            'role'      => 'user'
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'user'
         ]);
 
         return redirect()->back()
@@ -43,20 +50,25 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $request->validate([
-            'name'  => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'phone' => 'nullable'
+        $request->merge([
+            'edit_id'=>$id
         ]);
 
-        $user->update([
-            'name'  => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'phone' => 'nullable|max:20'
+        ],[
+            'name.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan.'
         ]);
+
+        $user->update($validated);
 
         return redirect()->back()
-            ->with('success', 'User berhasil diupdate');
+            ->with('success','Data tamu berhasil diperbarui.');
     }
 
     public function destroy($id)
